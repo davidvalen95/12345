@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use App\Helper\Form;
 class LoginController extends Controller
 {
     /*
@@ -37,4 +38,28 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    protected function showLoginForm(){
+        $name         = new Form("Full Name","name","text","glyphicon-user");
+        $email        = new Form("Email","email","email","glyphicon-envelope");
+        $optionMusik  = array(
+        "gitar"=>"Gitar",
+        "drum"=>"Drum",
+        "bass" => "Bass",
+        "keyboard" => "Keyboard"
+        );
+        $instrument   = new Form("Instrument", "instrument", "select", "glyphicon-music",  $optionMusik);
+        $password     = new Form("Password","passwd","password","glyphicon-lock");
+        $passwordR    = new Form("Retype password","retype","password","glyphicon-lock");
+
+        $registCode   = new Form("Registration Code","registrationCode","text","glyphicon-tag");
+
+
+
+        $forms = array($name, $email, $instrument, $password, $passwordR, $registCode);
+
+        $data['title']  = "YouthGBZ";
+        $data['forms']  = $forms;
+
+        return view('auth.register',$data);
+    }
 }

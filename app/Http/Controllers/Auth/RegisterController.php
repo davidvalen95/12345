@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\User;
-
+use App\Helper\Form;
 class RegisterController extends Controller
 {
     /*
@@ -30,16 +30,16 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-    protected $request;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware('guest');
-        $this->request = $request;
+
     }
 
     /**
@@ -71,10 +71,48 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-    public function register(){
-        $user = new User($this->request->all());
+    public function register(Request $request){
+
+
+        $request->flash();
+        $this->validate($request,array(
+            'password' => 'required|confirmed',
+            'instrument' => 'required',
+            'name' => 'required|min:3|max:20',
+            'email' => 'required|unique:users',
+            'registrationCode' => 'required|in:hendri'
+
+
+        ));
+
+        $user = new User($request->all());
         $user->password = bcrypt($user->password);
-        $user->save();
+
         return redirect('/');
+    }
+
+    protected function showRegistrationForm(){
+        $name         = new Form("Full Name","name","text","glyphicon-user");
+        $email        = new Form("Email","email","email","glyphicon-envelope");
+        $optionMusik  = array(
+        "gitar"=>"Gitar",
+        "drum"=>"Drum",
+        "bass" => "Bass",
+        "keyboard" => "Keyboard"
+        );
+        $instrument   = new Form("Instrument", "instrument", "select", "glyphicon-music",  $optionMusik);
+        $password     = new Form("Password","password","password","glyphicon-lock");
+        $passwordR    = new Form("Retype password","password_confirmation","password","glyphicon-lock");
+
+        $registCode   = new Form("Registration Code","registrationCode","text","glyphicon-tag");
+
+
+
+        $forms = array($name, $email, $instrument, $password, $passwordR, $registCode);
+
+        $data['title']  = "YouthGBZ";
+        $data['forms']  = $forms;
+
+        return view('auth.register',$data);
     }
 }
