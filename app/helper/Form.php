@@ -12,6 +12,8 @@ class Form{
     public $type;
     public $options = array();
     public $oldValue = "";
+    public $validatorSetting;
+    //placeholder, name, type, icon, options:array
     function __construct($placeholder, $name, $type, $icon, $options = array()){
         $this->placeholder = $placeholder;
         $this->name = $name;
@@ -32,11 +34,19 @@ class Form{
               </option>";
             }
             $input .= "</select>";
-        }else if ($this->type == ""){
+        }else if ($this->type == "textarea"){
+            $input = "<textarea class='form-control' name='$this->name' rows='15' class='form-control' id='$this->name' placeholder='$this->placeholder'></textarea>";
+        }else if($this->type == "editor"){
+            $input = "<textarea  rows='15' class='form-control' id='$this->name' placeholder='' name='$this->name'></textarea>
+                        <script type='text/javascript'>
+                        	$('#$this->name').wysihtml5();
 
+                            $('.textarea').val();
+                        </script>
+                        ";
         }else{
 
-            $input = "<input value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
+            $input = "<input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
         }
 
         $hasError = ($errors->has($this->name) ? "has-error" : NULL);
@@ -51,9 +61,9 @@ class Form{
             $errorMessage .= "</span>";
         }
         $form =  "
-        <div class='form-group $hasError'>
+        <div class='form-group mForm-group $hasError'>
 
-          <label  class=' control-label mLabel-$cssCounter'>$this->placeholder</label>
+          <label  for='$this->name' class=' control-label'>$this->placeholder</label>
           $input
           $errorMessage
 
@@ -66,6 +76,23 @@ class Form{
     }
 
 
+
+
+
+
+
+
+    public static function getEmail(){
+        $form = new Form("Email","email","email","glyphicon-envelope");
+        $form->validatorSetting = 'required|email';
+        return  $form;
+        $form = new Form("Email","email","email","glyphicon-envelope");
+
+    }
+
+    public static function getPassword(){
+        return new Form("Password","password","password","glyphicon-lock");;
+    }
 }
 
 

@@ -2,3 +2,7 @@
     @include color-hue(#5a698f);
 
 }
+.mBackground{
+  @include color-hue(#5a698f,$background: true);
+
+}

@@ -1,0 +1,3 @@
+.mForm-group{
+    @include color-hue(#5a698f, $formLabel: true);
+}

@@ -1,11 +1,31 @@
-@mixin color-hue($base-color:red, $hover-color:white){
+@mixin color-hue($base-color:red, $hover-color:white,$background:false, $formLabel: false){
+
+
 
   @for $i from 0 to 10{
-    $hue-color: adjust-hue($base-color, ($i * 25));
-    $complement-color: complement($hue-color);
-    &-#{$i}{
+    //   $pseudoSelector = ($formLabel ? &:nth-child(#{$i}) label : &-#{$i} );
+    $pseudoSelector: "";
 
-      color: $hue-color ;
+      @if($formLabel){
+           $pseudoSelector: "&:nth-child(#{$i}) label";
+      }
+      @else{
+        $pseudoSelector: "&-#{$i}";
+      }
+    $hue-color: adjust-hue($base-color, ($i * 30));
+    $complement-color: complement($hue-color);
+
+    
+    #{$pseudoSelector}{
+
+
+      @if($background){
+          background-color: $hue-color;
+      }@else{
+          color: $hue-color ;
+      }
+
+
       // color: $complement-color;
     }
     // &-#{$i}:hover{

@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'password' => 'required|confirmed',
             'instrument' => 'required',
             'name' => 'required|min:3|max:20',
-            'email' => 'required|unique:users',
+            'email' => Form::getEmail()->validatorSetting.'|unique:users',
             'registrationCode' => 'required|in:hendri'
 
 
@@ -87,13 +87,15 @@ class RegisterController extends Controller
 
         $user = new User($request->all());
         $user->password = bcrypt($user->password);
-
+        $user->name     = ucwords($user->name);
+        $user->instrument = ucwords($user->instrument);
+        $user->save();
         return redirect('/');
     }
 
     protected function showRegistrationForm(){
         $name         = new Form("Full Name","name","text","glyphicon-user");
-        $email        = new Form("Email","email","email","glyphicon-envelope");
+        $email        = Form::getEmail();
         $optionMusik  = array(
         "gitar"=>"Gitar",
         "drum"=>"Drum",
@@ -101,7 +103,7 @@ class RegisterController extends Controller
         "keyboard" => "Keyboard"
         );
         $instrument   = new Form("Instrument", "instrument", "select", "glyphicon-music",  $optionMusik);
-        $password     = new Form("Password","password","password","glyphicon-lock");
+        $password     = Form::getPassword();
         $passwordR    = new Form("Retype password","password_confirmation","password","glyphicon-lock");
 
         $registCode   = new Form("Registration Code","registrationCode","text","glyphicon-tag");

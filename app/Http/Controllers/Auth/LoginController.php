@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use Auth;
 use App\Helper\Form;
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -37,29 +40,44 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    protected function login(Request $request){
 
+        $request->flash();
+        $this->validate($request, array(
+            'email' => Form::getEmail()->validatorSetting,
+            'password' => 'required'
+
+        ));
+        if(Auth::attempt(array(
+            'email' => $request['email'],
+            'password' => $request['password']
+        ))){
+            return redirect()->action('HomeController@index');
+        }else{
+            $errors = [
+                'email' => 'Authentication fails',
+                'password' => 'Authentication fails'
+
+        ];
+
+            return redirect()->back()->withErrors($errors);
+        }
+        return redirect()->action('HomeController@index');
+
+    }
     protected function showLoginForm(){
-        $name         = new Form("Full Name","name","text","glyphicon-user");
-        $email        = new Form("Email","email","email","glyphicon-envelope");
-        $optionMusik  = array(
-        "gitar"=>"Gitar",
-        "drum"=>"Drum",
-        "bass" => "Bass",
-        "keyboard" => "Keyboard"
-        );
-        $instrument   = new Form("Instrument", "instrument", "select", "glyphicon-music",  $optionMusik);
-        $password     = new Form("Password","passwd","password","glyphicon-lock");
-        $passwordR    = new Form("Retype password","retype","password","glyphicon-lock");
 
-        $registCode   = new Form("Registration Code","registrationCode","text","glyphicon-tag");
+        $email        = Form::getEmail();
+        $password     = Form::getPassword();
 
 
 
-        $forms = array($name, $email, $instrument, $password, $passwordR, $registCode);
+
+        $forms = array($email,$password);
 
         $data['title']  = "YouthGBZ";
         $data['forms']  = $forms;
 
-        return view('auth.register',$data);
+        return view('auth.login',$data);
     }
 }
