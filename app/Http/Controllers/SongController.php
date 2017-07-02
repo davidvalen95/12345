@@ -7,15 +7,20 @@ use App\User;
 use Auth;
 use App\Helper\Form;
 use App\Model\Song;
+use App\Model\SongDetail;
+use Session;
 class SongController extends Controller
 {
     private $user;
     public function __construct(){
         $this->middleware(function($request,$next){
+            // debug(Auth::id());
             $this->user = User::find(Auth::id());
             $this->user->setDefaultPreferences();
+
             return $next($request);
         });
+        $this->middleware('auth');
     }
 
 
@@ -51,6 +56,7 @@ class SongController extends Controller
 
 
         $song = new Song($request->all());
+        $song->user_id = $this->user->id;
         $song->save();
 
 
@@ -58,7 +64,7 @@ class SongController extends Controller
         return redirect("song/$urlSong/$song->id");
     }
 
-    public function getSongDetail($title, $id){
+    public function getSongDetail($title, $id, Request $request){
         $song = Song::find($id);
         if(!$song){
             return redirect('/');
@@ -67,6 +73,46 @@ class SongController extends Controller
         $data['title']  = "$song->title | ". TITLE;
         $data['user']   = $this->user;
         $data['song']   = $song;
+        $data['songDetails'] = $song->getSongDetail;;
+
+        //placeholder, name, type, icon, options:array
+        $titleForm          = new Form("Video title", "title", "text", "");
+        $descriptionForm    = new Form("Video description", "description", "text", "");
+        $urlForm            = new Form("Video embed url", "embedUrl", "text","");
+
+        $data['forms'] =  array($titleForm, $descriptionForm,$urlForm);
+
+        // Session::reflash();
+        Session::flash('id', $id);
+
+        Session::save();
+
         return view('song.songDetail',$data);
+
+    }
+
+    public function postSongDetail(Request $request){
+
+
+        $this->validate($request, array(
+            'title' => 'required',
+            'description' => 'required',
+            'embedUrl'  => 'required|regex:((https:\/\/www\.youtube\.com\/embed\/[^\/]+)$)'
+
+        ));
+
+        $idSong = session::get('id');
+
+
+        $songDetail = new SongDetail($request->all());
+        $songDetail->song_id = $idSong;
+        $songDetail->user_id = Auth::id();
+        // debug(Auth::id());
+        $songDetail->save();
+
+
+        Session::flash('success', "Video arangement submited!");
+
+        return redirect()->back();
     }
 }

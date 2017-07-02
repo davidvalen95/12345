@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Helper\Form;
+use Session;
 class RegisterController extends Controller
 {
     /*
@@ -90,7 +91,9 @@ class RegisterController extends Controller
         $user->name     = ucwords($user->name);
         $user->instrument = ucwords($user->instrument);
         $user->save();
-        return redirect('/');
+
+        Session::flash('success', 'Register success. Go login ;)');
+        return redirect('/login');
     }
 
     protected function showRegistrationForm(){

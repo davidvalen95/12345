@@ -1,4 +1,4 @@
-@mixin color-hue($base-color:red, $hover-color:white,$background:false, $formLabel: false){
+@mixin color-hue($base-color:#5a698f, $hover-color:white,$background:false, $formLabel: false, $arangement:false){
 
 
 
@@ -9,18 +9,25 @@
       @if($formLabel){
            $pseudoSelector: "&:nth-child(#{$i}) label";
       }
+      @else if($arangement){
+            $pseudoSelector: "&:nth-child(#{$i}) .widget-user-header";
+
+      }
       @else{
         $pseudoSelector: "&-#{$i}";
       }
     $hue-color: adjust-hue($base-color, ($i * 30));
     $complement-color: complement($hue-color);
 
-    
+
     #{$pseudoSelector}{
 
 
       @if($background){
           background-color: $hue-color;
+          @if($arangement){
+              color: rgba(255,255,255,0.8);
+          }
       }@else{
           color: $hue-color ;
       }

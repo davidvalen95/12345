@@ -77,6 +77,42 @@ class Form{
 
 
 
+    public function getFormFormat2($errors){
+
+
+        $input = "<div class='col-sm-10'><input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'></div>";
+
+
+
+
+        $hasError = ($errors->has($this->name) ? "has-error" : NULL);
+        $errorMessage = "";
+        if(true){
+            $errorMessage.= "<span class='helpBlock col-sm-offset-2 col-sm-10'>";
+            foreach($errors->get($this->name) as $error){
+                $errorMessage.= "<p>
+                    $error
+                </p> ";
+            }
+            $errorMessage .= "</span>";
+        }
+        $form =  "
+        <div class='form-group mForm-group $hasError'>
+
+          <label  for='$this->name' class='col-sm-2 control-label'>$this->placeholder</label>
+          $input
+          $errorMessage
+
+          <span class='glyphicon $this->icon form-control-feedback'></span>
+        </div>
+
+        ";
+
+        return $form;
+
+
+    }
+
 
 
 

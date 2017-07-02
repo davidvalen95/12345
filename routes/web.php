@@ -21,4 +21,6 @@ Route::get('/logout',"Auth\LoginController@logout");
 //song
 Route::get('song/new',"SongController@getNewSong")->name('song.new');
 Route::post('song/new', "SongController@postNewSong");
+
 Route::get('song/{title}/{id}', "SongController@getSongDetail")->name('song.detail');
+Route::post('song/add/song-detail', "SongController@postSongDetail")->name('post.song.detail');

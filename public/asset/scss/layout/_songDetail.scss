@@ -1,0 +1,23 @@
+.mDetail{
+
+    padding-left: 0;
+    list-style: none;
+
+    li span {
+        margin-left: 12px;
+    }
+
+}
+
+
+.mSongCover{
+    width:150px;height:150px; display:block;  border:0px solid tomato;
+    @extend %center-div;
+}
+
+
+
+.mSongArangement{
+    // @mixin color-hue($base-color:#5a698f, $hover-color:white,$background:false, $formLabel: false, $arangement:false){
+    @include color-hue( $arangement:true, $background: true);
+}

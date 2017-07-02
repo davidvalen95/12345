@@ -506,8 +506,13 @@
       <!-- /.sidebar -->
     </aside>
 
+
+
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+
+        @include('layouts.alert')
+
 
         @section('content')
             main body yang ada di tengah

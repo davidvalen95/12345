@@ -14,6 +14,7 @@
 --}}
 
 <body class="hold-transition register-page">
+    @include('layouts.alert')
 <div class="register-box">
   <div class="register-logo">
     <a href="../../index2.html">{{TITLE}}</a>

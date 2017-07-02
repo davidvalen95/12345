@@ -9,6 +9,7 @@ use App\User;
 use Auth;
 use App\Helper\Form;
 use Illuminate\Http\Request;
+use Session;
 class LoginController extends Controller
 {
     /*
@@ -52,17 +53,17 @@ class LoginController extends Controller
             'email' => $request['email'],
             'password' => $request['password']
         ))){
+            $user = User::find(Auth::id());
+            Session::flash('success',"Login succeeddedddeded.. Hey $user->name. ;);)");
+            // debug();
             return redirect()->action('HomeController@index');
         }else{
-            $errors = [
-                'email' => 'Authentication fails',
-                'password' => 'Authentication fails'
-
-        ];
-
-            return redirect()->back()->withErrors($errors);
+            Session::flash('danger',"Email or password is not registered yet");
+            return redirect()->back();
         }
-        return redirect()->action('HomeController@index');
+
+
+        return redirect();
 
     }
     protected function showLoginForm(){

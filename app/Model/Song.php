@@ -15,4 +15,8 @@ class Song extends Model
     public function setDefaultPreferences(){
         $this->title = getNameFormat($this->title);
     }
+
+    public function getSongDetail(){
+        return $this->hasMany('App\Model\SongDetail');
+    }
 }
