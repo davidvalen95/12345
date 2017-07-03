@@ -125,6 +125,7 @@
 
                     <?php
                         $userContributor = $songDetail->getUser;
+                        $userContributor->setDefaultPreferences();
                     ?>
                     <div class="col-md-6">
                     <!-- Widget: user widget style 1 -->
@@ -132,7 +133,7 @@
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                             <div class="widget-user-header">
                                 <div class="widget-user-image">
-                                    <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+                                    <img class="img-circle" src={{IMAGE_LOGO}} alt="User Avatar">
                                 </div>
                                 <!-- /.widget-user-image -->
                                 <h3 class="widget-user-username">{{$songDetail->title}}</h3>
@@ -146,7 +147,7 @@
                                     <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
                                 </ul> --}}
 
-                                <iframe style='height:400px' class='col-xs-12' frameborder="0" src={{$songDetail->embedUrl}} allowfullscreen></iframe>
+                                <iframe style='height:400px' class='col-xs-12' frameborder="0" src="https://www.youtube.com/embed/{{$songDetail->embedUrl}}" allowfullscreen></iframe>
 
                             </div>
                         </div>

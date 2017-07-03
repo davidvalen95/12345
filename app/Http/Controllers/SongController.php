@@ -79,13 +79,9 @@ class SongController extends Controller
         $titleForm          = new Form("Video title", "title", "text", "");
         $descriptionForm    = new Form("Video description", "description", "text", "");
         $urlForm            = new Form("Video embed url", "embedUrl", "text","");
+        $songId             = new Form("song id", "song_id", "hidden", "", [], "$song->id");
+        $data['forms'] =  array($titleForm, $descriptionForm,$urlForm,$songId);
 
-        $data['forms'] =  array($titleForm, $descriptionForm,$urlForm);
-
-        // Session::reflash();
-        Session::flash('id', $id);
-
-        Session::save();
 
         return view('song.songDetail',$data);
 
@@ -97,15 +93,13 @@ class SongController extends Controller
         $this->validate($request, array(
             'title' => 'required',
             'description' => 'required',
-            'embedUrl'  => 'required|regex:((https:\/\/www\.youtube\.com\/embed\/[^\/]+)$)'
+            'embedUrl'  => 'required|regex:(^[^\/]+$)'
 
         ));
 
-        $idSong = session::get('id');
-
 
         $songDetail = new SongDetail($request->all());
-        $songDetail->song_id = $idSong;
+
         $songDetail->user_id = Auth::id();
         // debug(Auth::id());
         $songDetail->save();

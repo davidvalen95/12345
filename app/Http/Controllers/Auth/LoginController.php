@@ -56,7 +56,7 @@ class LoginController extends Controller
             $user = User::find(Auth::id());
             Session::flash('success',"Login succeeddedddeded.. Hey $user->name. ;);)");
             // debug();
-            return redirect()->action('HomeController@index');
+            return redirect()->intended('/');
         }else{
             Session::flash('danger',"Email or password is not registered yet");
             return redirect()->back();

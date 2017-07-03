@@ -355,18 +355,20 @@
         </li> -->
         <li class='treeview'>
             <a href="#">
-                <i class="fa fa-th"></i> <span>Form</span>
+                <i class="fa fa-music"></i> <span>Songs</span>
                 <span class="pull-right-container">
-                    <small class="label pull-right bg-green">New Entry</small>
+                  <i class="fa fa-angle-left pull-right"></i>
                 </span>
 
             </a>
             <ul class="treeview-menu">
-              <li><a href={{route('song.new')}}><i class="fa fa-circle-o"></i>New Song</a></li>
-              <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-              <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-              <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-            </ul>
+              <li><a href={{route('song.new')}}><i class="fa fa-circle-o"></i>Add song
+                  <span class="pull-right-container">
+                      <small class="label pull-right bg-green">+</small>
+                  </span>
+              </a></li>
+              <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>See all</a></li>
+             </ul>
         </li>
           <li class="treeview">
             <a href="#">

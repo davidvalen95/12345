@@ -25,68 +25,166 @@
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>150</h3>
+        <div class="row">
+            <a href='https://google.com'>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-yellow">
+                    <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
-              <p>New Orders</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Jadwal bulanan</span>
+                        <span class="info-box-number"></span>
 
-              <p>Bounce Rate</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>44</h3>
+                        <span class="progress-description">
+                            Klik untuk jadwal bulanan
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                    </div>
+                <!-- /.info-box -->
+                </div>
+            </a>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-music"></i></span>
 
-              <p>User Registrations</p>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total song</span>
+                    <span class="info-box-number">{{App\Model\Song::count()}}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+            <!-- /.info-box -->
             </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>65</h3>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-music"></i></span>
 
-              <p>Unique Visitors</p>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Arangement</span>
+                    <span class="info-box-number">{{App\Model\SongDetail::count()}}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+            <!-- /.info-box -->
             </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-olive"><i class="fa fa-user"></i></span>
+
+                <div class="info-box-content">
+                    
+                    <?php $instruments = ['gitar','bass','keyboard','drum'];?>
+                    @foreach($instruments as $instrument)
+                    <span class="progress-description">{{ucwords($instrument)}}: {{App\User::where('instrument', '=' , $instrument)->get()->count()}}</span>
+
+                    @endForeach
+                    </div>
+                <!-- /.info-box-content -->
+                </div>
+            <!-- /.info-box -->
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+
+
+
+
+
+
+        <!-- row -->
         </div>
-        <!-- ./col -->
-      </div>
+        <div class='row'>
+            <div class="col-md-3 col-sm-5 col-xs-12">
+                <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+
+                    <h3 class="profile-username text-center">Nina Mcintire</h3>
+
+                    <p class="text-muted text-center">Software Engineer</p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                        <b>Followers</b> <a class="pull-right">1,322</a>
+                        </li>
+                        <li class="list-group-item">
+                        <b>Following</b> <a class="pull-right">543</a>
+                        </li>
+                        <li class="list-group-item">
+                        <b>Friends</b> <a class="pull-right">13,287</a>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                </div>
+                <!-- /.box-body -->
+                </div>
+
+            <!-- col3 -->
+            </div>
+                          <!-- /.box -->
+            <div class="col-md-9 col-sm-7 col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Striped Full Width Table</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <table class="table table-striped">
+                            <tbody><tr>
+                            <th style="width: 10px">#</th>
+                            <th>Task</th>
+                            <th>Progress</th>
+                            <th style="width: 40px">Label</th>
+                            </tr>
+                            <tr>
+                            <td>1.</td>
+                            <td>Update software</td>
+                            <td>
+                            <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                            </div>
+                            </td>
+                            <td><span class="badge bg-red">55%</span></td>
+                            </tr>
+                            <tr>
+                            <td>2.</td>
+                            <td>Clean database</td>
+                            <td>
+                            <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                            </div>
+                            </td>
+                            <td><span class="badge bg-yellow">70%</span></td>
+                            </tr>
+                            <tr>
+                            <td>3.</td>
+                            <td>Cron job running</td>
+                            <td>
+                            <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                            </div>
+                            </td>
+                            <td><span class="badge bg-light-blue">30%</span></td>
+                            </tr>
+                            <tr>
+                            <td>4.</td>
+                            <td>Fix and squish bugs</td>
+                            <td>
+                            <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                            </div>
+                            </td>
+                            <td><span class="badge bg-green">90%</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <!-- /.box-body -->
+                </div>
+            <!-- /.box -->
+            </div>
+        <!-- row table -->
+        </div>
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">

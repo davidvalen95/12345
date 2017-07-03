@@ -1,9 +1,4 @@
 Home
-     4 di dashboard
-          total lagu
-          total video
-          total pemain
-
      detail
           link jadwal
           daftar lagu untuk minggu depan

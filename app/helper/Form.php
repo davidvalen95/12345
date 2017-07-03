@@ -14,17 +14,26 @@ class Form{
     public $oldValue = "";
     public $validatorSetting;
     //placeholder, name, type, icon, options:array
-    function __construct($placeholder, $name, $type, $icon, $options = array()){
+    function __construct($placeholder, $name, $type, $icon, $options = array(), $value = null){
         $this->placeholder = $placeholder;
         $this->name = $name;
         $this->icon = $icon;
         $this->type = $type;
         $this->options = $options;
-        $this->oldValue = old($name);
+        if($value!=null){
+            $this->oldValue = $value;
+        }else{
+            $this->oldValue = old($name);
+        }
+
     }
 
 
     //return string format div
+    public function getHidden(){
+        return "<input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
+
+    }
     public function getFormFormat($cssCounter=0,$errors = NULL){
         if($this->type == "select"){
             $input = "<select required='required' name='$this->name' class='form-control'>";
@@ -37,14 +46,21 @@ class Form{
         }else if ($this->type == "textarea"){
             $input = "<textarea class='form-control' name='$this->name' rows='15' class='form-control' id='$this->name' placeholder='$this->placeholder'></textarea>";
         }else if($this->type == "editor"){
-            $input = "<textarea  rows='15' class='form-control' id='$this->name' placeholder='' name='$this->name'></textarea>
+            $input = "<textarea  class='form-control' id='$this->name' placeholder='' name='$this->name'></textarea>
                         <script type='text/javascript'>
                         	$('#$this->name').wysihtml5();
 
                             $('.textarea').val();
                         </script>
                         ";
-        }else{
+        }else if($this->type == 'hidden'){
+
+
+            return "<input  id='$this->name' value='$this->oldValue' type='hidden' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
+
+        }
+
+        else{
 
             $input = "<input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
         }
@@ -78,9 +94,18 @@ class Form{
 
 
     public function getFormFormat2($errors){
+        if(false){
+
+        }
+        else if($this->type == 'hidden'){
 
 
-        $input = "<div class='col-sm-10'><input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'></div>";
+            return "<input  id='$this->name' value='$this->oldValue' type='hidden' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
+
+        }else{
+            $input = "<div class='col-sm-10'><input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'></div>";
+
+        }
 
 
 
