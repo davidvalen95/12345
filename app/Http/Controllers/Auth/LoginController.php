@@ -54,16 +54,16 @@ class LoginController extends Controller
             'password' => $request['password']
         ))){
             $user = User::find(Auth::id());
-            Session::flash('success',"Login succeeddedddeded.. Hey $user->name. ;);)");
+            $request->session()->flash('message.success',"Login succeeddedddeded.. Hey $user->name. ;);)");
             // debug();
             return redirect()->intended('/');
         }else{
-            Session::flash('danger',"Email or password is not registered yet");
+            Session::flash('message.danger',"Email or password is not registered yet");
             return redirect()->back();
         }
 
+return redirect()->intended('/');
 
-        return redirect();
 
     }
     protected function showLoginForm(){
@@ -78,7 +78,7 @@ class LoginController extends Controller
 
         $data['title']  = "YouthGBZ";
         $data['forms']  = $forms;
-
+        // Session::forget('message');
         return view('auth.login',$data);
     }
 }

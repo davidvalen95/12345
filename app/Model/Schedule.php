@@ -11,5 +11,6 @@ class Schedule extends Model
 
     public function getSong(){
         return $this->belongsToMany('App\Model\Song','schedule_song','schedule_id','song_id');
+        
     }
 }

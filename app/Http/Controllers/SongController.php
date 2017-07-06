@@ -12,14 +12,16 @@ use Session;
 class SongController extends Controller
 {
     private $user;
+    private $message;
     public function __construct(){
         $this->middleware(function($request,$next){
             // debug(Auth::id());
             $this->user = User::find(Auth::id());
             $this->user->setDefaultPreferences();
-
+            $this->message = (Session::get('message'));
             return $next($request);
         });
+
         $this->middleware('auth');
     }
 
@@ -28,6 +30,10 @@ class SongController extends Controller
     public function index(){
         $data['title'] = 'Home | '.TITLE;
         $data['user'] = $this->user;
+
+
+
+        // Session::forget('message');
         return view('',$data);
     }
 
@@ -42,6 +48,7 @@ class SongController extends Controller
         $foto = new Form('Url Image Cover (ex. https://pbs.twimg.com/profile_images/710468502457442304/f-8UB2T1.jpg)', 'imageUrl', 'text', "");
         $data['forms'] = array($title, $foto, $lyric);
 
+        // Session::forget('message');
         return view('song.newSong',$data);
     }
 
@@ -61,6 +68,7 @@ class SongController extends Controller
 
 
         $urlSong = getUrlFormat($song->title);
+        $request->session()->flash('message.success', "New song created");
         return redirect("song/$urlSong/$song->id");
     }
 
@@ -83,6 +91,8 @@ class SongController extends Controller
         $data['forms'] =  array($titleForm, $descriptionForm,$urlForm,$songId);
 
 
+
+        // // Session::forget('message');
         return view('song.songDetail',$data);
 
     }
@@ -105,7 +115,7 @@ class SongController extends Controller
         $songDetail->save();
 
 
-        Session::flash('success', "Video arangement submited!");
+        $request->session()->flash('message.success', "Video arangement submited!");
 
         return redirect()->back();
     }

@@ -92,7 +92,7 @@ class RegisterController extends Controller
         $user->instrument = ucwords($user->instrument);
         $user->save();
 
-        Session::flash('success', 'Register success. Go login ;)');
+        Session::flash('message.success', 'Register success. Go login ;)');
         return redirect('/login');
     }
 
@@ -118,6 +118,7 @@ class RegisterController extends Controller
         $data['title']  = "YouthGBZ";
         $data['forms']  = $forms;
 
+        // Session::forget('message');
         return view('auth.register',$data);
     }
 }

@@ -15,6 +15,7 @@ class SongIndexing extends Migration
     {
         Schema::table('song', function (Blueprint $table) {
             //
+        
             $table->string('title')->index()->change();
         });
     }

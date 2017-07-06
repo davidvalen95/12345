@@ -139,16 +139,16 @@
                                 <h3 class="widget-user-username">{{$songDetail->title}}</h3>
                                 <h5 class="widget-user-desc">Contributor: {{$userContributor->name}}</h5>
                             </div>
-                            <div class="box-footer no-padding">
-                                {{-- <ul class="nav nav-stacked">
-                                    <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
-                                    <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
-                                    <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                                    <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
-                                </ul> --}}
+                            <div class='box box-widget widget-user-2'>
+                                </div>
+                            <div style='margin-top:12px' class="box-footer">
+                                <iframe style='height:400px; margin-bottom: 12px;' class='col-xs-12' frameborder="0" src="https://www.youtube.com/embed/{{$songDetail->embedUrl}}" allowfullscreen></iframe>
 
-                                <iframe style='height:400px' class='col-xs-12' frameborder="0" src="https://www.youtube.com/embed/{{$songDetail->embedUrl}}" allowfullscreen></iframe>
+                                <h5 style='padding-left:18px;'><b>Description</b></h5>
 
+                                <p style='padding-left:18px;'>
+                                    {{$songDetail->description}}
+                                </p>
                             </div>
                         </div>
                     <!-- /.widget-user -->

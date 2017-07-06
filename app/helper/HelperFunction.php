@@ -17,4 +17,11 @@
         $string = ucwords($string);
         return $string;
     }
+
+    function dateTimeToString($source, $format){
+
+        $date = new DateTime($source);
+        return $date->format($format); // 31.07.2012
+        
+    }
  ?>
