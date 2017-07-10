@@ -44,12 +44,22 @@ class HomeController extends Controller
     {
         // debug(Auth::user());
         // /home
+        $request->flash();
+        $post = $request->all();
+        if(isset($post['songSearch'])){
+            // debug($post['songSearch']);
+            $data['songs'] = Song::getSearchSong($post['songSearch']);
+
+        }else{
+            $data['songs'] = Song::paginate(15);
+        }
         $data['title'] = 'Home | '.TITLE;
         $data['user'] = $this->user;
-        $schedule = Schedule::orderBy('due','desc')->get()->first();
-        $data['schedule'] = $schedule;
-        $data['songFromSchedule'] = $schedule->getSong;;
-        $data['songs'] = Song::paginate(15);
+        $schedule = Schedule::orderBy('due','desc')->take(3)->get();
+        $data['schedules'] = $schedule;
+        //placeholder, name, type, icon, options:array, $value=null
+        $data['scheduleForm'] = new Form("Play date", 'due', 'datepicker', "");
+
         // Session::flush();
 
 
@@ -57,5 +67,8 @@ class HomeController extends Controller
         // Session::forget('message');
         return view('home',$data);
         // return redirect('/song/sadf/3');
+
     }
+
+    
 }

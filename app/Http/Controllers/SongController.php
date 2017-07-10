@@ -8,6 +8,7 @@ use Auth;
 use App\Helper\Form;
 use App\Model\Song;
 use App\Model\SongDetail;
+use App\Model\Schedule;
 use Session;
 class SongController extends Controller
 {
@@ -52,6 +53,50 @@ class SongController extends Controller
         return view('song.newSong',$data);
     }
 
+
+    public function getSongDetail($title, $id, Request $request){
+        $song = Song::find($id);
+        if(!$song){
+            return redirect('/');
+        }
+        $song->setDefaultPreferences();
+        $data['title']  = "$song->title | ". TITLE;
+        $data['user']   = $this->user;
+        $data['song']   = $song;
+        $data['songDetails'] = $song->getSongDetail;;
+
+        //#form
+        //placeholder, name, type, icon, options:array
+        $titleForm          = new Form("Video title", "title", "text", "");
+        $descriptionForm    = new Form("Video description", "description", "text", "");
+        $urlForm            = new Form("Video embed url", "embedUrl", "text","");
+        $songId             = new Form("song id", "song_id", "hidden", "", [], "$song->id");
+        $data['forms'] =  array($titleForm, $descriptionForm,$urlForm,$songId);
+        $schedule  = Schedule::getLatestSchedule();
+        // debug($schedule->due);
+
+        //# cek lagu uda di add
+        $isUsed = false;
+        foreach( $schedule->getSongDetail as $songDetail){
+            $checkSong = $songDetail->getSong;
+            if($checkSong->id == $id){
+                $isUsed = true;
+                $data['usedSong'] = $songDetail;
+                break;
+            }
+        }
+
+        $data['isUsed'] = $isUsed;
+
+
+
+        // // Session::forget('message');
+        return view('song.songDetail',$data);
+
+    }
+
+
+
     public function postNewSong(Request $request){
         $request->flash();
         $this->validate($request,array(
@@ -72,30 +117,6 @@ class SongController extends Controller
         return redirect("song/$urlSong/$song->id");
     }
 
-    public function getSongDetail($title, $id, Request $request){
-        $song = Song::find($id);
-        if(!$song){
-            return redirect('/');
-        }
-        $song->setDefaultPreferences();
-        $data['title']  = "$song->title | ". TITLE;
-        $data['user']   = $this->user;
-        $data['song']   = $song;
-        $data['songDetails'] = $song->getSongDetail;;
-
-        //placeholder, name, type, icon, options:array
-        $titleForm          = new Form("Video title", "title", "text", "");
-        $descriptionForm    = new Form("Video description", "description", "text", "");
-        $urlForm            = new Form("Video embed url", "embedUrl", "text","");
-        $songId             = new Form("song id", "song_id", "hidden", "", [], "$song->id");
-        $data['forms'] =  array($titleForm, $descriptionForm,$urlForm,$songId);
-
-
-
-        // // Session::forget('message');
-        return view('song.songDetail',$data);
-
-    }
 
     public function postSongDetail(Request $request){
 
@@ -119,4 +140,7 @@ class SongController extends Controller
 
         return redirect()->back();
     }
+
+
+
 }

@@ -32,7 +32,7 @@
 
       foreach($forms as $form){
 
-        echo $form->getFormFormat($i,$errors);
+        echo $form->getFormFormat($errors);
         $i++;
       }
 

@@ -1,5 +1,7 @@
 <?php
 
+
+
 return [
 
     /*
@@ -19,9 +21,9 @@ return [
     | Application Environment
     |--------------------------------------------------------------------------
     |
-    | This value determines the "environment" your application is currently
+    | This value determines the 'environment' your application is currently
     | running in. This may determine how you prefer to configure various
-    | services your application utilizes. Set this in your ".env" file.
+    | services your application utilizes. Set this in your '.env' file.
     |
     */
 
@@ -116,7 +118,7 @@ return [
     | the box, Laravel uses the Monolog PHP logging library. This gives
     | you a variety of powerful log handlers / formatters to utilize.
     |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
+    | Available Settings: 'single', 'daily', 'syslog', 'errorlog'
     |
     */
 
@@ -186,7 +188,7 @@ return [
     |
     | This array of class aliases will be registered when this application
     | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
+    | the aliases are 'lazy' loaded so they don't hinder performance.
     |
     */
 

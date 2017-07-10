@@ -4,6 +4,8 @@
     $title
     $username
 
+    objek
+        schedules:Schedule
 -->
 
 
@@ -12,6 +14,8 @@
 
   <!-- Content Wrapper. Contains page content -->
 
+
+  {{-- statistics atas --}}
   <section class="content-header">
       <h1>
       Dashboard
@@ -89,49 +93,50 @@
 
 
 
-
+        {{-- jadwal mingguan kiri --}}
         <!-- row -->
         </div>
         <div class='row'>
             <div class="col-md-4 col-xs-12">
-                <div class="box box-primary">
-                <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src={{IMAGE_LOGO}} alt="User profile picture">
-
-                    <h3 class="profile-username text-center">Jadwal Musik</h3>
-
-                    <p class="text-muted text-center">{{dateTimeToString($schedule->due,'D d-m-y')}}</p>
-
-                    <ul class="list-group list-group-unbordered">
-                        @php ($i=0 )
-
-
-
-                        @foreach($songFromSchedule as $song)
-
-                            @php($song->setDefaultPreferences())
-                            <a href={{$song->getSongDetailUrl()}}><li class="list-group-item">
-                                {{++$i}}.
-                                <b>{{$song->title}}</b> <a href={{$song->getSongDetailUrl()}} class="pull-right">({{$song->getSongDetail->count()}})</a>
-                            </li></a>
-                        @endForeach
-
-                    </ul>
-
-                    <a href="#" class="btn btn-primary btn-block"><b>Add next schedule</b></a>
-                </div>
-                <!-- /.box-body -->
-                </div>
+                @include('schedule.weeklyList')
 
             <!-- col3 -->
             </div>
-                          <!-- /.box -->
+
+
+
+
+
+
+
+
+            {{-- list lagu --}}
+            {{-- {{debug($songs->hasMorePages())}} --}}
+                          {{-- <!-- /.box -->{{debug(old('songSearch'))}} --}}
             <div class="col-md-8 col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
 
                         <h3 class="box-title">Song we have</h3>
-                        <div class="pull-right"><a href={{action('SongController@getNewSong')}} class='label bg-green'>Add song</a></div>
+                        <div style='display: inline;' class=""><a href={{action('SongController@getNewSong')}} class='label bg-green'>Add song</a></div>
+
+                        <div class="box-tools">
+                            <form action='' method='post'>
+                                {{csrf_field()}}
+                                <div class="input-group input-group-sm" style="width: 250px;">
+
+
+
+                                    <input name="songSearch" value="{{old('songSearch')}}" class="form-control pull-right" placeholder="Search" type="text">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    {{-- boxheader --}}
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
@@ -183,6 +188,15 @@
                             </tbody>
                         </table>
                     </div>
+
+
+
+                    <div class="box-footer clearfix">
+                        {!!pagination($songs)!!}
+                    </div>
+
+
+
                 <!-- /.box-body -->
                 </div>
             <!-- /.box -->
@@ -195,6 +209,37 @@
 
     </section>
     <!-- /.content -->
+
+
+
+
+
+    {{-- modal tambah schedule--}}
+    <div class="modal fade" id="modal-add-schedule" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Add schedule</h4>
+                </div>
+                <form action={{route('post.schedule')}} method='post'>
+                    {{csrf_field()}}
+                    <div class="modal-body">
+                        {!!$scheduleForm->getFormFormat($errors)!!}
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add schedule</button>
+                    </div>
+                </form>
+            </div>
+        <!-- /.modal-content -->
+        </div>
+    <!-- /.modal-dialog -->
+    </div>
 
 
 @endsection

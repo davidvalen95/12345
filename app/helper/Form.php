@@ -13,7 +13,7 @@ class Form{
     public $options = array();
     public $oldValue = "";
     public $validatorSetting;
-    //placeholder, name, type, icon, options:array
+    //placeholder, name, type, icon, options:array, $value=null
     function __construct($placeholder, $name, $type, $icon, $options = array(), $value = null){
         $this->placeholder = $placeholder;
         $this->name = $name;
@@ -34,7 +34,7 @@ class Form{
         return "<input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
 
     }
-    public function getFormFormat($cssCounter=0,$errors = NULL){
+    public function getFormFormat($errors = NULL){
         if($this->type == "select"){
             $input = "<select required='required' name='$this->name' class='form-control'>";
             foreach($this->options as $key=>$value){
@@ -58,23 +58,44 @@ class Form{
 
             return "<input  id='$this->name' value='$this->oldValue' type='hidden' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
 
+        }else if($this->type == "datepicker"){
+
+            $input = "
+                    <div class='input-group date'>
+                        <div class='input-group-addon'>
+                            <i class='fa fa-calendar'></i>
+                        </div>
+                        <input class='form-control pull-right' id='$this->name' type='text' name='$this->name'>
+                    </div>
+
+
+                    <script type='text/javascript'>
+                        $('#$this->name').datepicker({useCurrent:false});;
+
+                        $('.textarea').val();
+                    </script>
+
+                    ";
         }
 
         else{
 
             $input = "<input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
         }
-
-        $hasError = ($errors->has($this->name) ? "has-error" : NULL);
+        $hasError = "";
         $errorMessage = "";
-        if(true){
-            $errorMessage.= "<span class='helpBlock'>";
-            foreach($errors->get($this->name) as $error){
-                $errorMessage.= "<p>
-                    $error
-                </p> ";
+        if($errors){
+            $hasError = ($errors->has($this->name) ? "has-error" : NULL);
+            $errorMessage = "";
+            if(true){
+                $errorMessage.= "<span class='helpBlock'>";
+                foreach($errors->get($this->name) as $error){
+                    $errorMessage.= "<p>
+                        $error
+                    </p> ";
+                }
+                $errorMessage .= "</span>";
             }
-            $errorMessage .= "</span>";
         }
         $form =  "
         <div class='form-group mForm-group $hasError'>
@@ -87,7 +108,7 @@ class Form{
         </div>
 
         ";
-
+        // debug($form);
         return $form;
     }
 
@@ -102,7 +123,32 @@ class Form{
 
             return "<input  id='$this->name' value='$this->oldValue' type='hidden' class='form-control' placeholder='$this->placeholder' name ='$this->name'>";
 
-        }else{
+        }else if($this->type == 'datepicker'){
+            $input = "
+            <div class='input-group date'>
+                <div class='input-group-addon'>
+                    <i class='fa fa-calendar'></i>
+                </div>
+                <input class='form-control pull-right' id='$this->name' type='text' name='$this->name'>
+            </div>
+
+
+            <script type='text/javascript'>
+                $('#$this->name').datepicker({useCurrent:false});;
+
+                $('.textarea').val();
+            </script>
+
+
+            ";
+            // <div class="form-group">
+            //     <label>Date:</label>
+            //
+
+            //     <!-- /.input group -->
+            //   </div>
+        }
+        else{
             $input = "<div class='col-sm-10'><input id='$this->name' value='$this->oldValue' type='$this->type' class='form-control' placeholder='$this->placeholder' name ='$this->name'></div>";
 
         }

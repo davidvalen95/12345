@@ -1,13 +1,14 @@
 {{--
     variable
         title
-
+        isUsed
 
 
     object
         user
         song
-
+        songDetails
+        usedSong
 
     section
         content
@@ -33,6 +34,7 @@
 
     <div class='row'>
 
+        {{-- lirik kiri --}}
         <div class='col-md-3 col-xs-12'>
             <div class="box box-primary">
                         <div class="box-body box-profile">
@@ -65,7 +67,7 @@
         <!-- col               -->
         </div>
 
-
+        {{-- statistic atas --}}
         <div class='col-md-9 col-xs-12'>
             <div class='row'>
                 <div class="nav-tabs-custom">
@@ -118,37 +120,97 @@
 
 
 
-
+            {{-- view utube --}}
             <div class='row'>
 
                 @foreach($songDetails as $songDetail)
 
                     <?php
+                        $thisSong = false;
                         $userContributor = $songDetail->getUser;
                         $userContributor->setDefaultPreferences();
+                        if(isset($usedSong))
+                            if($songDetail->id == $usedSong->id)
+                                $thisSong = true;
                     ?>
                     <div class="col-md-6">
                     <!-- Widget: user widget style 1 -->
                         <div class="box box-widget widget-user-2">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header">
+                            <div class="widget-user-header @if($thisSong)bg bg-warning @endIf ">
                                 <div class="widget-user-image">
                                     <img class="img-circle" src={{IMAGE_LOGO}} alt="User Avatar">
+                                    @if($thisSong)<i class="fa fa-star pull-right" aria-hidden="true"></i> @endIf
+
                                 </div>
                                 <!-- /.widget-user-image -->
                                 <h3 class="widget-user-username">{{$songDetail->title}}</h3>
                                 <h5 class="widget-user-desc">Contributor: {{$userContributor->name}}</h5>
+
                             </div>
-                            <div class='box box-widget widget-user-2'>
-                                </div>
+
                             <div style='margin-top:12px' class="box-footer">
-                                <iframe style='height:400px; margin-bottom: 12px;' class='col-xs-12' frameborder="0" src="https://www.youtube.com/embed/{{$songDetail->embedUrl}}" allowfullscreen></iframe>
+
+                                {{-- usage history --}}
+                                <button class="btn btn-app" data-toggle="modal" data-target="#modal-schedule-{{$songDetail->id}}">
+                                    <span class="badge bg-red">{{$songDetail->getSchedule->count()}}</span>
+                                    <i class="fa fa-bar-chart"></i> History
+                                </button>
+
+                                <div class="modal fade" id="modal-schedule-{{$songDetail->id}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title">{{$songDetail->title}} history</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul>
+                                                    {{-- dapetin h2 dengan membandingkan --}}
+                                                    @php($month = "")
+                                                    @foreach($songDetail->getSchedule()->orderBy("due",'desc')->get() as $currentSchedule)
+                                                        @if($month != dateTimeToString($currentSchedule->due,'M'))
+                                                            @php($month = dateTimeToString($currentSchedule->due,'M'))
+                                                            <h2 style='padding:0;margin-left:-30px;'>{{dateTimeToString($currentSchedule->due,'M Y')}}</h2>
+                                                        @endIf
+                                                        <li>
+                                                            {{dateTimeToString($currentSchedule->due,'D d M Y')}}
+                                                        </li>
+                                                    @endForeach
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+                                            </div>
+                                        </div>
+                                    <!-- /.modal-content -->
+                                    </div>
+                                <!-- /.modal-dialog -->
+                                </div>
+
+
+
+
+
+
+
+                                <iframe style='height:400px; margin: 12px 0px;' class='col-xs-12' frameborder="0" src="https://www.youtube.com/embed/{{$songDetail->embedUrl}}" allowfullscreen></iframe>
 
                                 <h5 style='padding-left:18px;'><b>Description</b></h5>
 
                                 <p style='padding-left:18px;'>
                                     {{$songDetail->description}}
                                 </p>
+                                @if(!$isUsed)
+                                    <form action={{action('ScheduleController@postAddScheduleSongDetail')}} method='POST'>
+                                        <button class='btn btn-success' style='margin-left:18px;'>Add to schedule</button>
+                                        <input type='hidden' name='songDetailId' value={{$songDetail->id}} />
+                                        {{csrf_field()}}
+                                    </form>
+                                @endIf
+
                             </div>
                         </div>
                     <!-- /.widget-user -->

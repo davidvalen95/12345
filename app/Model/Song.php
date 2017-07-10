@@ -15,6 +15,7 @@ class Song extends Model
     public function setDefaultPreferences(){
         $this->title = getNameFormat($this->title);
         $this->lyric = ucwords(strtolower($this->lyric));
+        return $this;
     }
 
     public function getSongDetail(){
@@ -27,5 +28,25 @@ class Song extends Model
 
     public function getSongDetailUrl(){
         return action("SongController@getSongDetail",array(getUrlFormat($this->title), $this->id));
+    }
+
+    public static function getSearchSong($str){
+        $exploded = preg_split("/\\W+/", $str);
+        $i=0;
+        foreach($exploded as $string){
+            if($i==0){
+                $result = Song::orWhere('title', 'like',"%".$string."%");
+            }else{
+                $result = $result->orWhere('title', 'like',"%".$string."%");
+            }
+        }
+        foreach($exploded as $string){
+
+            $result = $result->orWhere('lyric', 'like',"%".$string."%");
+
+        }
+
+        return $result->paginate(2000);
+
     }
 }

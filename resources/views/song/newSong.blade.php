@@ -48,7 +48,7 @@
                   <div class="box-body">
                       <input type='hidden' name='_token' value={{csrf_token()}} />
                     @foreach($forms as $form)
-                        {!!$form->getFormFormat(1,$errors)!!}
+                        {!!$form->getFormFormat($errors)!!}
                     @endForeach
 
                     <div class="box-footer">
