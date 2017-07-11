@@ -153,6 +153,9 @@
               </span>
             </a>
         </li> -->
+
+        <li><a href={{route('home')}}><i class="fa fa-home"></i> <span>Home</span></a></li>
+
         <li class='treeview'>
             <a href="#">
                 <i class="fa fa-music"></i> <span>Songs</span>
