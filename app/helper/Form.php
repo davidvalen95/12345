@@ -36,9 +36,15 @@ class Form{
     }
     public function getFormFormat($errors = NULL){
         if($this->type == "select"){
-            $input = "<select required='required' name='$this->name' class='form-control'>";
+            $input = "<select required='required' name='$this->name' class='form-control'><option value=''>
+                $this->placeholder
+            </option>";
             foreach($this->options as $key=>$value){
-              $input .= "<option value='$key'>
+                $selected = "";
+                if($this->oldValue == $value){
+                    $selected = "selected='selected'";
+                }
+              $input .= "<option $selected value='$key'>
                 $value
               </option>";
             }

@@ -74,10 +74,11 @@ class RegisterController extends Controller
     }
     public function register(Request $request){
 
-
+        // debug($request->all());
         $request->flash();
         $this->validate($request,array(
             'password' => 'required|confirmed',
+            'category' => 'required|in:1,2',
             'instrument' => 'required',
             'name' => 'required|min:3|max:20',
             'email' => Form::getEmail()->validatorSetting.'|unique:users',
@@ -90,6 +91,7 @@ class RegisterController extends Controller
         $user->password = bcrypt($user->password);
         $user->name     = ucwords($user->name);
         $user->instrument = ucwords($user->instrument);
+        // debug($user);
         $user->save();
 
         Session::flash('message.success', 'Register success. Go login ;)');
@@ -99,6 +101,7 @@ class RegisterController extends Controller
     protected function showRegistrationForm(){
         $name         = new Form("Full Name","name","text","glyphicon-user");
         $email        = Form::getEmail();
+        $category     = new Form("Pelajar / Kap", "category", "select", "id-card-o",  array("1"=>"Pelajar","2"=>"KAP"));
         $optionMusik  = array(
         "gitar"=>"Gitar",
         "drum"=>"Drum",
@@ -113,7 +116,7 @@ class RegisterController extends Controller
 
 
 
-        $forms = array($name, $email, $instrument, $password, $passwordR, $registCode);
+        $forms = array($name, $email, $category, $instrument, $password, $passwordR, $registCode);
 
         $data['title']  = "YouthGBZ";
         $data['forms']  = $forms;

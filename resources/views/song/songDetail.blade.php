@@ -56,7 +56,7 @@
                             </li> -->
                           </ul>
 
-                          <a href="#" class="btn btn-primary btn-block disabled"><b>Add to myFavorite</b></a>
+                          <a href="#" class="btn btn-primary btn-block"><b>Add to myFavorite</b></a>
                             {{-- <iframe width="420" height="315" src="https://www.youtube.com/embed/iiNXf0n_hrA">
                             </iframe> --}}
 
@@ -122,7 +122,7 @@
 
             {{-- view utube --}}
             <div class='row'>
-                @php($i=0)
+
                 @foreach($songDetails as $songDetail)
 
                     <?php
@@ -132,15 +132,7 @@
                         if(isset($usedSong))
                             if($songDetail->id == $usedSong->id)
                                 $thisSong = true;
-
-                        if($i++ % 2==0){
-                            echo "<div class='row'>
-
-                            ";
-                        }
-
                     ?>
-
                     <div class="col-md-6">
                     <!-- Widget: user widget style 1 -->
                         <div class="box box-widget widget-user-2">
@@ -162,7 +154,7 @@
                                 {{-- usage history --}}
                                 <button class="btn btn-app" data-toggle="modal" data-target="#modal-schedule-{{$songDetail->id}}">
                                     <span class="badge bg-red">{{$songDetail->getSchedule->count()}}</span>
-                                    <i class="fa fa-bar-chart"></i> History
+                                    <i class="fa fa-bar-chart"></i>
                                 </button>
 
                                 <div class="modal fade" id="modal-schedule-{{$songDetail->id}}">
@@ -213,30 +205,17 @@
                                 </p>
                                 @if(!$isUsed)
                                     <form action={{action('ScheduleController@postAddScheduleSongDetail')}} method='POST'>
-                                        @if(!App\Model\Schedule::getLatestSchedule()->isExpired())
-                                            <button class='btn btn-success' style='margin-left:18px;'>Add to schedule</button>
-                                        @else
-                                            <button type='button' class='btn btn-danger disabled' style='margin-left:18px;'>Add to schedule (expired)</button>
-                                        @endIf
+                                        <button class='btn btn-success' style='margin-left:18px;'>Add to schedule</button>
                                         <input type='hidden' name='songDetailId' value={{$songDetail->id}} />
                                         {{csrf_field()}}
-
                                     </form>
                                 @endIf
 
                             </div>
                         </div>
-
-
-
-                    <!-- md 6 -->
+                    <!-- /.widget-user -->
                     </div>
 
-
-                    @if($i % 2 ==0)
-                    <!-- div penutup row baru -->
-                    </div>
-                    @endIf
                 @endForeach
             </div>
 

@@ -16,7 +16,7 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'name', 'email', 'password','instrument',
+        'name', 'email', 'password','instrument', 'category',
     ];
 
     /**
@@ -32,5 +32,14 @@ class User extends Authenticatable
     public function setDefaultPreferences(){
         $this->name = ucwords($this->name);
         $this->instrument = ucwords($this->instrument);
+    }
+
+    public function getImageLogo(){
+        switch($this->category_id){
+            case 1: return IMAGE_LOGO;
+            case 2: return IMAGE_LOGO_KAP;
+            default: return "";
+        }
+
     }
 }

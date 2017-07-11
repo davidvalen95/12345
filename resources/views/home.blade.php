@@ -53,8 +53,10 @@
                 <span class="info-box-icon bg-red"><i class="fa fa-music"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Total song</span>
-                    <span class="info-box-number">{{App\Model\Song::count()}}</span>
+                    <span class="info-box-text">Statistic</span>
+                    <span class="progress-description">Total song: <b>{{App\Model\Song::count()}}</b></span>
+                    <span class="progress-description">Total arangement: <b>{{App\Model\SongDetail::count()}}</b></span>
+                    {{-- <span class="info-box-number">{{App\Model\Song::count()}}</span> --}}
                 </div>
                 <!-- /.info-box-content -->
                 </div>
@@ -62,25 +64,29 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-music"></i></span>
+                <span class="info-box-icon "><img src={{IMAGE_LOGO_KAP}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Arangement</span>
-                    <span class="info-box-number">{{App\Model\SongDetail::count()}}</span>
-                </div>
-                <!-- /.info-box-content -->
-                </div>
-            <!-- /.info-box -->
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                <span class="info-box-icon bg-olive"><i class="fa fa-user"></i></span>
-
-                <div class="info-box-content">
-
-                    <?php $instruments = ['gitar','bass','keyboard','drum'];?>
+                    @php($instruments = ['Gitar','Bass','Keyboard','Drum'])
                     @foreach($instruments as $instrument)
-                    <span class="progress-description">{{ucwords($instrument)}}: {{App\User::where('instrument', '=' , $instrument)->get()->count()}}</span>
+                    <span class="progress-description">{{ucwords($instrument)}}: <b>{{App\Model\Category::find(2)->getUsers->where('instrument',$instrument)->count()}}</b></span>
+
+                    @endForeach
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+            <!-- /.info-box -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon "><img src={{IMAGE_LOGO}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
+
+
+                <div class="info-box-content">
+
+                    @php($instruments = ['Gitar','Bass','Keyboard','Drum'])
+                    @foreach($instruments as $instrument)
+                    <span class="progress-description">{{ucwords($instrument)}}: <b>{{App\Model\Category::find(1)->getUsers->where('instrument',$instrument)->count()}}</b></span>
 
                     @endForeach
                     </div>

@@ -46,13 +46,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src={{IMAGE_LOGO}} class="user-image" alt="User Image">
+              <img src={{$user->getImageLogo()}} class="user-image" alt="User Image">
               <span class="hidden-xs">{{$user->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src={{IMAGE_LOGO}}  class="img-circle" alt="User Image">
+                <img src={{$user->getImageLogo()}}  class="img-circle" alt="User Image">
 
                 <p>
                   {{$user->name}}
@@ -70,7 +70,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{route('logout')}}" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -92,7 +92,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src={{IMAGE_LOGO}}  class="img-circle" alt="User Image">
+            <img src={{$user->getImageLogo()}} class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
             <p>{{$user->name}}</p>
@@ -100,9 +100,11 @@
           </div>
         </div>
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
+        <form action={{action('HomeController@index')}} method="POST" class="sidebar-form">
+
+            {{csrf_field()}}
           <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <input type="text" name="songSearch" class="form-control" placeholder="Song search...">
             <span class="input-group-btn">
                   <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                   </button>
