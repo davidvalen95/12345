@@ -51,4 +51,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## About Musik
-This project is created and developed to maintain musical arangement and weekly schedule
+This project is created and developed to maintain **musical** arangement and weekly schedule
