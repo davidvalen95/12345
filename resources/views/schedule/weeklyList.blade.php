@@ -1,7 +1,7 @@
 {{--
     objek
         schedules
-        
+
 
 --}}
 
@@ -53,25 +53,28 @@
 
                         </div> --}}
 
+                        <form >
+                            {{csrf_field()}}
+                            <ul class="list-group list-group-unbordered dragsort">
+                                @php ($j=0 )
+                                @foreach($schedule->getSongDetail as $songDetail)
 
-                        <ul class="list-group list-group-unbordered">
-                            @php ($j=0 )
-                            @foreach($schedule->getSongDetail as $songDetail)
+                                    @php($song = $songDetail->getSong)
+                                    @php($song->setDefaultPreferences())
+                                    <li class="list-group-item"><a href={{$song->getSongDetailUrl()}}>
+                                        {{++$j}}.
+                                        <b>{{$song->title}}</b> <a href={{$song->getSongDetailUrl()}} class="pull-right">({{$song->getSongDetail->count()}})</a>
+                                    </a>
+                                    <input type='hidden' name='id' value='{{$songDetail->pivot->id}}'  />
+                                    {{-- {{debug($songDetail->pivot->id)}} --}}
+                                    </li>
+                                @endForeach
 
-                                @php($song = $songDetail->getSong)
-                                @php($song->setDefaultPreferences())
-                                <a href={{$song->getSongDetailUrl()}}><li class="list-group-item">
-                                    {{++$j}}.
-                                    <b>{{$song->title}}</b> <a href={{$song->getSongDetailUrl()}} class="pull-right">({{$song->getSongDetail->count()}})</a>
-                                </li></a>
-                            @endForeach
-
-                        </ul>
-
+                            </ul>
+                        </form>
                     {{-- schedule tab --}}
                     </div>
                 @endForeach
-
 
 
                 <!-- tabcontent -->
@@ -87,3 +90,8 @@
 </div>
 <!-- /.box-body -->
 </div>
+
+
+<script>
+        $(".dragsort").dragsort();
+</script>
