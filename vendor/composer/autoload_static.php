@@ -2951,6 +2951,7 @@ class ComposerStaticInit78aed1f893f06aae017392937dcd90b6
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Schedule' => __DIR__ . '/../..' . '/database/migrations/2017_07_03_093748_schedule.php',
         'ScheduleSong' => __DIR__ . '/../..' . '/database/migrations/2017_07_03_094455_schedule_song.php',
+        'ScheduleSongDetailOrder' => __DIR__ . '/../..' . '/database/migrations/2017_07_12_093416_schedule_song_detail_order.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',

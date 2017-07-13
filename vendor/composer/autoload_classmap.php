@@ -2658,6 +2658,7 @@ return array(
     'Ramsey\\Uuid\\UuidInterface' => $vendorDir . '/ramsey/uuid/src/UuidInterface.php',
     'Schedule' => $baseDir . '/database/migrations/2017_07_03_093748_schedule.php',
     'ScheduleSong' => $baseDir . '/database/migrations/2017_07_03_094455_schedule_song.php',
+    'ScheduleSongDetailOrder' => $baseDir . '/database/migrations/2017_07_12_093416_schedule_song_detail_order.php',
     'SebastianBergmann\\CodeCoverage\\CodeCoverage' => $vendorDir . '/phpunit/php-code-coverage/src/CodeCoverage.php',
     'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => $vendorDir . '/phpunit/php-code-coverage/src/Driver/Driver.php',

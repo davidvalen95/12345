@@ -80,7 +80,20 @@
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
   <!-- AdminLTE for demo purposes -->
+
   <script src="{{asset('dist/js/demo.js')}}"></script>
+
+
+  {{-- dragsort --}}
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="{{asset('plugins/dragsort/jquery.dragsort-0.5.2.min.js')}}"></script>
+
+
+
+
+
+
+
   <script>
     $(document).ready(function(){
         $("html").attr("style","");
