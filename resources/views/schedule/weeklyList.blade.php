@@ -20,7 +20,7 @@
                 @foreach($schedules as $schedule)
                     {{-- {{debug($schedule->due->format('d-m-y'))}} --}}
 
-                    <li class="@if($i==0)active @endIf"><a href="#schedule{{++$i}}" data-toggle="tab" aria-expanded="true">{{dateTimeToString($schedule->due)}}
+                    <li class="@if($i==0)active @endIf"><a href="#schedule{{$i++}}" data-toggle="tab" aria-expanded="true">{{dateTimeToString($schedule->due)}}
                         @if(!$schedule->isExpired())
                             <span class='label label-success'><span class='fa fa-check'></span></span>
 
@@ -33,7 +33,7 @@
                 @foreach($schedules as $schedule)
 
                     {{-- schedule tab --}}
-                    <div class="tab-pane @if($i==0)active @endIf" id="schedule{{++$i}}">
+                    <div class="tab-pane @if($i==0)active @endIf" id="schedule{{$i}}">
 
                         <p class="text-muted text-center">{{dateTimeToString($schedule->due)}}
                             @if($schedule->isExpired())
@@ -53,24 +53,30 @@
 
                         </div> --}}
 
-                        <form >
+                        <form action='{{route('post.reorder')}}' method='POST'>
                             {{csrf_field()}}
                             <ul class="list-group list-group-unbordered dragsort">
                                 @php ($j=0 )
-                                @foreach($schedule->getSongDetail as $songDetail)
+                                @foreach($schedule->getSongDetail()->orderBy('schedule_song_detail.order','asc')->get() as $songDetail)
 
                                     @php($song = $songDetail->getSong)
                                     @php($song->setDefaultPreferences())
-                                    <li class="list-group-item"><a href={{$song->getSongDetailUrl()}}>
+                                    <li class="list-group-item">
                                         {{++$j}}.
-                                        <b>{{$song->title}}</b> <a href={{$song->getSongDetailUrl()}} class="pull-right">({{$song->getSongDetail->count()}})</a>
-                                    </a>
-                                    <input type='hidden' name='id' value='{{$songDetail->pivot->id}}'  />
+                                        {{$song->title}} <a href={{$song->getSongDetailUrl()}} class="pull-right">detail ({{$song->getSongDetail->count()}})</a>
+
+                                    <input type='hidden' name='id[]' value='{{$songDetail->pivot->id}}'  />
                                     {{-- {{debug($songDetail->pivot->id)}} --}}
                                     </li>
                                 @endForeach
 
                             </ul>
+                            @if($i++==0)
+                                <p>
+                                    Drag and drop list to reorder song
+                                </p>
+                                <button class='btn btn-success'>Save order</button>
+                            @endIf
                         </form>
                     {{-- schedule tab --}}
                     </div>

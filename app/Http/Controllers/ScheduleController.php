@@ -75,6 +75,27 @@ class ScheduleController extends Controller
     }
 
 
+    public function postOrderSongDetail(Request $request){
 
+        $post = $request->all();
+        // debug($post);
+        //# simpen urutan di array named with id
+        $array = array();
+        $i=0;
+        foreach($post['id'] as $id){
+            $array[$id] = $i++;
+        }
+
+
+        $latest = Schedule::getLatestSchedule();
+        foreach($latest->getSongDetail()->get() as $songDetail){
+            $id = $songDetail->pivot->id;
+            $songDetail->pivot->order = $array[$id];
+            $songDetail->pivot->save();
+        }
+
+        Session::flash('message.success','Songs has been re-ordered');
+        return redirect()->back();
+    }
 
 }

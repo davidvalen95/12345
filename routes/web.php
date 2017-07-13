@@ -41,3 +41,6 @@ Route::post('schedule/add/song-detail/', "ScheduleController@postAddScheduleSong
 
 // all song in a schedule
 Route::get("schedule/all-song","ScheduleController@getAllSong");
+
+//reorder song list
+Route::post('schedule/reorder', "ScheduleController@postOrderSongDetail")->name('post.reorder');

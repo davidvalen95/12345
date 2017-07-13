@@ -22,6 +22,6 @@ class SongDetail extends Model
     }
 
     public function getSchedule(){
-        return $this->belongsToMany('App\Model\Schedule','schedule_song_detail','song_detail_id','schedule_id')->withPivot('id');
+        return $this->belongsToMany('App\Model\Schedule','schedule_song_detail','song_detail_id','schedule_id')->withPivot(array('id','order'));
     }
 }
