@@ -35,13 +35,16 @@
                     {{-- schedule tab --}}
                     <div class="tab-pane @if($i==0)active @endIf" id="schedule{{$i}}">
 
-                        <p class="text-muted text-center">{{dateTimeToString($schedule->due)}}
+                        <p class="text-muted ">
+                            {{-- {{dateTimeToString($schedule->due)}} --}}
                             @if($schedule->isExpired())
-                                <span class='label label-danger'>Expired</span>
+                                <span class='pull-right label label-danger'>Expired</span>
 
                             @endIf
+                            <a href='{{action('ScheduleController@getAllSong')}}'>All Schedule's Songs</a>
+
                         </p>
-                        <a href='{{action('ScheduleController@getAllSong')}}'>All Schedule's Songs</a>
+
 
 
 
@@ -75,7 +78,7 @@
                                 <p>
                                     Drag and drop list to reorder song
                                 </p>
-                                <button class='btn btn-success'>Save order</button>
+                                <button class='btn btn-warning'>Save order</button>
                             @endIf
                         </form>
                     {{-- schedule tab --}}

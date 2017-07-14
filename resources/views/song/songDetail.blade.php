@@ -134,7 +134,7 @@
                             if($songDetail->id == $usedSong->id)
                                 $thisSong = true;
                     @endPhp
-
+                    {{-- row separator, for each 2 --}}
                     @if($i++%2==0)<div class='row'>@endIf
                     <div class="col-sm-6">
                     <!-- Widget: user widget style 1 -->

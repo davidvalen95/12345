@@ -38,7 +38,7 @@ class User extends Authenticatable
         switch($this->category_id){
             case 1: return IMAGE_LOGO;
             case 2: return IMAGE_LOGO_KAP;
-            default: return "";
+            default: return IMAGE_LOGO;
         }
 
     }
