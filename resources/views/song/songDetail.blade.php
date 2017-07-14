@@ -122,18 +122,21 @@
 
             {{-- view utube --}}
             <div class='row'>
-
+                @php($i=0)
                 @foreach($songDetails as $songDetail)
 
-                    <?php
+                    @php
+
                         $thisSong = false;
                         $userContributor = $songDetail->getUser;
                         $userContributor->setDefaultPreferences();
                         if(isset($usedSong))
                             if($songDetail->id == $usedSong->id)
                                 $thisSong = true;
-                    ?>
-                    <div class="col-md-6">
+                    @endPhp
+
+                    @if($i++%2==0)<div class='row'>@endIf
+                    <div class="col-sm-6">
                     <!-- Widget: user widget style 1 -->
                         <div class="box box-widget widget-user-2">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -213,8 +216,12 @@
 
                             </div>
                         </div>
-                    <!-- /.widget-user -->
+
+
+                    {{-- col 6 --}}
                     </div>
+                    {{-- div nya row nutup per baru jika ==0  --}}
+                    @if($i%2==0)</div>@endIf
 
                 @endForeach
             </div>
