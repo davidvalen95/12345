@@ -44,3 +44,47 @@ Route::get("schedule/all-song","ScheduleController@getAllSong");
 
 //reorder song list
 Route::post('schedule/reorder', "ScheduleController@postOrderSongDetail")->name('post.reorder');
+
+
+
+Route::get('coba',function(){
+
+    //# filter songDetail based on foreign User attribute
+    $songs = App\Model\SongDetail::whereHas('getUser' , function($query){
+        $query->where('name','like','%david%');
+        // $query->orderBy('id','asc');
+
+    })->orderBy('id','asc')->get();
+
+
+    //# will return null foreach songDetail->getUser if not satisfied current condifiont
+    $eager = App\Model\SongDetail::with(['getUser' => function($query){
+        $query->where('id','4');
+        // $query->orderBy('id','asc');
+
+    }])->get();
+
+
+
+    // $songs = App\Model\SongDetail::all();
+    // debug($songs);
+    foreach($songs as $song){
+
+        echo $song->getUser->name . "<br />";
+        // echo"sdf";
+    }
+    foreach($eager as $songDetail){
+        if($songDetail->getUser != null){
+            echo $songDetail->getUser->id;
+            echo $songDetail->title;
+        }
+    }
+
+
+    $user = Auth::user();
+    $songDetails = $user->getSongDetail;
+    foreach($songDetails as $songDetail){
+        // echo "<br />$songDetail->title ";
+
+    }
+});

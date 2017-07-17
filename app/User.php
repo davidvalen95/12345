@@ -42,4 +42,8 @@ class User extends Authenticatable
         }
 
     }
+
+    public function getSongDetail(){
+        return $this->hasMany('App\Model\SongDetail');
+    }
 }
