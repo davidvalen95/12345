@@ -67,7 +67,7 @@
                                     <li class="list-group-item">
                                         {{++$j}}.
                                         {{$song->title}} <a href={{$song->getSongDetailUrl()}} class="pull-right">detail ({{$song->getSongDetail->count()}})</a>
-
+                            
                                     <input type='hidden' name='id[]' value='{{$songDetail->pivot->id}}'  />
                                     {{-- {{debug($songDetail->pivot->id)}} --}}
                                     </li>

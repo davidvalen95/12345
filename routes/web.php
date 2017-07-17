@@ -38,12 +38,21 @@ Route::post('schedule/add', 'ScheduleController@postAddSchedule')->name('post.sc
 
 //add song to schedule
 Route::post('schedule/add/song-detail/', "ScheduleController@postAddScheduleSongDetail")->name('post.scheduleSongDetail');
+Route::delete('schedule/delete/song-detail', "ScheduleController@deleteScheduleSongDetail")->name('delete.scheduleSongDetail');
+
+
 
 // all song in a schedule
 Route::get("schedule/all-song","ScheduleController@getAllSong");
 
 //reorder song list
 Route::post('schedule/reorder', "ScheduleController@postOrderSongDetail")->name('post.reorder');
+
+
+
+
+
+
 
 
 
@@ -77,6 +86,7 @@ Route::get('coba',function(){
         if($songDetail->getUser != null){
             echo $songDetail->getUser->id;
             echo $songDetail->title;
+            echo $songDetail->getUser->name;
         }
     }
 

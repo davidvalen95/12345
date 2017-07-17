@@ -24,7 +24,10 @@ class ScheduleController extends Controller
             return $next($request);
         });
     }
-
+    public function deleteScheduleSongDetail(Request $request){
+        // debug($request->all());
+        return "asdf";
+    }
     public function getAllSong(){
 
         $data['title'] = "Schedule all song | ".TITLE;
