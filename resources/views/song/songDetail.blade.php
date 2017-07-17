@@ -208,7 +208,14 @@
                                 </p>
                                 @if(!$isUsed)
                                     <form action={{action('ScheduleController@postAddScheduleSongDetail')}} method='POST'>
-                                        <button class='btn btn-success' style='margin-left:18px;'>Add to schedule</button>
+
+                                        @if(!App\Model\Schedule::getLatestSchedule()->isExpired())
+                                            <button class='btn btn-success' style='margin-left:18px;'>Add to schedule</button>
+                                        @else
+
+                                             <button type='button' class='btn btn-danger disabled' style='margin-left:18px;'>Add to schedule (expired)</button>
+                                        @endIf
+
                                         <input type='hidden' name='songDetailId' value={{$songDetail->id}} />
                                         {{csrf_field()}}
                                     </form>
