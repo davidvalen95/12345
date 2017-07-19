@@ -35,6 +35,8 @@ class SongController extends Controller
 
 
         // Session::forget('message');
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
         return view('',$data);
     }
 
@@ -50,6 +52,8 @@ class SongController extends Controller
         $data['forms'] = array($title, $foto, $lyric);
 
         // Session::forget('message');
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
         return view('song.newSong',$data);
     }
 
@@ -91,6 +95,8 @@ class SongController extends Controller
 
 
         // // Session::forget('message');
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
         return view('song.songDetail',$data);
 
     }

@@ -85,10 +85,10 @@
 
 
   {{-- dragsort --}}
+
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="{{asset('plugins/dragsort/jquery.dragsort-0.5.2.min.js')}}"></script>
-
-
+  <script type="text/javascript">var $old = $.noConflict(true);</script>
 
 
 

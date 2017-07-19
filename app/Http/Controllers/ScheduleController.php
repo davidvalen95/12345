@@ -7,6 +7,7 @@ use App\Model\Schedule;
 use Session;
 use App\Model\Song;
 use App\Model\SongDetail;
+use App\Model\Pivot;
 use App\User;
 use Auth;
 
@@ -25,14 +26,21 @@ class ScheduleController extends Controller
         });
     }
     public function deleteScheduleSongDetail(Request $request){
-        // debug($request->all());
-        return "asdf";
+        $post = (object)$request->all();
+        $schedule = Schedule::find($post->schedule_id);
+        $schedule->getSongDetail()->detach($post->song_detail_id);
+        Session::flash('message.success','deleted');
+        return redirect()->back();
     }
     public function getAllSong(){
 
         $data['title'] = "Schedule all song | ".TITLE;
         $data['user'] = $this->user;
         $data['schedules'] = Schedule::orderBy('due','desc')->take(3)->get();
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
+
+
         return view('schedule.allSong',$data);
     }
 
@@ -62,7 +70,7 @@ class ScheduleController extends Controller
     //add schedule song detail
     public function postAddScheduleSongDetail(Request $request){
         $post = $request->all();
-        $latestSchedule = Schedule::orderBy('due','desc')->get()->first();
+        $latestSchedule = Schedule::getLatestSchedule();
 
         // debug(dateTimeToString($latestSchedule->due));
 

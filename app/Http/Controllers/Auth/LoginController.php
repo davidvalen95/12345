@@ -54,7 +54,7 @@ class LoginController extends Controller
             'password' => $request['password']
         ))){
             $user = User::find(Auth::id());
-            $request->session()->flash('message.success',"Login succeeddedddeded.. Hey $user->name. ;);)");
+            Session::flash('message.success',"Login succeeddedddeded.. Hey $user->name. ;);)");
             // debug();
             return redirect()->intended('/');
         }else{
@@ -62,7 +62,7 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
-return redirect()->intended('/');
+        return redirect()->intended('/');
 
 
     }
@@ -79,6 +79,8 @@ return redirect()->intended('/');
         $data['title']  = "YouthGBZ";
         $data['forms']  = $forms;
         // Session::forget('message');
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
         return view('auth.login',$data);
     }
 }

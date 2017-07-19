@@ -220,32 +220,6 @@
 
 
 
-    {{-- modal tambah schedule--}}
-    <div class="modal fade" id="modal-add-schedule" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Add schedule</h4>
-                </div>
-                <form action={{route('post.schedule')}} method='post'>
-                    {{csrf_field()}}
-                    <div class="modal-body">
-                        {!!$scheduleForm->getFormFormat($errors)!!}
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add schedule</button>
-                    </div>
-                </form>
-            </div>
-        <!-- /.modal-content -->
-        </div>
-    <!-- /.modal-dialog -->
-    </div>
 
 
 @endsection

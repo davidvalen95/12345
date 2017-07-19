@@ -77,7 +77,7 @@ class Form{
 
                     <script type='text/javascript'>
                         $('#$this->name').datepicker({useCurrent:false});;
-
+                        // alert();
                         $('.textarea').val();
                     </script>
 

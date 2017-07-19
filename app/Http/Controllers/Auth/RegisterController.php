@@ -122,6 +122,8 @@ class RegisterController extends Controller
         $data['forms']  = $forms;
 
         // Session::forget('message');
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
         return view('auth.register',$data);
     }
 }

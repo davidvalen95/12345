@@ -62,7 +62,8 @@ class HomeController extends Controller
 
         // Session::flush();
 
-
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
 
         // Session::forget('message');
         return view('home',$data);
@@ -70,5 +71,5 @@ class HomeController extends Controller
 
     }
 
-    
+
 }

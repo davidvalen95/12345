@@ -29,6 +29,8 @@
                 @endForeach
             </ul>
             <div class="tab-content">
+
+                {{-- detail --}}
                 @php($i=0)
                 @foreach($schedules as $schedule)
 
@@ -41,24 +43,16 @@
                                 <span class='pull-right label label-danger'>Expired</span>
 
                             @endIf
-                            <a href='{{action('ScheduleController@getAllSong')}}'>All Schedule's Songs</a>
+
+                            <a href='{{action('ScheduleController@getAllSong')}}'>All latest schedule's songs</a>
 
                         </p>
 
 
 
-
-                        {{-- <div class='callout callout-info'>
-                            <h4>Add schedule</h4>
-                            <p>
-                                Open song page first, then add ;)
-                            </p>
-
-                        </div> --}}
-
                         <form action='{{route('post.reorder')}}' method='POST'>
                             {{csrf_field()}}
-                            <ul class="list-group list-group-unbordered dragsort">
+                            <ul class="list-group list-group-unbordered @if(!$schedule->isExpired())dragsort @endIf">
                                 @php ($j=0 )
                                 @foreach($schedule->getSongDetail()->orderBy('schedule_song_detail.order','asc')->get() as $songDetail)
 
@@ -66,20 +60,34 @@
                                     @php($song->setDefaultPreferences())
                                     <li class="list-group-item">
                                         {{++$j}}.
-                                        {{$song->title}} <a href={{$song->getSongDetailUrl()}} class="pull-right">detail ({{$song->getSongDetail->count()}})</a>
-                            
+                                        {{$song->title}}
+                                        @if(!$schedule->isExpired())
+                                            <button type='button' data-toggle="modal" data-target="#modal-schedule-{{$songDetail->id}}"  class="btn btn-default label pull-right bg-red">Remove <span class='fa fa-times'></span></button>
+
+                                        @endIf
+                                        <a href={{$song->getSongDetailUrl()}} class="">detail ({{$song->getSongDetail->count()}})</a>
+
+
+
+
+
+
+
+
                                     <input type='hidden' name='id[]' value='{{$songDetail->pivot->id}}'  />
                                     {{-- {{debug($songDetail->pivot->id)}} --}}
                                     </li>
                                 @endForeach
 
                             </ul>
-                            @if($i++==0)
+
+                            @if(!$schedule->isExpired() && $i==0)
                                 <p>
                                     Drag and drop list to reorder song
                                 </p>
                                 <button class='btn btn-warning'>Save order</button>
                             @endIf
+                            @php($i++)
                         </form>
                     {{-- schedule tab --}}
                     </div>
@@ -101,6 +109,85 @@
 </div>
 
 
+
+
+
+{{-- modal delete --}}
+@foreach(APP\Model\Schedule::getLatestSchedule()->getSongDetail as $songDetail)
+<div class="modal fade" id="modal-schedule-{{$songDetail->id}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Remove <b>{{$songDetail->getSong->title}}</b> from schedule?
+                </p>
+
+
+            </div>
+            <div class="modal-footer">
+                <form class='pull-right' method='POST' action='{{route('delete.scheduleSongDetail')}}'>
+                    {{method_field('DELETE')}}
+                    {{csrf_field()}}
+                    <input type='hidden' name='schedule_id' value='{{$songDetail->pivot->schedule_id}}'/>
+                    <input type='hidden' name='song_detail_id' value='{{$songDetail->id}}'/>
+                    <button type="submit" class="btn btn-danger ">Remove</button>
+
+                </form>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">cancel</button>
+
+            </div>
+        </div>
+    <!-- /.modal-content -->
+    </div>
+<!-- /.modal-dialog -->
+</div>
+@endForeach
+
+
+
+
+
+
+
+    {{-- modal tambah schedule--}}
+    <div class="modal fade" id="modal-add-schedule" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Add schedule</h4>
+                </div>
+                <form action={{route('post.schedule')}} method='post'>
+                    {{csrf_field()}}
+                    <div class="modal-body">
+                        {!!$scheduleForm->getFormFormat($errors)!!}
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add schedule</button>
+                    </div>
+                </form>
+            </div>
+        <!-- /.modal-content -->
+        </div>
+    <!-- /.modal-dialog -->
+    </div>
+
+
+
+
 <script>
-        $(".dragsort").dragsort();
+        // (function ($){
+        //     /* plugin code */
+        // })(jQuery);
+        $old(".dragsort").dragsort();
+        // alert();
 </script>
