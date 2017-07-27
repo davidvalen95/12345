@@ -28,10 +28,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getCategory(){
+        return $this->belongsTo('App\Model\Category','category_id');
+    }
+
 
     public function setDefaultPreferences(){
         $this->name = ucwords($this->name);
         $this->instrument = ucwords($this->instrument);
+        return $this;
     }
 
     public function getImageLogo(){
@@ -45,5 +50,9 @@ class User extends Authenticatable
 
     public function getSongDetail(){
         return $this->hasMany('App\Model\SongDetail');
+    }
+
+    public function getEvents(){
+        return $this->hasMany('App\Model\Event','user_id');
     }
 }

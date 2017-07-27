@@ -60,12 +60,12 @@
                                     @php($song->setDefaultPreferences())
                                     <li class="list-group-item">
                                         {{++$j}}.
-                                        {{$song->title}}
+                                        <a href={{$song->getSongDetailUrl()}} class="">{{$song->title}} ({{$song->getSongDetail->count()}})</a>
                                         @if(!$schedule->isExpired())
                                             <button type='button' data-toggle="modal" data-target="#modal-schedule-{{$songDetail->id}}"  class="btn btn-default label pull-right bg-red">Remove <span class='fa fa-times'></span></button>
 
                                         @endIf
-                                        <a href={{$song->getSongDetailUrl()}} class="">detail ({{$song->getSongDetail->count()}})</a>
+
 
 
 

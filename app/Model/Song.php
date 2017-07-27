@@ -49,4 +49,10 @@ class Song extends Model
         return $result->paginate(2000);
 
     }
+
+    public function save(array $options = array()){
+        saveEvent("Created <b>new song</b>, <a href='".$this->getSongDetailUrl()."'>$this->title</a>");
+
+        parent::save($options);
+    }
 }

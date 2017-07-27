@@ -8,6 +8,7 @@ use Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\User;
+use App\Model\Category;
 use App\Helper\Form;
 use Session;
 class RegisterController extends Controller
@@ -87,11 +88,13 @@ class RegisterController extends Controller
 
         ));
 
-        $user = new User($request->all());
+        $user = new User($request->except('category'));
+        $category = Category::find((int)$request->only('category'));
         $user->password = bcrypt($user->password);
         $user->name     = ucwords($user->name);
         $user->instrument = ucwords($user->instrument);
-        // debug($user);
+        $user->getCategory()->associate($category);
+        // debug($category->name);
         $user->save();
 
         Session::flash('message.success', 'Register success. Go login ;)');
@@ -106,9 +109,11 @@ class RegisterController extends Controller
         "gitar"=>"Gitar",
         "drum"=>"Drum",
         "bass" => "Bass",
-        "keyboard" => "Keyboard"
+        "keyboard" => "Keyboard",
+        "singer" => "WL / Singer",
+        "ava" => "Sound / Ava"
         );
-        $instrument   = new Form("Instrument", "instrument", "select", "glyphicon-music",  $optionMusik);
+        $instrument   = new Form("Jenis pelayanan", "instrument", "select", "glyphicon-music",  $optionMusik);
         $password     = Form::getPassword();
         $passwordR    = new Form("Retype password","password_confirmation","password","glyphicon-lock");
 
