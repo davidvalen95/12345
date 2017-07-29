@@ -51,8 +51,10 @@ class Song extends Model
     }
 
     public function save(array $options = array()){
-        saveEvent("Created <b>new song</b>, <a href='".$this->getSongDetailUrl()."'>$this->title</a>");
 
         parent::save($options);
+    
+        saveEvent("Created <b>new song</b>, <a href='".$this->setDefaultPreferences()->getSongDetailUrl()."'>$this->title</a>");
+
     }
 }

@@ -107,7 +107,7 @@
 
 
                                 {{-- history --}}
-                                <div class="box box-warning direct-chat direct-chat-warning">
+                                <div class="box box-primary direct-chat direct-chat-primary">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Recent Activities</h3>
 
@@ -128,9 +128,10 @@
                                         <div class="direct-chat-messages">
                                             @foreach($events as $event)
 
+                                                    @php($isMe = ($event->getUser == Auth::user()))
 
                                                     <!-- Message. Default to the left -->
-                                                    <div class="direct-chat-msg">
+                                                    <div class="direct-chat-msg @if(!$isMe)right @endIf">
                                                         <div class="direct-chat-info clearfix">
                                                             <span class="direct-chat-name pull-left">{{$event->getUser->setDefaultPreferences()->name}}</span>
                                                             <span class="direct-chat-timestamp pull-right">{{dateTimeToString($event->created_at,'D d-M H:i:s')}}</span>

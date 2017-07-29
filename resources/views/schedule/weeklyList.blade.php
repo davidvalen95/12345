@@ -166,6 +166,7 @@
                 <form action={{route('post.schedule')}} method='post'>
                     {{csrf_field()}}
                     <div class="modal-body">
+                        @php($scheduleForm = new App\Helper\Form("Play date", 'due', 'datepicker', ""))
                         {!!$scheduleForm->getFormFormat($errors)!!}
 
 
