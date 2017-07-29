@@ -24,4 +24,13 @@ class SongDetail extends Model
     public function getSchedule(){
         return $this->belongsToMany('App\Model\Schedule','schedule_song_detail','song_detail_id','schedule_id')->withPivot(array('id','order','schedule_id','song_detail_id'));
     }
+
+
+
+    public function save(array $options = array()){
+
+
+        parent::save($options);
+        saveEvent("Added new <b>song-detail</b> '<i>$this->title</i>' for <a href='".$this->getSong->getSongDetailUrl()."'>".$this->getSong->title."</a>");
+    }
 }

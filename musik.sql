@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2017 at 09:29 AM
+-- Generation Time: Jul 15, 2017 at 12:46 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -19,6 +19,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `musik`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'pelajar', NULL, NULL),
+(2, 'kap', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -53,7 +74,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (68, '2017_07_03_061924_song_indexing', 4),
 (69, '2017_07_03_093748_schedule', 4),
 (70, '2017_07_03_094455_schedule_song', 4),
-(73, '2017_07_07_150411_pivot_schedile_detail', 5);
+(73, '2017_07_07_150411_pivot_schedile_detail', 5),
+(74, '2017_07_11_123630_user_permission', 6),
+(83, '2017_07_11_123655_user_permission2', 7),
+(84, '2017_07_11_135506_create_category', 7),
+(85, '2017_07_11_135946_user_foreign_cateogyr', 8),
+(87, '2017_07_12_093416_schedule_song_detail_order', 9);
 
 -- --------------------------------------------------------
 
@@ -126,23 +152,26 @@ CREATE TABLE `schedule_song_detail` (
   `schedule_id` int(10) UNSIGNED NOT NULL,
   `song_detail_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `order` smallint(6) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `schedule_song_detail`
 --
 
-INSERT INTO `schedule_song_detail` (`id`, `schedule_id`, `song_detail_id`, `created_at`, `updated_at`) VALUES
-(1, 11, 9, NULL, NULL),
-(2, 11, 9, NULL, NULL),
-(6, 14, 9, NULL, NULL),
-(7, 14, 16, NULL, NULL),
-(8, 14, 17, NULL, NULL),
-(9, 14, 18, NULL, NULL),
-(10, 14, 19, NULL, NULL),
-(11, 14, 21, NULL, NULL),
-(12, 14, 20, NULL, NULL);
+INSERT INTO `schedule_song_detail` (`id`, `schedule_id`, `song_detail_id`, `created_at`, `updated_at`, `order`) VALUES
+(1, 11, 9, NULL, NULL, 1),
+(2, 11, 9, NULL, NULL, 1),
+(6, 14, 9, NULL, NULL, 1),
+(7, 14, 16, NULL, NULL, 4),
+(8, 14, 17, NULL, NULL, 0),
+(9, 14, 18, NULL, NULL, 2),
+(10, 14, 19, NULL, NULL, 5),
+(11, 14, 21, NULL, NULL, 3),
+(12, 14, 20, NULL, NULL, 6),
+(13, 3, 9, NULL, NULL, 1),
+(14, 7, 9, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -169,20 +198,6 @@ INSERT INTO `song` (`id`, `user_id`, `title`, `lyric`, `imageUrl`, `created_at`,
 (3, 1, 'king of majesty', '<p></p><div>You know that,<br>\r\nI love You,<br>\r\nYou know that,<br>\r\nI want to know You so much more,<br>\r\nMore than I have before<br>\r\n<br>\r\nThese words are,<br>\r\nFrom my heart,<br>\r\nThese words are,<br>\r\nNot made up,<br>\r\nI will live for You,<br>\r\nI am devoted to You,<br>\r\n<br>\r\n<i>[Pre-Chorus:]</i><br>\r\nKing of Majesty<br>\r\nI have one desire<br>\r\nJust to be with You my Lord,<br>\r\nJust to be with You my Lord,<br>\r\n<br>\r\n<i>[Chorus:]</i><br>\r\nJesus You are the Saviour of my soul<br>\r\nAnd forever and ever I\'ll give my praises to You,<br>\r\nJesus You are the Saviour of my soul<br>\r\nAnd forever and ever I\'ll give my praises to You,<br>\r\n<br>\r\n<i>[Bridge:]</i><br>\r\nJesus You are the Saviour of my soul <i>[echo]</i><br>\r\nAnd forever and ever I\'ll give my praises to You <i>[echo]</i>\r\n</div>\r\n\r\n<br><p></p>', 'https://images.genius.com/4cdf08f7cd7258614bc6b141d9ab372c.640x640x1.jpg', '2017-07-02 09:21:05', '2017-07-02 09:21:05'),
 (4, 1, 'Terpujilah namamu tuhan', '<p></p><div><strong>Verse 1</strong><br>Terpujilah namaMu Tuhan<br>Kuat dan penuh kemuliaan<br>Satu suara kami nyatakan<br>KebesaranMu tetap selamanya<br><br><strong>Verse 2</strong><br>Terpujilah namaMu Tuhan<br>Ajaib dan penuh keagungan<br>Satu hati kami nyatakan<br>KerajaanMu kekal selamanya<br><br><strong>Chorus</strong><br>Engkaulah Raja atas dunia<br>Yang menghancurkan kutuk<br>Dan membebaskan jiwa<br>Kami bersorak bertepuk tangan<br>Engkau Tuhan berjaya<br>Dan mem’rintah untuk s’lamanya</div><br><p></p>', 'http://3.bp.blogspot.com/-RfgCe3Bh_90/T5OxVt1UvhI/AAAAAAAAAOU/GHpyZRIR0jM/s1600/favor_hljcc.jpg', '2017-07-03 06:04:20', '2017-07-03 06:04:20'),
 (5, 1, 'dengan mu tuhan', '<p>TAK PERNAH ‘KU RAGU AKAN KESETIAAN-MU<br>\r\nKAU PEGANG HIDUPKU<br>\r\nSEPENUH JIWAKU ‘KU YAKIN DAN PERCAYA<br>\r\nKAU TUNTUN LANGKAHKU</p>\r\n<p>YESUS KAULAH RAJA DALAM HIDUPKU<br>\r\nBERKUASA BERJAYA UNTUK S’LAMANYA</p>\r\n<p>HANYA KAU TUHAN SUMBER KEKUATAN<br>\r\nKUASA-MU TERCURAH BAGIKU S’NANTIASA<br>\r\nDENGAN-MU TUHAN ’KU ‘KAN BERJALAN<br>\r\nDARI KEMULIAAN SAMPAI KEMULIAAN<br>\r\nS’LAMANYA</p>', 'https://4.bp.blogspot.com/-Awk9w_fJ35I/VGTQLeM2wSI/AAAAAAAABOM/5TGTy318as0/s1600/True%2BWorshippers%2B-%2BGlory%2BTo%2BGlory.jpg', '2017-07-03 06:21:18', '2017-07-03 06:21:18'),
-(6, 1, 'coba', '<p>sdf<br></p>', NULL, '2017-07-03 06:37:51', '2017-07-03 06:37:51'),
-(7, 1, 'cobas', '<p>w<br></p>', NULL, '2017-07-03 06:38:35', '2017-07-03 06:38:35'),
-(8, 1, 'cobas3', '<p>w<br></p>', NULL, '2017-07-03 06:39:40', '2017-07-03 06:39:40'),
-(9, 1, '4cobas3', '<p>w<br></p>', NULL, '2017-07-03 06:40:07', '2017-07-03 06:40:07'),
-(10, 1, '34cobas3', '<p>w<br></p>', NULL, '2017-07-03 06:40:24', '2017-07-03 06:40:24'),
-(11, 1, '34cobas3444', '<p>w<br></p>', NULL, '2017-07-03 06:40:45', '2017-07-03 06:40:45'),
-(12, 1, '34cobas344455', '<p>w<br></p>', NULL, '2017-07-03 06:41:53', '2017-07-03 06:41:53'),
-(13, 1, '34cobas3444555', '<p>w<br></p>', NULL, '2017-07-03 06:43:34', '2017-07-03 06:43:34'),
-(14, 1, '34cobas34445553', '<p>w<br></p>', NULL, '2017-07-03 06:43:58', '2017-07-03 06:43:58'),
-(15, 1, '34cobas3444555333', '<p>w<br></p>', NULL, '2017-07-03 06:49:07', '2017-07-03 06:49:07'),
-(16, 1, '34cobas344455533332', '<p>w<br></p>', NULL, '2017-07-03 06:49:40', '2017-07-03 06:49:40'),
-(17, 1, '1134cobas344455533332', '<p>w<br></p>', NULL, '2017-07-03 06:50:02', '2017-07-03 06:50:02'),
-(18, 1, '1134cobas344455533333332', '<p>w34<br></p>', NULL, '2017-07-03 06:50:41', '2017-07-03 06:50:41'),
-(19, 1, 'sdfsdf', '<p>sdfsdf<br></p>', 'dsfsdf', '2017-07-03 07:04:37', '2017-07-03 07:04:37'),
 (20, 1, 'Seharusnya Ku Datang', '<p></p><p>Seringkali kudatang Tuhan</p>\r\n<p>Hanya karna sejuta keluhan</p>\r\n<p>Seringkali kulupa Tuhan</p>\r\n<p>Seharusnya kudatang</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Chorus:</strong></p>\r\n<p>Dengan segenap rindu dari lubuk hatiku</p>\r\n<p>Dengan hasrat yang tulus</p>\r\n<p>Karna kucinta padaMu</p>\r\n<p>Tak hanya memikirkan</p>\r\n<p>berkat yang Kau berikan</p>\r\n<p>Sungguh hanya karnaku mengasihiMu Yesus</p>\r\n<p>&nbsp;</p>\r\n<p>Seringkali aku berdoa</p>\r\n<p>hanya karna tak ingin dicela</p>\r\n<p>Namun kini kusadar Tuhan</p>\r\n<p>seharusnya kudatang</p><br><p></p>', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2EsGsAgUMf5hSxT8Dpsmxo7tf9jbxlxHs3OdWfz7ZKAb4-Mvj', '2017-07-07 21:56:39', '2017-07-07 21:56:39'),
 (21, 1, 'AMAN DI DALAM-MU', '<p></p><p>ENGKAULAH PERISAIKU<br>\r\nMENARA KEKUATANKU\r\nTUHAN<br>\r\nGUNUNG BATUKU</p>\r\n<p>KAULAH PENGHARAPANKU<br>\r\nTEMPAT PERLINDUNGANKU TUHAN<br>\r\nKOTA BENTENGKU<br>\r\nYESUS KESELAMATANKU</p>\r\n<p>REFF :<br>\r\nKU S\'LALU AMAN DI DALAM TANGAN-MU<br>\r\nTERPUJILAH TUHAN S\'BAB KASIH SETIA-MU<br>\r\nKU S\'LALU BERSANDAR HANYA PADA-MU<br>\r\nTERPUJILAH TUHAN<br>\r\nTERPUJILAH TUHAN<br>\r\n</p><br><p></p>', 'https://i.ytimg.com/vi/j9davuqKHJM/hqdefault.jpg', '2017-07-07 21:59:19', '2017-07-07 21:59:19'),
 (22, 1, 'Sungguh Kau', '<p></p><div>Syukur kuucapkan atas semua perbuatanMu</div><div>Hidupku diubahkan sejak Kau tinggal di dalam hatiku</div><div>Betapa kubersandar pada diriMu</div><div>TanpaMu Ku Takkan kuat</div><div>chorus</div><div><br>\r\n</div><div>Sungguh Kaulah yang terindah</div><div>Sungguh Kaulah yang kucinta</div><div>KehadiranMu ubahkan seluruh duniaku</div><div><br>\r\n</div><div>Hanya Kaulah Yang Kupandang</div><div>Hanya Kaulah Yang Kupegang</div><div>Kasih dan kebaikanMu di dalam duniaku</div><div>bridge</div><div><br>\r\n</div><div>S\'bab hanya Kau yang ubahkan duniaku, duniaku</div><div>S\'bab hanya Kau yang ubahkan duniaku, duniaku</div><div>(repeat)</div><br><p></p>', 'https://i.ytimg.com/vi/Z8jr5fcBL4A/hqdefault.jpg', '2017-07-07 22:01:34', '2017-07-07 22:01:34'),
@@ -222,9 +237,6 @@ INSERT INTO `song_detail` (`id`, `song_id`, `user_id`, `title`, `embedUrl`, `des
 (9, 1, 1, '\'DIA RAJA\' JPCC Worship/True Worshippers | HD', '0uIeJPQRmG0', 'basic', '2017-07-03 06:18:07', '2017-07-03 06:18:07'),
 (10, 5, 1, '2. DENGANMU TUHAN - Glory to Glory - True Worshippers live recording (HD)', 'bMZ2vISOtoQ', 'basic', '2017-07-03 06:23:23', '2017-07-03 06:23:23'),
 (12, 5, 1, 'DenganMu Tuhan - Guitar and Bass Instrumental Cover - True Worshipper - by Gary Wiryawan', 'MuHk06rLy2I', 'Cover gitar nya keren bro', '2017-07-03 06:24:29', '2017-07-03 06:24:29'),
-(13, 8, 1, 'Allah Sanggup - BCS PW Workshop by GBI Sukawarna Team', 'gnpOStr_UC8', 'groovy', '2017-07-03 06:51:53', '2017-07-03 06:51:53'),
-(14, 10, 1, 'Allah Sanggup - BCS PW Workshop by GBI Sukawarna Team', 'gnpOStr_UC8', 'dsf', '2017-07-03 06:55:05', '2017-07-03 06:55:05'),
-(15, 12, 1, 'kdsf', 'sdf', 'dfs', '2017-07-03 07:03:35', '2017-07-03 07:03:35'),
 (16, 20, 1, 'Seharusnya Kudatang - Bethany Nginden Church Indonesia', 'tuZW6V7dED4', 'bethany punya', '2017-07-07 21:57:05', '2017-07-07 21:57:05'),
 (17, 21, 1, 'Aman DidalamMu - Yan Ivan Christian', 'j9davuqKHJM', 'basic', '2017-07-07 21:59:34', '2017-07-07 21:59:34'),
 (18, 22, 1, 'Sungguh Kau - Sidney Mohede (Louder Than Life Sidney Mohede Live Concert).', 'doUuHodiXmA', 'basic', '2017-07-07 22:01:51', '2017-07-07 22:01:51'),
@@ -246,27 +258,29 @@ CREATE TABLE `users` (
   `password` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `category_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `instrument`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'David Valentino', 'davidvalen95@gmail.com', 'Gitar', '$2y$10$7f2j50hzugEmtjqTQreKdO9h6JtlMFui1N3TPOZHytu1/45OK9SrC', 'ioWTxbPoeZuosdFoahnS5cmdRZgDkUZQoLp0RE1u7I4gjbbbBx1MbMJVmNAj', '2017-07-01 04:02:06', '2017-07-01 04:02:06'),
-(2, 'Kezia Grace', 'kezia@gmail.com', 'Keyboard', '$2y$10$LyLT53E0PVnmCQtSJOjgkOQxJQCS1texLeLbounjtOv9Hq2Y.Y3Ma', NULL, '2017-07-02 07:37:14', '2017-07-02 07:37:14'),
-(3, 'Kezia Grace', 'kezia@gmail.com2', 'Keyboard', '$2y$10$db2gShGTNhsXYk4tOhTITeDn8xIInzak4gDxvzVlY2xySwjhol8lu', NULL, '2017-07-02 07:38:06', '2017-07-02 07:38:06'),
-(4, 'Kezia Grace', 'kezia@gmilc.c', 'Gitar', '$2y$10$Tsv1DEiX6A.T/wp9bLxhle0oloYsykN1bxD4OzvWTHeh.vrDKV6qG', NULL, '2017-07-02 07:47:34', '2017-07-02 07:47:34'),
-(5, 'Kezia Grace', 'kezia@gmilc.com2', 'Gitar', '$2y$10$7Xz22legWV9yzn5SLuMOTe6Kr3H4DN1lby8YoBPRttNELO4Ec5Bky', NULL, '2017-07-02 07:47:54', '2017-07-02 07:47:54'),
-(6, 'Sdfsdf', 'davidvalen95@gmail.com3', 'Gitar', '$2y$10$x2uETx3IVHiG5w/e36WMGOhfQLwUbhbRZASC2frRZ7jpxjfbfU5bS', 'GjZVHa3rSpwvjvo6XLQnf5AzM1imXsk5VdEsjx2xHpA5nVXO3IPb50QsMRDc', '2017-07-03 06:52:27', '2017-07-03 06:52:27'),
-(7, 'David Valentino', 'davidvalen95@gmail.com42', 'Gitar', '$2y$10$InUDWVO9NrWFoa2vrgtmf.oXyGa5y29mHRJfoXgVVIKITUbPZHZLi', NULL, '2017-07-03 06:55:59', '2017-07-03 06:55:59'),
-(8, 'Janc', 'davidvalen95@gmail.com324', 'Gitar', '$2y$10$Kq4hRg09zTJ7VWLK0hec1ehtkcs6W2zstRH6p9RLO95Dtb.fPy2/6', NULL, '2017-07-03 07:05:23', '2017-07-03 07:05:23'),
-(9, 'Asu', 'davidvalen95@gmail.com33', 'Gitar', '$2y$10$2G2FJdhlXhVdd7w7Wu2XC.U0aaHIH6.nbAhueGB6UPRrKzln63DfK', NULL, '2017-07-03 07:06:56', '2017-07-03 07:06:56');
+INSERT INTO `users` (`id`, `name`, `email`, `instrument`, `password`, `remember_token`, `created_at`, `updated_at`, `category_id`) VALUES
+(1, 'David Valentino', 'davidvalen95@gmail.com', 'Gitar', '$2y$10$7f2j50hzugEmtjqTQreKdO9h6JtlMFui1N3TPOZHytu1/45OK9SrC', 'mEV5BPB4qOS8USWYqWPkll5eymgASaiBXAhKUNlrMx2PQAFfD9OzTMk8nS6c', '2017-07-01 04:02:06', '2017-07-01 04:02:06', 1),
+(2, 'Kezia Grace', 'kezia@gmail.com', 'Keyboard', '$2y$10$LyLT53E0PVnmCQtSJOjgkOQxJQCS1texLeLbounjtOv9Hq2Y.Y3Ma', NULL, '2017-07-02 07:37:14', '2017-07-02 07:37:14', 1),
+(4, 'Kezia Grace', 'kezia@gmilc.c', 'Gitar', '$2y$10$Tsv1DEiX6A.T/wp9bLxhle0oloYsykN1bxD4OzvWTHeh.vrDKV6qG', NULL, '2017-07-02 07:47:34', '2017-07-02 07:47:34', 1),
+(11, 'I Am Kap', 'kap@kap.com', 'Drum', '$2y$10$M./JRHDDWSX0dosEo.4Ch.QMwTEMfDZ2LmBOtwhi7YYa6.w8vVWmG', NULL, '2017-07-11 06:40:02', '2017-07-11 06:40:02', 2);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -323,17 +337,23 @@ ALTER TABLE `song_detail`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_category_id_foreign` (`category_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `schedule`
 --
@@ -348,7 +368,7 @@ ALTER TABLE `schedule_song`
 -- AUTO_INCREMENT for table `schedule_song_detail`
 --
 ALTER TABLE `schedule_song_detail`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `song`
 --
@@ -363,7 +383,7 @@ ALTER TABLE `song_detail`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --
@@ -394,6 +414,12 @@ ALTER TABLE `song`
 ALTER TABLE `song_detail`
   ADD CONSTRAINT `song_detail_song_id_foreign` FOREIGN KEY (`song_id`) REFERENCES `song` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `song_detail_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

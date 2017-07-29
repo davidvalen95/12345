@@ -8,6 +8,7 @@ use App\User;
 use Auth;
 use App\Model\Schedule;
 use App\Model\Song;
+use App\Model\Event;
 use Session;
 class HomeController extends Controller
 {
@@ -53,12 +54,15 @@ class HomeController extends Controller
         }else{
             $data['songs'] = Song::paginate(15);
         }
-        $data['title'] = 'Home | '.TITLE;
-        $data['user'] = $this->user;
-        $schedule = Schedule::orderBy('due','desc')->take(3)->get();
-        $data['schedules'] = $schedule;
+        $data['title']      = 'Home | '.TITLE;
+        $data['user']       = $this->user;
+        $schedule           = Schedule::orderBy('due','desc')->take(3)->get();
+        $data['schedules']  = $schedule;
+        $data['events']     = Event::orderBy('created_at','desc')->take(15)->get();
         //placeholder, name, type, icon, options:array, $value=null
-        $data['scheduleForm'] = new Form("Play date", 'due', 'datepicker', "");
+
+
+        $data['scheduleForm']   = new Form("Play date", 'due', 'datepicker', "");
 
         // Session::flush();
 

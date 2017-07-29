@@ -90,15 +90,22 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
-        <div class="user-panel">
-          <div class="pull-left image">
-            <img src={{$user->getImageLogo()}} class="img-circle" alt="User Image">
-          </div>
-          <div class="pull-left info">
-            <p>{{$user->name}}</p>
-            <a href="#"><i class="fa fa-circle text-success"></i>{{$user->instrument}}</a>
-          </div>
-        </div>
+
+            <div class="user-panel">
+
+                <div class="pull-left image">
+
+                        <img src={{$user->getImageLogo()}} class="img-circle" alt="User Image">
+
+                </div>
+                <div class="pull-left info">
+
+                    <p>{{$user->name}}</p>
+                    <a href="{{route('home')}}"><i class="fa fa-circle text-success"></i>{{$user->instrument}}</a>
+                </div>
+
+            </div>
+
         <!-- search form -->
         <form action={{action('HomeController@index')}} method="POST" class="sidebar-form">
 

@@ -64,10 +64,10 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                <span class="info-box-icon "><img src={{IMAGE_LOGO_KAP}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
+                <span style='height:130px;' class="info-box-icon "><img src={{IMAGE_LOGO_KAP}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
 
                 <div class="info-box-content">
-                    @php($instruments = ['Gitar','Bass','Keyboard','Drum'])
+                    @php($instruments = ['Gitar','Bass','Keyboard','Drum','Singer','Ava'])
                     @foreach($instruments as $instrument)
                     <span class="progress-description">{{ucwords($instrument)}}: <b>{{App\Model\Category::find(2)->getUsers->where('instrument',$instrument)->count()}}</b></span>
 
@@ -78,13 +78,13 @@
             <!-- /.info-box -->
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                <span class="info-box-icon "><img src={{IMAGE_LOGO}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
+                <div style='height:100%;' class="info-box">
+                    <span style='height:130px;' class="info-box-icon "><img src={{IMAGE_LOGO}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
 
 
                 <div class="info-box-content">
 
-                    @php($instruments = ['Gitar','Bass','Keyboard','Drum'])
+                    @php($instruments = ['Gitar','Bass','Keyboard','Drum','Singer','Ava'])
                     @foreach($instruments as $instrument)
                     <span class="progress-description">{{ucwords($instrument)}}: <b>{{App\Model\Category::find(1)->getUsers->where('instrument',$instrument)->count()}}</b></span>
 
@@ -104,12 +104,76 @@
         </div>
         <div class='row'>
             <div class="col-md-4 col-xs-12">
-                @include('schedule.weeklyList')
 
+
+                                {{-- history --}}
+                                <div class="box box-warning direct-chat direct-chat-warning">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Recent Activities</h3>
+
+                                        <div class="box-tools pull-right">
+                                            {{-- <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts">
+                                                <i class="fa fa-comments"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                            </button> --}}
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <!-- Conversations are loaded here -->
+
+                                        <div class="direct-chat-messages">
+                                            @foreach($events as $event)
+
+
+                                                    <!-- Message. Default to the left -->
+                                                    <div class="direct-chat-msg">
+                                                        <div class="direct-chat-info clearfix">
+                                                            <span class="direct-chat-name pull-left">{{$event->getUser->setDefaultPreferences()->name}}</span>
+                                                            <span class="direct-chat-timestamp pull-right">{{dateTimeToString($event->created_at,'D d-M H:i:s')}}</span>
+                                                        </div>
+                                                        <!-- /.direct-chat-info -->
+                                                        {{-- <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"> --}}
+                                                        <!-- /.direct-chat-img -->
+                                                        <div class="direct-chat-text">
+                                                            {!!$event->detail!!}
+                                                        </div>
+                                                        <!-- /.direct-chat-text -->
+                                                    </div>
+                                                    <!-- /.direct-chat-msg -->
+
+
+                                                {{-- the message --}}
+
+                                            @endForeach
+
+                                        </div>
+
+
+
+                                    {{-- body --}}
+                                    </div>
+
+                                    <div class="box-footer">
+
+                                    {{-- footer --}}
+                                    </div>
+
+                                    </div>
+
+
+                            {{-- endHistory --}}
+
+
+
+
+
+                @include('schedule.weeklyList')
             <!-- col3 -->
             </div>
-
-
 
 
 

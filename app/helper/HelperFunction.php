@@ -1,5 +1,5 @@
 <?php
-
+    // use Auth;
     function debug($var="hello"){
         die(var_dump($var));
     }
@@ -77,4 +77,14 @@
                                 </ul>";
 		return $list;
 	}
+
+
+    function saveEvent($message){
+        $event = new App\Model\Event();
+
+        $event->detail = $message;
+        $user = Auth::user();
+        $event->getUser()->associate($user);
+        $event->save();
+    }
  ?>

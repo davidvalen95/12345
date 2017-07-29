@@ -3,7 +3,8 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\User;
+use Auth;
 class Schedule extends Model
 {
     protected $table = "schedule";
@@ -32,5 +33,12 @@ class Schedule extends Model
 
     static function getLatestSchedule(){
         return Schedule::orderBy('due','desc')->get()->first();
+    }
+
+    public function save(array $options = array()){
+        //# helper function
+        saveEvent("Added <b>new schedule</b> for ". dateTimeToString($this->due));
+
+        parent::save($options);
     }
 }
