@@ -133,7 +133,7 @@
 
 
 
-                                    <input name="songSearch" value="{{old('songSearch')}}" class="form-control pull-right" placeholder="Search" type="text">
+                                    <input name="songSearch" value="{{old('songSearch')}}" class="form-control pull-right" placeholder="Search by lyric / title" type="text">
 
                                     <div class="input-group-btn">
                                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
