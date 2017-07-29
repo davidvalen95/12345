@@ -31,7 +31,7 @@
       <!-- Small boxes (Stat box) -->
         <div class="row">
             <a href='https://google.com'>
-                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-md-3 col-sm-6 col-xs-12">
+                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-sm-6 col-lg-3  col-xs-12">
                     <div class="info-box bg-yellow">
                     <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
@@ -48,8 +48,9 @@
                 <!-- /.info-box -->
                 </div></a>
             </a>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
+
+            <div class="col-sm-6 col-lg-3 hidden-xs">
+                <div class="info-box ">
                 <span class="info-box-icon bg-red"><i class="fa fa-music"></i></span>
 
                 <div class="info-box-content">
@@ -62,7 +63,9 @@
                 </div>
             <!-- /.info-box -->
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+
+
+            <div class="col-sm-6 col-lg-3 hidden-xs">
                 <div class="info-box">
                 <span style='height:130px;' class="info-box-icon "><img src={{IMAGE_LOGO_KAP}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
 
@@ -77,7 +80,10 @@
                 </div>
             <!-- /.info-box -->
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+
+
+
+            <div class="col-sm-6 col-lg-3 hidden-xs">
                 <div style='height:100%;' class="info-box">
                     <span style='height:130px;' class="info-box-icon "><img src={{IMAGE_LOGO}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
 
