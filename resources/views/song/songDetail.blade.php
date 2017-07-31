@@ -126,7 +126,7 @@
                                 {{-- <img  class='.d-block' src='{{asset('images/video-code-2.png')}}'/> --}}
                             </p>
                             <p>
-                                Error message, it wrong video code
+                                Error message, wrong video code
 
                                 <img  class='.d-block img-thumbnail' src='{{asset('images/error-video-code.png')}}'/>
 
