@@ -120,11 +120,11 @@
                                 <img  class='.d-block img-thumbnail' src='{{asset('images/video-code-2.png')}}'/>
 
                             </p>
-                            <p>
+                            {{-- <p>
                                 Error message, it means it has copyright and cannot be inserted here
                                 <img  class='.d-block img-thumbnail' src='{{asset('images/error-copyright.png')}}'/>
-                                {{-- <img  class='.d-block' src='{{asset('images/video-code-2.png')}}'/> --}}
-                            </p>
+
+                            </p> --}}
                             <p>
                                 Error message, wrong video code
 

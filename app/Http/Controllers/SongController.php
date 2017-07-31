@@ -146,11 +146,13 @@ class SongController extends Controller
         $content = (object)$content;
         if($content->status == "fail"){
             $reason = strtolower($content->reason);
-            if(strcontain)
-            $request->session()->flash('message.danger', "$content->reason");
-            return redirect()->back();
-
+            if(!str_contains($reason, "wmg")){
+                //# wmg means copyright
+                $request->session()->flash('message.danger', "$content->reason");
+                return redirect()->back();
+            }
         }
+        $content->title = (isset($content->title) ? $content->title : "$post->embedUrl, this video has copyright by origin");
         $songDetail->title = $content->title;
         $songDetail->save();
 
