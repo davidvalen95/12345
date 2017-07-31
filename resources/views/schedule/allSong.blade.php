@@ -46,7 +46,7 @@
 
         {{-- all song  video--}}
         <div class='row'>
-            @foreach($schedules->first()->getSongDetail()->orderBy('created_at','asc')->get() as $songDetail)
+            @foreach($schedules->first()->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
 
                 <?php
                     $userContributor = $songDetail->getUser;
