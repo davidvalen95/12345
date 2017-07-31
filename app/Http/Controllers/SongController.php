@@ -127,11 +127,11 @@ class SongController extends Controller
     public function postSongDetail(Request $request){
 
         $post = (object)$request->all();
-
+        $request->flash();
         $this->validate($request, array(
             // 'title' => 'required',
             // 'description' => 'required',
-            // 'embedUrl'  => 'required|regex:(^[^\/]+$)'
+            'embedUrl'  => 'unique:song_detail'
 
         ));
 
