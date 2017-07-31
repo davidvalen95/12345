@@ -1,0 +1,11 @@
+.direct-chat .right{
+        a{
+
+            &:active,&:visited,&:link{
+                color: white;
+            }
+            &:hover{
+                color:red;
+            }
+        }
+}
