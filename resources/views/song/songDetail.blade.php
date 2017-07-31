@@ -109,7 +109,7 @@
                                 </div>
                             </form>
 
-
+                            <h3>Guidelines</h3>
                             <p>
                                 Example for valid video code :
                                 <img  class='.d-block img-thumbnail' src='{{asset('images/video-code-1.png')}}'/>

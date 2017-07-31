@@ -9,9 +9,31 @@
 -->
 
 
-
 @section('content')
 
+    <div class='row'>
+        <div class='col-xs-12'>
+            <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i>New update Monday 31 July 2017</h4>
+            <ol>
+                <li>
+                    Add arangement: Automatically get youtube video's title, no need to insert title
+                </li>
+                <li>
+                    Add arangement: Tackle same video code
+                </li>
+                <li>
+                    Add arangement: picture guideline
+                </li>
+                <li>
+                    New recent activities
+                </li>
+
+            </ol>
+          </div>
+        </div>
+    </div>
   <!-- Content Wrapper. Contains page content -->
 
 
