@@ -71,11 +71,11 @@ class SongController extends Controller
 
         //#form
         //placeholder, name, type, icon, options:array
-        $titleForm          = new Form("Video title", "title", "text", "");
+        // $titleForm          = new Form("Video title", "title", "text", "");
+        $urlForm            = new Form("Video code*", "embedUrl", "text","");
         $descriptionForm    = new Form("Video description", "description", "text", "");
-        $urlForm            = new Form("Video embed url", "embedUrl", "text","");
         $songId             = new Form("song id", "song_id", "hidden", "", [], "$song->id");
-        $data['forms'] =  array($titleForm, $descriptionForm,$urlForm,$songId);
+        $data['forms'] =  array( $urlForm,$descriptionForm,$songId);
         $schedule  = Schedule::getLatestSchedule();
         // debug($schedule->due);
 
@@ -126,11 +126,12 @@ class SongController extends Controller
 
     public function postSongDetail(Request $request){
 
+        $post = (object)$request->all();
 
         $this->validate($request, array(
-            'title' => 'required',
-            'description' => 'required',
-            'embedUrl'  => 'required|regex:(^[^\/]+$)'
+            // 'title' => 'required',
+            // 'description' => 'required',
+            // 'embedUrl'  => 'required|regex:(^[^\/]+$)'
 
         ));
 
@@ -139,6 +140,16 @@ class SongController extends Controller
 
         $songDetail->user_id = Auth::id();
         // debug(Auth::id());
+        //# sdah ada songId dari form
+        $fileContent = file_get_contents("http://youtube.com/get_video_info?video_id=".$post->embedUrl);
+        parse_str($fileContent, $content);
+        $content = (object)$content;
+        if($content->status == "fail"){
+            $request->session()->flash('message.danger', "$content->reason");
+            return redirect()->back();
+
+        }
+        $songDetail->title = $content->title;
         $songDetail->save();
 
 

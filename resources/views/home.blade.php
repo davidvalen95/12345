@@ -31,7 +31,7 @@
       <!-- Small boxes (Stat box) -->
         <div class="row">
             <a href='https://google.com'>
-                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-sm-6 col-lg-3  col-xs-12">
+                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-sm                 -6 col-lg-3  col-xs-12">
                     <div class="info-box bg-yellow">
                     <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
