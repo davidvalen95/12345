@@ -108,6 +108,30 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <h3>Guidelines</h3>
+                            <p>
+                                Example for valid video code :
+                                <img  class='.d-block img-thumbnail' src='{{asset('images/video-code-1.png')}}'/>
+                                {{-- <img  class='.d-block' src='{{asset('images/video-code-2.png')}}'/> --}}
+                            </p>
+                            <p>
+                                Example for valid video code:
+                                <img  class='.d-block img-thumbnail' src='{{asset('images/video-code-2.png')}}'/>
+
+                            </p>
+                            <p>
+                                Error message, it means it has copyright and cannot be inserted here
+                                <img  class='.d-block img-thumbnail' src='{{asset('images/error-copyright.png')}}'/>
+                                {{-- <img  class='.d-block' src='{{asset('images/video-code-2.png')}}'/> --}}
+                            </p>
+                            <p>
+                                Error message, wrong video code
+
+                                <img  class='.d-block img-thumbnail' src='{{asset('images/error-video-code.png')}}'/>
+
+                            </p>
+
                         {{-- id setting --}}
                         </div>
                         <!-- tabcontent -->

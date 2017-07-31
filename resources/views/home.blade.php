@@ -9,9 +9,31 @@
 -->
 
 
-
 @section('content')
 
+    <div class='row'>
+        <div class='col-xs-12'>
+            <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i>New update Monday 31 July 2017</h4>
+            <ol>
+                <li>
+                    Add arangement: Automatically get youtube video's title, no need to insert title
+                </li>
+                <li>
+                    Add arangement: Tackle same video code
+                </li>
+                <li>
+                    Add arangement: picture guideline
+                </li>
+                <li>
+                    New recent activities
+                </li>
+
+            </ol>
+          </div>
+        </div>
+    </div>
   <!-- Content Wrapper. Contains page content -->
 
 
@@ -31,7 +53,7 @@
       <!-- Small boxes (Stat box) -->
         <div class="row">
             <a href='https://google.com'>
-                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-md-3 col-sm-6 col-xs-12">
+                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-sm                 -6 col-lg-3  col-xs-12">
                     <div class="info-box bg-yellow">
                     <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
@@ -48,8 +70,9 @@
                 <!-- /.info-box -->
                 </div></a>
             </a>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
+
+            <div class="col-sm-6 col-lg-3 hidden-xs">
+                <div class="info-box ">
                 <span class="info-box-icon bg-red"><i class="fa fa-music"></i></span>
 
                 <div class="info-box-content">
@@ -62,7 +85,9 @@
                 </div>
             <!-- /.info-box -->
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+
+
+            <div class="col-sm-6 col-lg-3 hidden-xs">
                 <div class="info-box">
                 <span style='height:130px;' class="info-box-icon "><img src={{IMAGE_LOGO_KAP}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
 
@@ -77,7 +102,10 @@
                 </div>
             <!-- /.info-box -->
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+
+
+
+            <div class="col-sm-6 col-lg-3 hidden-xs">
                 <div style='height:100%;' class="info-box">
                     <span style='height:130px;' class="info-box-icon "><img src={{IMAGE_LOGO}} class="img-circle" style='width:70px;height:70px;'alt="User Image"></span>
 
@@ -107,7 +135,7 @@
 
 
                                 {{-- history --}}
-                                <div class="box box-warning direct-chat direct-chat-warning">
+                                <div class="box box-primary direct-chat direct-chat-primary">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Recent Activities</h3>
 
@@ -128,9 +156,10 @@
                                         <div class="direct-chat-messages">
                                             @foreach($events as $event)
 
+                                                    @php($isMe = ($event->getUser == Auth::user()))
 
                                                     <!-- Message. Default to the left -->
-                                                    <div class="direct-chat-msg">
+                                                    <div class="direct-chat-msg @if(!$isMe)right @endIf">
                                                         <div class="direct-chat-info clearfix">
                                                             <span class="direct-chat-name pull-left">{{$event->getUser->setDefaultPreferences()->name}}</span>
                                                             <span class="direct-chat-timestamp pull-right">{{dateTimeToString($event->created_at,'D d-M H:i:s')}}</span>
@@ -197,7 +226,7 @@
 
 
 
-                                    <input name="songSearch" value="{{old('songSearch')}}" class="form-control pull-right" placeholder="Search" type="text">
+                                    <input name="songSearch" value="{{old('songSearch')}}" class="form-control pull-right" placeholder="Search by lyric / title" type="text">
 
                                     <div class="input-group-btn">
                                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>

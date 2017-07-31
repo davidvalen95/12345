@@ -117,4 +117,9 @@
   background-color: #5a8f66;
   color: rgba(255, 255, 255, 0.8); }
 
+.direct-chat .right a:active, .direct-chat .right a:visited, .direct-chat .right a:link {
+  color: white; }
+.direct-chat .right a:hover {
+  color: red; }
+
 /*# sourceMappingURL=custom.css.map */

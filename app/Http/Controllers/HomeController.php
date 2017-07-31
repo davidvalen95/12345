@@ -61,8 +61,8 @@ class HomeController extends Controller
         $data['events']     = Event::orderBy('created_at','desc')->take(15)->get();
         //placeholder, name, type, icon, options:array, $value=null
 
-
-        $data['scheduleForm']   = new Form("Play date", 'due', 'datepicker', "");
+        //# dipindah ke weeklylist karena weeklylist include dimanapun
+        // $data['scheduleForm']   =
 
         // Session::flush();
 
