@@ -145,6 +145,8 @@ class SongController extends Controller
         parse_str($fileContent, $content);
         $content = (object)$content;
         if($content->status == "fail"){
+            $reason = strtolower($content->reason);
+            if(strcontain)
             $request->session()->flash('message.danger', "$content->reason");
             return redirect()->back();
 
