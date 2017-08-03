@@ -105,6 +105,14 @@ class SongController extends Controller
 
     public function postNewSong(Request $request){
         $request->flash();
+
+        $song = new Song($request->all());
+        $song->prepareFormat();//# for title preprocessing
+        $song->raw_lyric = getSearchFormat($song->lyric);
+        $song->user_id = $this->user->id;
+
+
+        $request['title'] = $song->title;
         $this->validate($request,array(
             'title' => "required|unique:song",
             'lyric' => 'required'
@@ -113,8 +121,11 @@ class SongController extends Controller
 
 
 
-        $song = new Song($request->all());
-        $song->user_id = $this->user->id;
+
+
+
+
+
         $song->save();
 
 

@@ -15,22 +15,58 @@
         <div class='col-xs-12'>
             <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i>New update Monday 31 July 2017</h4>
-            <ol>
+            <h4><i class="icon fa fa-check"></i>New update </h4>
+            <ul>
                 <li>
-                    Add arangement: Automatically get youtube video's title, no need to insert title
+                    Thursday 3rd August 2017
+                    <ol>
+                        <li>
+                            Search song: improve search algorithm for easier lookup in 10000+ songs. try it;)
+                        </li>
+                    </ol>
+                {{-- 3 agustus? --}}
                 </li>
                 <li>
-                    Add arangement: Tackle same video code
-                </li>
-                <li>
-                    Add arangement: picture guideline
-                </li>
-                <li>
-                    New recent activities
+                    Monday 31st July 2017
+                    <ol>
+                        <li>
+                            Add arangement: Automatically get youtube video's title, no need to insert title
+                        </li>
+                        <li>
+                            Add arangement: Tackle same video code
+                        </li>
+                        <li>
+                            Add arangement: picture guideline
+                        </li>
+                        <li>
+                            New recent activities
+                        </li>
+
+                    </ol>
+                {{-- 31july --}}
                 </li>
 
-            </ol>
+
+                <li>
+                    Coming soon
+                    <ol>
+                        <li>
+                            User profile
+                        </li>
+                        <li>
+                            Add favorite arangement
+                        </li>
+                        <li>
+                            Weekly email system for reminder
+                        </li>
+                        <li>
+                            Profile photo
+                        </li>
+                    </ol>
+                {{-- comingsoong --}}
+                </li>
+            </ul>
+
           </div>
         </div>
     </div>
@@ -244,10 +280,14 @@
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th>Title</th>
-                                    <th>Mark</th>
-                                    <th style='width:60px'>
-                                        Arangement
-                                    </th>
+                                    @if($searchSong)
+                                        <th>Occurence</th>
+                                    @else
+                                        <th>Mark</th>
+                                        <th style='width:60px'>
+                                            Arangement
+                                        </th>
+                                    @endIf
                                 </tr>
                                 @php($i=1)
                                 @foreach($songs as $song)
@@ -256,7 +296,8 @@
                                     {{-- buat logika warna --}}
 
                                         <td>{{$i++}}.</td>
-                                        <td><a href={{$song->getSongDetailUrl()}}>{{$song->title}}</a></td>
+                                        @php($title = ($searchSong? getHighlight($searchSong,$song->title,false) :  $song->title))
+                                        <td><a href={{$song->getSongDetailUrl()}}>{!!$title!!}</a></td>
                                         @php
                                             $count = $song->getSongDetail->count();
                                             if($count <=1 ){
@@ -273,14 +314,23 @@
                                             }
 
                                         @endphp
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar progress-bar-{{$progress}}" style="width: {{$count/10*100}}%"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-{{$bg}}">{{$count}}</span>
-                                        </td>
+
+                                        @if($searchSong)
+                                            @php($occurence = getHighlight($searchSong,$song->raw_lyric,true))
+
+                                            <td >
+                                                <div style='word-wrap: break-word;width:320px;'>{!!$occurence!!}</div>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar progress-bar-{{$progress}}" style="width: {{$count/10*100}}%"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-{{$bg}}">{{$count}}</span>
+                                            </td>
+                                        @endIf
                                     </tr>
                                 @endForeach
 

@@ -49,10 +49,15 @@ class HomeController extends Controller
         $post = $request->all();
         if(isset($post['songSearch'])){
             // debug($post['songSearch']);
-            $data['songs'] = Song::getSearchSong($post['songSearch']);
-
+            $str = getSearchFormat($post['songSearch']);
+            $where = Song::where('raw_lyric','like',"%$str%");
+            $where = $where->orWhere('title','like',"%{$post['songSearch']}%");
+            $data['songs'] = $where->paginate(5000);
+            $data['searchSong'] = $post['songSearch'];
         }else{
             $data['songs'] = Song::paginate(15);
+            $data['searchSong'] = null;
+
         }
         $data['title']      = 'Home | '.TITLE;
         $data['user']       = $this->user;

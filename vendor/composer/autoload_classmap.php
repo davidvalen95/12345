@@ -2659,6 +2659,7 @@ return array(
     'Ramsey\\Uuid\\UuidFactory' => $vendorDir . '/ramsey/uuid/src/UuidFactory.php',
     'Ramsey\\Uuid\\UuidFactoryInterface' => $vendorDir . '/ramsey/uuid/src/UuidFactoryInterface.php',
     'Ramsey\\Uuid\\UuidInterface' => $vendorDir . '/ramsey/uuid/src/UuidInterface.php',
+    'RawSong' => $baseDir . '/database/migrations/2017_08_03_070022_raw_song.php',
     'Schedule' => $baseDir . '/database/migrations/2017_07_03_093748_schedule.php',
     'ScheduleSong' => $baseDir . '/database/migrations/2017_07_03_094455_schedule_song.php',
     'ScheduleSongDetailOrder' => $baseDir . '/database/migrations/2017_07_12_093416_schedule_song_detail_order.php',

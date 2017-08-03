@@ -2952,6 +2952,7 @@ class ComposerStaticInit78aed1f893f06aae017392937dcd90b6
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
+        'RawSong' => __DIR__ . '/../..' . '/database/migrations/2017_08_03_070022_raw_song.php',
         'Schedule' => __DIR__ . '/../..' . '/database/migrations/2017_07_03_093748_schedule.php',
         'ScheduleSong' => __DIR__ . '/../..' . '/database/migrations/2017_07_03_094455_schedule_song.php',
         'ScheduleSongDetailOrder' => __DIR__ . '/../..' . '/database/migrations/2017_07_12_093416_schedule_song_detail_order.php',

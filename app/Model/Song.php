@@ -8,7 +8,7 @@ class Song extends Model
 {
     protected $primaryKey   = "id";
     protected $table        = 'song';
-    protected $fillable     = array('title','lyric', 'imageUrl');
+    protected $fillable     = array('title','lyric', 'imageUrl', 'raw_lyric');
 
 
 
@@ -17,7 +17,7 @@ class Song extends Model
         $this->lyric = ucwords(strtolower($this->lyric));
         return $this;
     }
-
+    
     public function getSongDetail(){
         return $this->hasMany('App\Model\SongDetail');
     }
@@ -31,6 +31,7 @@ class Song extends Model
     }
 
     public static function getSearchSong($str){
+        //#split 1 1
         $exploded = preg_split("/\\W+/", $str);
         $i=0;
         foreach($exploded as $string){
@@ -49,7 +50,11 @@ class Song extends Model
         return $result->paginate(2000);
 
     }
+    public function prepareFormat(){
+        $this->title = getNameFormat($this->title);//lower,trim spaces
+        $this->title = preg_replace("/[^a-zA-Z\s]/","",$this->title);
 
+    }
     public function save(array $options = array()){
 
         parent::save($options);
