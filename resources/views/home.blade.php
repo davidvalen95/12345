@@ -23,6 +23,9 @@
                         <li>
                             Search song: improve search algorithm for easier lookup in 10000+ songs. try it;)
                         </li>
+                        <li>
+                            Add song: Base reformating for title
+                        </li>
                     </ol>
                 {{-- 3 agustus? --}}
                 </li>
