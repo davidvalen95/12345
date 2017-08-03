@@ -24,7 +24,7 @@
                             Search song: improve search algorithm for easier lookup in 10000+ songs. try it;)
                         </li>
                         <li>
-                            Add song: Base reformating for title
+                            Add song: Base reformating for title. Cannot add 'tiba saatnya2' anymore xD
                         </li>
                     </ol>
                 {{-- 3 agustus? --}}
