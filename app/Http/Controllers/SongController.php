@@ -10,6 +10,7 @@ use App\Model\Song;
 use App\Model\SongDetail;
 use App\Model\Schedule;
 use Session;
+use Illuminate\Validation\Rule;
 class SongController extends Controller
 {
     private $user;
@@ -138,12 +139,14 @@ class SongController extends Controller
     public function postSongDetail(Request $request){
 
         $post = (object)$request->all();
+        // debug($post);
         $request->flash();
         $this->validate($request, array(
             // 'title' => 'required',
             // 'description' => 'required',
-            'embedUrl'  => 'unique:song_detail'
-
+            'embedUrl'  => Rule::unique('song_detail')->where(function ($query) use($post){
+                                $query->where('embedUrl','=', $post->embedUrl)->where('song_id','=',$post->song_id);
+                            })
         ));
 
 
