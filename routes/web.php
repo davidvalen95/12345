@@ -49,7 +49,8 @@ Route::get("schedule/all-song","ScheduleController@getAllSong");
 Route::post('schedule/reorder', "ScheduleController@postOrderSongDetail")->name('post.reorder');
 
 
-
+//update list
+Route::get('update',"HomeController@getUpdate")->name('get.update');
 
 
 

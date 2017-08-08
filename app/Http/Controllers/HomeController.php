@@ -55,7 +55,7 @@ class HomeController extends Controller
             $data['songs'] = $where->paginate(5000);
             $data['searchSong'] = $post['songSearch'];
         }else{
-            $data['songs'] = Song::paginate(15);
+            $data['songs'] = Song::orderBy('title')->paginate(15);
             $data['searchSong'] = null;
 
         }
@@ -80,5 +80,14 @@ class HomeController extends Controller
 
     }
 
+    public function getUpdate(Request $request){
 
+        $data['title']          = "Update | ".TITLE;
+        $data['user']           = Auth::user();
+
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
+        return view('update',$data);
+
+    }
 }

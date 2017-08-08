@@ -46,6 +46,7 @@
 
         {{-- all song  video--}}
         <div class='row'>
+            @php($i=0)
             @foreach($schedules->first()->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
 
                 <?php
@@ -84,15 +85,71 @@
                                 {{$songDetail->title}}
                             </p>
                             <a style='padding-left:18px;' href='{{$songDetail->getSong->getSongDetailUrl()}}'>Song detail</a>
-
+                            <button style='margin-top:18px;' href="#" data-toggle='modal' data-target='#lyric-{{$i++}}' class="btn btn-block">Lyric {{$songDetail->getSong->setDefaultPreferences()->title}}</button>
 
                         </div>
                     </div>
                 <!-- /.widget-user -->
                 </div>
 
+
+
+
             @endForeach
         </div>
 
-    </section
+
+
+
+
+
+
+
+        @php($i=0)
+        @foreach($schedules->first()->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
+            @php($song = $songDetail->getSong->setDefaultPreferences())
+            {{-- modal tambah schedule--}}
+            <div class="modal fade" id="lyric-{{$i++}}" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Lyric {{$song->title}}</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            {!!$song->lyric!!}
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+                        </div>
+
+                    </div>
+                <!-- /.modal-content -->
+                </div>
+            <!-- /.modal-dialog -->
+            </div>
+        @endForeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </section>
 @endSection

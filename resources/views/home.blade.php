@@ -12,63 +12,12 @@
 @section('content')
 
     <div class='row'>
+        
         <div class='col-xs-12'>
             <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i>New update </h4>
-            <ul>
-                <li>
-                    Thursday 3rd August 2017
-                    <ol>
-                        <li>
-                            Search song: improve search algorithm for easier lookup in 10000+ songs. try it;)
-                        </li>
-                        <li>
-                            Add song: Base reformating for title. Cannot add 'tiba saatnya2' anymore xD
-                        </li>
-                    </ol>
-                {{-- 3 agustus? --}}
-                </li>
-                <li>
-                    Monday 31st July 2017
-                    <ol>
-                        <li>
-                            Add arangement: Automatically get youtube video's title, no need to insert title
-                        </li>
-                        <li>
-                            Add arangement: Tackle same video code
-                        </li>
-                        <li>
-                            Add arangement: picture guideline
-                        </li>
-                        <li>
-                            New recent activities
-                        </li>
+            <a href='{{route('get.update')}}'><h4><i class="icon fa fa-check"></i>New Update 8th August</h4><span> please click to view update</span></a>
 
-                    </ol>
-                {{-- 31july --}}
-                </li>
-
-
-                <li>
-                    Coming soon
-                    <ol>
-                        <li>
-                            User profile
-                        </li>
-                        <li>
-                            Add favorite arangement
-                        </li>
-                        <li>
-                            Weekly email system for reminder
-                        </li>
-                        <li>
-                            Profile photo
-                        </li>
-                    </ol>
-                {{-- comingsoong --}}
-                </li>
-            </ul>
 
           </div>
         </div>

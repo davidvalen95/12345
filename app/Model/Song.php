@@ -15,9 +15,12 @@ class Song extends Model
     public function setDefaultPreferences(){
         $this->title = getNameFormat($this->title);
         $this->lyric = ucwords(strtolower($this->lyric));
+        //# replace uppercase after - > " [ ] “
+        $this->lyric = preg_replace_callback('/([->"\]\[“])(\w+)/', create_function('$m','return $m[1].ucfirst($m[2]);'), $this->lyric);
+
         return $this;
     }
-    
+
     public function getSongDetail(){
         return $this->hasMany('App\Model\SongDetail');
     }
