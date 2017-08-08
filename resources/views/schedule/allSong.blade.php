@@ -33,14 +33,14 @@
     <section class="content">
 
         {{-- jadwal mingguan atas --}}
-        <div class='row'>
+        {{-- <div class='row'>
             <div class=" col-sm-6 col-xs-12">
                 @include('schedule.weeklyList')
 
             <!-- col3 -->
             </div>
 
-        </div>
+        </div> --}}
 
 
 
@@ -104,11 +104,10 @@
 
 
 
-
+        {{-- lyric dialog? --}}
         @php($i=0)
         @foreach($schedules->first()->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
             @php($song = $songDetail->getSong->setDefaultPreferences())
-            {{-- modal tambah schedule--}}
             <div class="modal fade" id="lyric-{{$i++}}" style="display: none;">
                 <div class="modal-dialog">
                     <div class="modal-content">
