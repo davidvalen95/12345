@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 <!--
-    $title
+    $songTitle
     $username
 
     objek
@@ -12,7 +12,7 @@
 @section('content')
 
     <div class='row'>
-        
+
         <div class='col-xs-12'>
             <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -248,8 +248,8 @@
                                     {{-- buat logika warna --}}
 
                                         <td>{{$i++}}.</td>
-                                        @php($title = ($searchSong? getHighlight($searchSong,$song->title,false) :  $song->title))
-                                        <td><a href={{$song->getSongDetailUrl()}}>{!!$title!!}</a></td>
+                                        @php($songTitle = ($searchSong? getHighlight($searchSong,$song->title,false) :  $song->title))
+                                        <td><a href={{$song->getSongDetailUrl()}}>{!!$songTitle!!}</a></td>
                                         @php
                                             $count = $song->getSongDetail->count();
                                             if($count <=1 ){
@@ -310,9 +310,6 @@
 
     </section>
     <!-- /.content -->
-
-
-
 
 
 

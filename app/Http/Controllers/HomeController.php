@@ -75,6 +75,7 @@ class HomeController extends Controller
         $data['danger'] = Session::get('message.danger');
 
         // Session::forget('message');
+        // debug();
         return view('home',$data);
         // return redirect('/song/sadf/3');
 
@@ -83,7 +84,7 @@ class HomeController extends Controller
     public function getUpdate(Request $request){
 
         $data['title']          = "Update | ".TITLE;
-        $data['user']           = Auth::user();
+        $data['user']           = $user;
 
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
