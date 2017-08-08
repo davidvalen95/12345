@@ -62,7 +62,7 @@ class Song extends Model
 
         parent::save($options);
 
-        saveEvent("<a href='".$this->setDefaultPreferences()->getSongDetailUrl()."'> Created <b>new song</b>: $this->title</a>");
+        
 
     }
 }

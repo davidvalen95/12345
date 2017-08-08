@@ -128,7 +128,7 @@ class SongController extends Controller
 
 
         $song->save();
-
+        saveEvent("<a href='".$song->setDefaultPreferences()->getSongDetailUrl()."'> Created <b>new song</b>: $song->title</a>");
 
         $urlSong = getUrlFormat($song->title);
         $request->session()->flash('message.success', "New song created");
@@ -169,7 +169,7 @@ class SongController extends Controller
         $content->title = (isset($content->title) ? $content->title : "$post->embedUrl, this video has copyright by origin");
         $songDetail->title = $content->title;
         $songDetail->save();
-
+        saveEvent("<a href='".$songDetail->getSong->setDefaultPreferences()->getSongDetailUrl()."'>Added new <b>Arangement</b> '<i>$songDetail->title</i>' for {$songDetail->getSong->title}</a>");
 
         $request->session()->flash('message.success', "Video arangement submited!");
 

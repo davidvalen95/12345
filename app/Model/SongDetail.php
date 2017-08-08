@@ -31,8 +31,7 @@ class SongDetail extends Model
 
 
         parent::save($options);
-        saveEvent("<a href='".$this->getSong->setDefaultPreferences()->getSongDetailUrl()."'>Added new <b>song-detail</b> '<i>$this->title</i>' for {$this->getSong->title}</a>");
+        
     }
-    
-}
 
+}

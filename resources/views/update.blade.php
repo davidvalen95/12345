@@ -59,7 +59,9 @@
                                                 <li>
                                                     All song in latest schedule: can view lyric in all song schedule
                                                 </li>
-
+                                                <li>
+                                                    Recent Activity: reveal who deletes and changes schedule
+                                                </li>
                                             </ol>
                                         </div>
                                     </li>

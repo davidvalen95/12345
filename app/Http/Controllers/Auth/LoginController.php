@@ -54,7 +54,7 @@ class LoginController extends Controller
             'password' => $request['password']
         ))){
             $user = User::find(Auth::id());
-            Session::flash('message.success',"Login succeeddedddeded.. Hey $user->name. ;);)");
+            Session::flash('message.success',"Hey welcome back <b>$user->name</b> ");
             // debug();
             return redirect()->intended('/');
         }else{

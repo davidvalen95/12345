@@ -29,7 +29,9 @@ class ScheduleController extends Controller
         $post = (object)$request->all();
         $schedule = Schedule::find($post->schedule_id);
         $schedule->getSongDetail()->detach($post->song_detail_id);
+        $songDetail = SongDetail::find($post->song_detail_id);
         Session::flash('message.success','deleted');
+        saveEvent("remove {$songDetail->title} from the schedule");
         return redirect()->back();
     }
     public function getAllSong(){
@@ -63,6 +65,7 @@ class ScheduleController extends Controller
         $schedule->save();
 
         Session::flash('message.success',"Schedule added");
+        saveEvent("Added <b>new schedule</b> for ". dateTimeToString($latestSchedule->due));
         return redirect()->back();
 
     }
@@ -93,10 +96,11 @@ class ScheduleController extends Controller
         //# simpen urutan di array named with id
         $array = array();
         $i=0;
-        foreach($post['id'] as $id){
-            $array[$id] = $i++;
+        if(isset($post['id'])){
+            foreach($post['id'] as $id){
+                $array[$id] = $i++;
+            }
         }
-
 
         $latest = Schedule::getLatestSchedule();
         foreach($latest->getSongDetail()->get() as $songDetail){
@@ -104,7 +108,7 @@ class ScheduleController extends Controller
             $songDetail->pivot->order = $array[$id];
             $songDetail->pivot->save();
         }
-
+        saveEvent('Change song order in latest schedule');
         Session::flash('message.success','Songs has been re-ordered');
         return redirect()->back();
     }

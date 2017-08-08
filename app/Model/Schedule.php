@@ -37,7 +37,7 @@ class Schedule extends Model
 
     public function save(array $options = array()){
         //# helper function
-        saveEvent("Added <b>new schedule</b> for ". dateTimeToString($this->due));
+        
 
         parent::save($options);
     }
