@@ -84,7 +84,7 @@ class HomeController extends Controller
     public function getUpdate(Request $request){
 
         $data['title']          = "Update | ".TITLE;
-        $data['user']           = $this->$user;
+        $data['user']           = $this->user;
 
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
