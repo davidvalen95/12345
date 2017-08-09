@@ -57,6 +57,9 @@
                                                     Song we have: sort by alphabet
                                                 </li>
                                                 <li>
+                                                    Song we have: Show history instead of mark of arangement! #important
+                                                </li>
+                                                <li>
                                                     All song in latest schedule: can view lyric in all song schedule
                                                 </li>
                                                 <li>

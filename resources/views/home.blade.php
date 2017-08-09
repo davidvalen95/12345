@@ -235,32 +235,91 @@
                                     @if($searchSong)
                                         <th>Occurence</th>
                                     @else
-                                        <th>Mark</th>
-                                        <th style='width:60px'>
-                                            Arangement
+                                        <th>#Arrangements</th>
+                                        <th style='width:120px'>
+                                            Usage history
                                         </th>
                                     @endIf
                                 </tr>
                                 @php($i=1)
                                 @foreach($songs as $song)
                                     @php($song->setDefaultPreferences())
+
+                                    {{-- eager to get schedule --}}
+                                    @php
+                                        $message = "";
+                                        $used = 0 ;
+                                        $songDetails = $song->getSongDetail->load('getSchedule');
+                                        $month = "";
+                                        // debug($songDetails->first());
+                                        foreach($songDetails as $songDetail){
+
+
+                                            if($songDetail != NULL){
+                                                // debug($songDetail->getSchedule->first()->due);
+                                                // debug($songDetail->getSongDetail->first()->title);
+                                                $used += $songDetail->getSchedule->count();
+                                                foreach($songDetail->getSchedule()->orderBy("due",'desc')->get() as $currentSchedule){
+                                                    // debug(dateTimeToString($currentSchedule->due, 'M'));
+                                                    // debug($month);
+                                                    if($month != dateTimeToString($currentSchedule->due, 'M')) {
+                                                        $month = dateTimeToString($currentSchedule->due, 'M');
+
+                                                        $message .= "<h2 style='padding:0;margin-left:-30px;'>".dateTimeToString($currentSchedule->due,'M Y')."</h2>";
+                                                    }
+                                                    $message .= "<li>".
+                                                        dateTimeToString($currentSchedule->due,'D d M Y')
+                                                    ."</li>";
+                                                }
+                                            }
+                                        }
+                                    @endphp
+
+
                                     <tr>
+
+                                    {{-- modal history --}}
+                                    <div class="modal fade" id="modal-song-history-{{$song->id}}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span></button>
+                                                    <h4 class="modal-title">Song {{$song->title}} usage history</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul>
+                                                        {!!$message!!}
+                                                    </ul>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+                                                </div>
+                                            </div>
+                                        <!-- /.modal-content -->
+                                        </div>
+                                    <!-- /.modal-dialog -->
+                                    </div>
+
+
+
                                     {{-- buat logika warna --}}
 
                                         <td>{{$i++}}.</td>
                                         @php($songTitle = ($searchSong? getHighlight($searchSong,$song->title,false) :  $song->title))
                                         <td><a href={{$song->getSongDetailUrl()}}>{!!$songTitle!!}</a></td>
                                         @php
-                                            $count = $song->getSongDetail->count();
-                                            if($count <=1 ){
+                                            $count = $used;
+                                            if($count >= 8 ){
                                                 $progress = "danger";
                                                 $bg = "red";
                                             }
-                                            if($count >= 2 && $count <= 3 ){
+                                            if($count >= 4 && $count <= 7 ){
                                                 $progress = "yellow";
                                                 $bg = "yellow";
                                             }
-                                            if($count >=4 ){
+                                            if($count <=3 ){
                                                 $progress = "green";
                                                 $bg = "green";
                                             }
@@ -275,12 +334,14 @@
                                             </td>
                                         @else
                                             <td>
-                                                <div class="progress progress-xs">
+                                                {{-- <div class="progress progress-xs">
                                                     <div class="progress-bar progress-bar-{{$progress}}" style="width: {{$count/10*100}}%"></div>
-                                                </div>
+                                                </div> --}}
+                                                {{$song->getSongDetail->count()}}
                                             </td>
                                             <td>
-                                                <span class="badge bg-{{$bg}}">{{$count}}</span>
+                                                <span class="badge bg-{{$bg}} ">{{$used}}</span>
+                                                <a class='btn btn-inline' data-toggle="modal" data-target="#modal-song-history-{{$song->id}}">history</a>
                                             </td>
                                         @endIf
                                     </tr>
@@ -310,6 +371,16 @@
 
     </section>
     <!-- /.content -->
+
+
+
+
+
+
+
+
+
+
 
 
 

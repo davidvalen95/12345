@@ -186,6 +186,7 @@
                                     <i class="fa fa-bar-chart"></i>
                                 </button>
 
+                                {{-- modal --}}
                                 <div class="modal fade" id="modal-schedule-{{$songDetail->id}}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
