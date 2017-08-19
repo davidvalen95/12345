@@ -27,6 +27,7 @@
                         @endIf
                     </a></li>
                 @endForeach
+                <li ><a href="{{route('get.scheduleHistory')}}"  aria-expanded="true">All History</a></li>
             </ul>
             <div class="tab-content">
 
