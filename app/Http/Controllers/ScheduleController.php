@@ -34,18 +34,32 @@ class ScheduleController extends Controller
         saveEvent("remove {$songDetail->title} from the schedule");
         return redirect()->back();
     }
-    public function getAllSong(){
+
+
+
+    public function getAllSong($id){
 
         $data['title'] = "Schedule all song | ".TITLE;
         $data['user'] = $this->user;
-        $data['schedules'] = Schedule::orderBy('due','desc')->take(3)->get();
+        $data['schedule'] = Schedule::find($id);
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
 
 
         return view('schedule.allSong',$data);
     }
+    public function getScheduleHistory(){
 
+
+            $data['title'] = "Schedule History | ". TITLE;
+            $data['user'] = $this->user;
+
+
+            $data['success'] = Session::get('message.success');
+            $data['danger'] = Session::get('message.danger');
+            $data['schedules'] = Schedule::all();
+            return view('schedule.allSchedule',$data);
+    }
     //add Schedule
     public function postAddSchedule(Request $request){
         $request->flash();
@@ -110,6 +124,18 @@ class ScheduleController extends Controller
         }
         saveEvent('Change song order in latest schedule');
         Session::flash('message.success','Songs has been re-ordered');
+        return redirect()->back();
+    }
+
+    public function postSetWorshipLeader(Request $request){
+
+        $post = (object)$request->all();
+        // debug($post);
+        $user = User::find($post->userId);
+        $schedule = Schedule::find($post->scheduleId);
+        $schedule->getWorshipLeader()->associate($user)->save();
+
+        Session::flash('message.success','Worship Leader set!');
         return redirect()->back();
     }
 

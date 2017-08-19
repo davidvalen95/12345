@@ -1,10 +1,10 @@
 {{--
     objek
-        schedules
+        schedule
 
 
 --}}
-
+@php($users = App\User::where('instrument','=','singer')->orderBy('name','asc')->get())
 
 <div class="box box-primary">
     <div class="box-body box-profile">
@@ -33,7 +33,7 @@
                 {{-- detail --}}
                 @php($i=0)
                 @foreach($schedules as $schedule)
-
+                    @php($wl = $schedule->getWorshipLeader)
                     {{-- schedule tab --}}
                     <div class="tab-pane @if($i==0)active @endIf" id="schedule{{$i}}">
 
@@ -43,8 +43,11 @@
                                 <span class='pull-right label label-danger'>Expired</span>
 
                             @endIf
+                            @if($wl != null)
 
-                            <a href='{{action('ScheduleController@getAllSong')}}'>All latest schedule's songs</a>
+                                <h5>WL: <strong>{{$wl->setDefaultPreferences()->name}}</strong></h5>
+                            @endIf
+                            <a href='{{route('getSongArangement',array($schedule->id))}}'>All arangement for this schedule</a>
 
                         </p>
 
@@ -83,12 +86,28 @@
 
                             @if(!$schedule->isExpired() && $i==0)
                                 <p>
-                                    Drag and drop list to reorder song
+                                    Drag and drop list to reorder song (for PC Only, no phone)
                                 </p>
-                                <button class='btn btn-warning'>Save order</button>
+                                <button class='hidden-sm hidden-xs btn btn-warning'>Save order</button>
                             @endIf
                             @php($i++)
                         </form>
+                        @if($wl==null)
+
+                            <form method='POST' action='{{route('post.setWorshipLeader')}}' style='margin-top:20px'>
+                                {{csrf_field()}}
+                                <p>Set WL for this schedule</p>
+                                <input hidden='hidden' name='scheduleId' value='{{$schedule->id}}'/>
+                                <select name='userId' class='form-control'>
+
+                                        @foreach($users as $user)
+                                            <option value='{{$user->id}}'>{{$user->setDefaultPreferences()->name}}</option>
+                                        @endForeach
+
+                                </select>
+                                <button class=' btn btn-success'>Set WL</button>
+                            </form>
+                        @endIf
                     {{-- schedule tab --}}
                     </div>
                 @endForeach

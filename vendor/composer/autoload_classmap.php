@@ -6,9 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AlterScheduleWl' => $baseDir . '/database/migrations/2017_08_19_073530_alter_schedule_wl.php',
     'AlterTable' => $baseDir . '/database/migrations/2017_06_29_085421_alter_table.php',
     'AlterUser' => $baseDir . '/database/migrations/2017_06_29_094524_alter_user.php',
     'AlterUserMusik' => $baseDir . '/database/migrations/2017_06_30_063951_alter_user_musik.php',
+    'AlterUserReset' => $baseDir . '/database/migrations/2017_08_19_064905_alter_user_reset.php',
+    'AlterUserReset2' => $baseDir . '/database/migrations/2017_08_19_065238_alter_user_reset2.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Helper\\Form' => $baseDir . '/app/helper/Form.php',

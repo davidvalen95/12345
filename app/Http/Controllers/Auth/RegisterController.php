@@ -76,6 +76,7 @@ class RegisterController extends Controller
     public function register(Request $request){
 
         // debug($request->all());
+        $request['registrationCode'] = strtolower($request['registrationCode']);
         $request->flash();
         $this->validate($request,array(
             'password' => 'required|confirmed',
@@ -83,7 +84,7 @@ class RegisterController extends Controller
             'instrument' => 'required',
             'name' => 'required|min:3|max:20',
             'email' => Form::getEmail()->validatorSetting.'|unique:users',
-            'registrationCode' => 'required|in:hendri'
+            'registrationCode' => 'required|in:warungtampang'
 
 
         ));

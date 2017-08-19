@@ -34,10 +34,13 @@ class Schedule extends Model
     static function getLatestSchedule(){
         return Schedule::orderBy('due','desc')->get()->first();
     }
+    public function getWorshipLeader(){
+        return $this->belongsTo('app\User','user_id');
 
+    }
     public function save(array $options = array()){
         //# helper function
-        
+
 
         parent::save($options);
     }

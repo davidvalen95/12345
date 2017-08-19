@@ -41,6 +41,35 @@
 
 
 
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="dist/img/default-50x50.gif" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <h1><a  class="product-title">Saturday 19th August 2017</a></h1>
+                                            <ol>
+                                                <li>
+                                                    new: Forget password
+                                                </li>
+                                                <li>
+                                                    new: now can see WL in each schedule
+                                                </li>
+                                                <li>
+                                                    new: can see history of all schedule
+                                                </li>
+                                                <li>
+                                                    update: View current schedule's arangement instead only showing latest arangement
+                                                </li>
+                                                <li>
+                                                    update: remove save order in phone, so wont accidentaly click again
+                                                </li>
+
+                                            </ol>
+                                        </div>
+                                    </li>
+
+
+
 
 
                                     <li class="item">
@@ -48,22 +77,22 @@
                                             <img src="dist/img/default-50x50.gif" alt="Product Image">
                                         </div>
                                         <div class="product-info">
-                                            <h1><a  class="product-title">Monday 8th August 2017</a></h1>
+                                            <a  class="product-title">Monday 8th August 2017</a>
                                             <ol>
                                                 <li>
-                                                    Song lyric: Capitalize
+                                                    update: Song lyric, Capitalize
                                                 </li>
                                                 <li>
-                                                    Song we have: sort by alphabet
+                                                    udpate: Song we have, sort by alphabet
                                                 </li>
                                                 <li>
-                                                    Song we have: Show history instead of mark of arangement! #important
+                                                    new: Song we have, Show history instead of mark of arangement! #important
                                                 </li>
                                                 <li>
-                                                    All song in latest schedule: can view lyric in all song schedule
+                                                    new: All song in latest schedule, can view lyric in all song schedule
                                                 </li>
                                                 <li>
-                                                    Recent Activity: reveal who deletes and changes schedule
+                                                    update: Recent Activity, reveal who deletes and changes schedule
                                                 </li>
                                             </ol>
                                         </div>
@@ -78,16 +107,16 @@
                                             <a  class="product-title">Thursday 3rd August 2017</a>
                                             <ol>
                                                 <li>
-                                                    Add arangement: Automatically get youtube video's title, no need to insert title
+                                                    new: Add arangement, Automatically get youtube video's title, no need to insert title
                                                 </li>
                                                 <li>
-                                                    Add arangement: Tackle same video code
+                                                    update: Add arangement, Tackle same video code
                                                 </li>
                                                 <li>
-                                                    Add arangement: picture guideline
+                                                    new: Add arangement, picture guideline
                                                 </li>
                                                 <li>
-                                                    New recent activities
+                                                    new: New recent activities
                                                 </li>
 
                                             </ol>
@@ -107,10 +136,10 @@
                                             <a  class="product-title">Monday 31st July 2017</a>
                                             <ol>
                                                 <li>
-                                                    Search song: improve search algorithm for easier lookup in 10000+ songs. try it;)
+                                                    update: Search song, improve search algorithm for easier lookup in 10000+ songs. try it;)
                                                 </li>
                                                 <li>
-                                                    Add song: Base reformating for title. Cannot add 'tiba saatnya2' anymore xD
+                                                    update: Add song, Base reformating for title. Cannot add 'tiba saatnya2' anymore xD
                                                 </li>
                                             </ol>
                                         </div>

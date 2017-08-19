@@ -83,4 +83,50 @@ class LoginController extends Controller
         $data['danger'] = Session::get('message.danger');
         return view('auth.login',$data);
     }
+
+    function getForgotPassword(Request $request){
+
+
+        $email        = Form::getEmail();
+        $password     = Form::getPassword();
+        $passwordR    = new Form("Retype password","password_confirmation","password","glyphicon-lock");
+        $forms = array($email,$password,$passwordR);
+
+        $data['title']  = "YouthGBZ";
+        $data['forms']  = $forms;
+        $data['forgotPassword'] = "";
+        // Session::forget('message');
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
+        return view('auth.login',$data);
+    }
+
+    function postForgotPassword(Request $request){
+
+
+
+        $request->flash();
+        $this->validate($request,array(
+            'password' => 'required|confirmed',
+            'email' => 'exists:users|email|required'
+        ));
+        $post = (object) $request;
+        $user = User::where('email','=',"$post->email")->first();
+        // debug($user->);
+        if($user == null){
+            // debug();
+
+            return redirect()->back()->with('message.danger',"Email is not registered yet");
+        }else if($user->reset == 0 ){
+            return redirect()->back()->with('message.danger',"No Permission to reset, ask admin to give permission");
+        }
+        $user->password = bcrypt($post->password);
+        $user->reset = false;
+        $user->save();
+
+        // debug();
+        Session::flash('message.success',"Password changed, reset permission for user {$user->setDefaultPreferences()->name} revoked");
+        return redirect(route('login'));
+
+    }
 }

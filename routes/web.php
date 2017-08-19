@@ -18,7 +18,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'HomeController@index' );
 Route::get('/logout',"Auth\LoginController@logout");
-
+Route::get('forgot-password','Auth\LoginController@getForgotPassword')->name('getForgotPassword');
+Route::post('forgot-password','Auth\LoginController@postForgotPassword')->name('postForgotPassword');
 //new song
 Route::get('song/new',"SongController@getNewSong")->name('song.new');
 Route::post('song/new', "SongController@postNewSong");
@@ -35,15 +36,19 @@ Route::post('song/add/song-detail', "SongController@postSongDetail")->name('post
 
 //add schedule
 Route::post('schedule/add', 'ScheduleController@postAddSchedule')->name('post.schedule');
+//all Scheudle
+Route::get('schedule/history', 'ScheduleController@getScheduleHistory')->name('get.scheduleHistory');
+
+//add wl
+Route::post('schedule/set-worship-leader','ScheduleController@postSetWorshipLeader')->name('post.setWorshipLeader');
+
 
 //add song to schedule
 Route::post('schedule/add/song-detail/', "ScheduleController@postAddScheduleSongDetail")->name('post.scheduleSongDetail');
 Route::delete('schedule/delete/song-detail', "ScheduleController@deleteScheduleSongDetail")->name('delete.scheduleSongDetail');
 
-
-
 // all song in a schedule
-Route::get("schedule/all-song","ScheduleController@getAllSong");
+Route::get('schedule/song-arangement/{id}',"ScheduleController@getAllSong")->name('getSongArangement');
 
 //reorder song list
 Route::post('schedule/reorder', "ScheduleController@postOrderSongDetail")->name('post.reorder');

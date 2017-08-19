@@ -2,7 +2,8 @@
 {{--
     variable
         title
-
+        danger
+        success
 
 
     object
@@ -12,7 +13,7 @@
     section
         content
 
-    
+
 
 --}}
 

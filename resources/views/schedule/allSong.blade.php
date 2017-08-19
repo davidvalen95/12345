@@ -22,7 +22,7 @@
     <section class="content-header">
         <h1>
         Schedule
-        <small>All song video</small>
+        <small>{{dateTimeToString($schedule->due)}}</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href={{route('home')}}><i class="fa fa-dashboard"></i> Home</a></li>
@@ -47,7 +47,7 @@
         {{-- all song  video--}}
         <div class='row'>
             @php($i=0)
-            @foreach($schedules->first()->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
+            @foreach($schedule->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
 
                 <?php
                     $userContributor = $songDetail->getUser;
@@ -106,7 +106,7 @@
 
         {{-- lyric dialog? --}}
         @php($i=0)
-        @foreach($schedules->first()->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
+        @foreach($schedule->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
             @php($song = $songDetail->getSong->setDefaultPreferences())
             <div class="modal fade" id="lyric-{{$i++}}" style="display: none;">
                 <div class="modal-dialog">

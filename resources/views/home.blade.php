@@ -14,9 +14,9 @@
     <div class='row'>
 
         <div class='col-xs-12'>
-            <div class="alert alert-danger alert-dismissible">
+            <div class="alert alert-info alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <a href='{{route('get.update')}}'><h4><i class="icon fa fa-check"></i>New Update 8th August</h4><span> please click to view update</span></a>
+            <a href='{{route('get.update')}}'><h4><i class="icon fa fa-check"></i>New Update 19th August</h4><span> please click to view update</span></a>
 
 
           </div>
