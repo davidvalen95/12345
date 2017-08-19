@@ -38,6 +38,16 @@ class Schedule extends Model
         return $this->belongsTo('app\User','user_id');
 
     }
+    public function getWorshipLeaderName(){
+        $wl = $this->getWorshipLeader;
+
+        if($wl == null){
+            return "no data";
+        }else{
+            $wl->setDefaultPreferences();
+            return $wl->name;
+        }
+    }
     public function save(array $options = array()){
         //# helper function
 

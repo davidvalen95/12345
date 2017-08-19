@@ -57,7 +57,7 @@ class ScheduleController extends Controller
 
             $data['success'] = Session::get('message.success');
             $data['danger'] = Session::get('message.danger');
-            $data['schedules'] = Schedule::all();
+            $data['schedules'] = Schedule::orderBy('due','desc')->get();
             return view('schedule.allSchedule',$data);
     }
     //add Schedule
