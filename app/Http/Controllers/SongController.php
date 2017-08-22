@@ -77,10 +77,11 @@ class SongController extends Controller
         $descriptionForm    = new Form("Video description", "description", "text", "");
         $songId             = new Form("song id", "song_id", "hidden", "", [], "$song->id");
         $data['forms'] =  array( $urlForm,$descriptionForm,$songId);
-        $schedule  = Schedule::getLatestSchedule();
+        $schedule  = Schedule::getLatestSchedule($this->user->getCategory);
         // debug($schedule->due);
 
         //# cek lagu uda di add
+        // debug($schedule->due);
         $isUsed = false;
         foreach( $schedule->getSongDetail as $songDetail){
             $checkSong = $songDetail->getSong;

@@ -57,7 +57,8 @@ Route::post('schedule/reorder', "ScheduleController@postOrderSongDetail")->name(
 //update list
 Route::get('update',"HomeController@getUpdate")->name('get.update');
 
-
+//cronJobschedule
+Route::get('cronjob/add/schedule', "ScheduleController@getCronjobAddSchedule")->name('cronjob.addSchedule');
 
 
 

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AlterScheduleCategory' => $baseDir . '/database/migrations/2017_08_22_061317_alter_schedule_category.php',
     'AlterScheduleWl' => $baseDir . '/database/migrations/2017_08_19_073530_alter_schedule_wl.php',
     'AlterTable' => $baseDir . '/database/migrations/2017_06_29_085421_alter_table.php',
     'AlterUser' => $baseDir . '/database/migrations/2017_06_29_094524_alter_user.php',

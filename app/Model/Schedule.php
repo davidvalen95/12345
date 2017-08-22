@@ -25,14 +25,16 @@ class Schedule extends Model
             return false;
         }
     }
-
+    public function getCategory(){
+        return $this->belongsTo('App\Model\Category','category_id');
+    }
     public function getSongDetail(){
         // debug();
         return $this->belongsToMany('App\Model\SongDetail','schedule_song_detail','schedule_id','song_detail_id')->withPivot(array('id','order','schedule_id','song_detail_id'));
     }
 
-    static function getLatestSchedule(){
-        return Schedule::orderBy('due','desc')->get()->first();
+    static function getLatestSchedule(Category $category){
+        return Schedule::where('category_id','=',"$category->id")->orderBy('due','desc')->get()->first();
     }
     public function getWorshipLeader(){
         return $this->belongsTo('app\User','user_id');

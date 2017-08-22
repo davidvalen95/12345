@@ -9,6 +9,7 @@ use Auth;
 use App\Model\Schedule;
 use App\Model\Song;
 use App\Model\Event;
+use App\Model\Category;
 use Session;
 class HomeController extends Controller
 {
@@ -62,7 +63,7 @@ class HomeController extends Controller
         $data['title']      = 'Home | '.TITLE;
         $data['user']       = $this->user;
         $schedule           = Schedule::orderBy('due','desc')->take(3)->get();
-        $data['schedules']  = $schedule;
+        // $data['schedulePelajar']  = $;
         $data['events']     = Event::orderBy('created_at','desc')->take(15)->get();
         //placeholder, name, type, icon, options:array, $value=null
 

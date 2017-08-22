@@ -8,7 +8,9 @@ use Session;
 use App\Model\Song;
 use App\Model\SongDetail;
 use App\Model\Pivot;
+use App\Model\Category;
 use App\User;
+
 use Auth;
 
 
@@ -17,14 +19,37 @@ class ScheduleController extends Controller
     protected $user;
 
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except('getCronjobAddSchedule');
         $this->middleware(function($request,$next){
             $this->user = User::find(Auth::id());
             $this->user->setDefaultPreferences();
             $this->message = (Session::get('message'));
             return $next($request);
-        });
+        })->except('getCronjobAddSchedule');
     }
+
+    public function getCronjobAddSchedule(){
+        $category =  Category::find(1);
+        $latestSchedule = Schedule::getLatestSchedule($category);
+
+        foreach(Category::all() as $category){
+            // debug($category->name);
+            $schedule = new Schedule();
+            date_default_timezone_set('Asia/Jakarta');
+            $schedule->due = date('Y-m-d  H:i:s', strtotime("+7 day", strtotime($latestSchedule->due)));
+
+            $schedule->getCategory()->associate($category);
+            $schedule->save();
+        }
+
+        // $event = new App\Model\Event();
+        // $event->detail = "System added new schedule for " . dateTimeToString(Schedule::getLatestSchedule($category)->due);
+
+        saveEvent("System added new schedule for " . dateTimeToString(Schedule::getLatestSchedule($category)->due));
+    }
+
+
+
     public function deleteScheduleSongDetail(Request $request){
         $post = (object)$request->all();
         $schedule = Schedule::find($post->schedule_id);
@@ -57,7 +82,7 @@ class ScheduleController extends Controller
 
             $data['success'] = Session::get('message.success');
             $data['danger'] = Session::get('message.danger');
-            $data['schedules'] = Schedule::orderBy('due','desc')->get();
+            $data['categories'] = Category::all();
             return view('schedule.allSchedule',$data);
     }
     //add Schedule
@@ -67,7 +92,7 @@ class ScheduleController extends Controller
             array('due' =>'date_format:m/d/Y')
         );
 
-        $latestSchedule = Schedule::orderBy('due','desc')->get()->first();
+        $latestSchedule = Schedule::getLatestSchedule($this->user->getCategory);
         if(!$latestSchedule->isExpired()){
             Session::flash('message.danger',"Add schedule failed. Latest schedule is not expired yet");
             return redirect()->back();
@@ -76,6 +101,7 @@ class ScheduleController extends Controller
         // debug($schedule->due);
         $schedule->due = getDefaultDatetime($schedule->due);
         // debug($schedule->due);
+        $schedule->getCategory()->associate($user->getCategory);
         $schedule->save();
 
         Session::flash('message.success',"Schedule added");
@@ -87,7 +113,7 @@ class ScheduleController extends Controller
     //add schedule song detail
     public function postAddScheduleSongDetail(Request $request){
         $post = $request->all();
-        $latestSchedule = Schedule::getLatestSchedule();
+        $latestSchedule = Schedule::getLatestSchedule($this->user->getCategory);
 
         // debug(dateTimeToString($latestSchedule->due));
 

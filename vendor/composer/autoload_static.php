@@ -299,6 +299,7 @@ class ComposerStaticInit78aed1f893f06aae017392937dcd90b6
     );
 
     public static $classMap = array (
+        'AlterScheduleCategory' => __DIR__ . '/../..' . '/database/migrations/2017_08_22_061317_alter_schedule_category.php',
         'AlterScheduleWl' => __DIR__ . '/../..' . '/database/migrations/2017_08_19_073530_alter_schedule_wl.php',
         'AlterTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_29_085421_alter_table.php',
         'AlterUser' => __DIR__ . '/../..' . '/database/migrations/2017_06_29_094524_alter_user.php',

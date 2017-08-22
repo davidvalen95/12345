@@ -6,6 +6,7 @@
 
     objek
         schedules:Schedule
+        $user (dari master)
 -->
 
 
@@ -144,18 +145,29 @@
                                         <div class="direct-chat-messages">
                                             @foreach($events as $event)
 
-                                                    @php($isMe = ($event->getUser == Auth::user()))
+                                                    @php
+                                                        $isMe = ($event->getUser == Auth::user());
+                                                        if($event->getUser == null){
+                                                            $name = "System";
+                                                            $isSystem = true;
+                                                        }else{
+                                                            $name = $event->getUser->setDefaultPreferences()->name;
+                                                            $isSystem = false;
+                                                        }
+
+
+                                                    @endPhp
 
                                                     <!-- Message. Default to the left -->
                                                     <div class="direct-chat-msg @if(!$isMe)right @endIf">
                                                         <div class="direct-chat-info clearfix">
-                                                            <span class="direct-chat-name pull-left">{{$event->getUser->setDefaultPreferences()->name}}</span>
+                                                            <span class="direct-chat-name pull-left">{{$name}}</span>
                                                             <span class="direct-chat-timestamp pull-right">{{dateTimeToString($event->created_at,'D d-M H:i:s')}}</span>
                                                         </div>
                                                         <!-- /.direct-chat-info -->
                                                         {{-- <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"> --}}
                                                         <!-- /.direct-chat-img -->
-                                                        <div class="direct-chat-text">
+                                                        <div @if($isSystem) style='background-color:#f15e31;' @endIf class="direct-chat-text">
                                                             {!!$event->detail!!}
                                                         </div>
                                                         <!-- /.direct-chat-text -->
@@ -269,7 +281,7 @@
                                                     }
                                                     $message .= "<li>".
                                                         dateTimeToString($currentSchedule->due,'D d M Y')
-                                                    ."</li>";
+                                                    ." WL: <b>{$currentSchedule->getWorshipLeaderName()}</b></li>";
                                                 }
                                             }
                                         }

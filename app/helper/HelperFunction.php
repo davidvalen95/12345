@@ -34,12 +34,13 @@
     }
 
     function dateTimeToString($source, $format="D d-M"){
-
+        date_default_timezone_set('Asia/Jakarta');
         $date = new DateTime($source);
         return $date->format($format); // 31.07.2012
 
     }
     function getDefaultDatetime($str){
+        date_default_timezone_set('Asia/Jakarta');
         return date('Y-m-d H:i:s', strtotime($str));
     }
 
@@ -109,6 +110,7 @@
 
         $event->detail = $message;
         $user = Auth::user();
+        
         $event->getUser()->associate($user);
         $event->save();
     }

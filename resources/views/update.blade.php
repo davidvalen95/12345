@@ -40,13 +40,31 @@
 
 
 
-
                                     <li class="item">
                                         <div class="product-img">
                                             <img src="dist/img/default-50x50.gif" alt="Product Image">
                                         </div>
                                         <div class="product-info">
                                             <h1><a  class="product-title">Saturday 19th August 2017</a></h1>
+                                            <ol>
+                                                <li>
+                                                    new: welcome KAP!, including split functionality between kap and pelajar
+                                                </li>
+                                                <li>
+                                                    new: auto schedule added per saturday, no need input manual
+                                                </li>
+
+                                            </ol>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="dist/img/default-50x50.gif" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <a  class="product-title">Saturday 19th August 2017</a>
                                             <ol>
                                                 <li>
                                                     new: Forget password

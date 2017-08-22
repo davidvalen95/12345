@@ -205,7 +205,7 @@
                                                             <h2 style='padding:0;margin-left:-30px;'>{{dateTimeToString($currentSchedule->due,'M Y')}}</h2>
                                                         @endIf
                                                         <li>
-                                                            {{dateTimeToString($currentSchedule->due,'D d M Y')}}
+                                                            {{dateTimeToString($currentSchedule->due,'D d M Y')}} WL: <b>{{$currentSchedule->getWorshipLeaderName()}}</b>
                                                         </li>
                                                     @endForeach
                                                 </ul>
@@ -233,19 +233,25 @@
                                 <p style='padding-left:18px;'>
                                     {{$songDetail->description}}
                                 </p>
+                                @php($latestSchedule = App\Model\Schedule::getLatestSchedule($user->getCategory))
+                                @php($for =  " for <b>".$user->getCategory->setDefaultPreferences()->name. "</b> ". dateTimeToString($latestSchedule->due))
                                 @if(!$isUsed)
                                     <form action={{action('ScheduleController@postAddScheduleSongDetail')}} method='POST'>
 
-                                        @if(!App\Model\Schedule::getLatestSchedule()->isExpired())
-                                            <button class='btn btn-success' style='margin-left:18px;'>Add to schedule</button>
+                                        @if(!$latestSchedule->isExpired())
+                                            <button class='btn btn-success' style='margin-left:18px;'>Add to schedule {!!$for!!}</button>
                                         @else
 
-                                             <button type='button' class='btn btn-danger disabled' style='margin-left:18px;'>Add to schedule (expired)</button>
+                                             <button type='button' class='btn btn-danger disabled' style='margin-left:18px;'>Add to schedule (expired) {!!$for!!}</button>
                                         @endIf
 
                                         <input type='hidden' name='songDetailId' value={{$songDetail->id}} />
                                         {{csrf_field()}}
                                     </form>
+                                @else
+                                    <p style='margin-left:18px;' class='btn btn-default'>
+                                        Already added {!!$for!!}
+                                    </p>
                                 @endIf
 
                             </div>
