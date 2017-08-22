@@ -45,7 +45,7 @@ class ScheduleController extends Controller
         // $event = new App\Model\Event();
         // $event->detail = "System added new schedule for " . dateTimeToString(Schedule::getLatestSchedule($category)->due);
 
-        saveEvent("System added new schedule for " . dateTimeToString(Schedule::getLatestSchedule($category)->due),null);
+        saveEvent("System added new schedule for KAP and Pelajar at " . dateTimeToString(Schedule::getLatestSchedule($category)->due),null);
     }
 
 
