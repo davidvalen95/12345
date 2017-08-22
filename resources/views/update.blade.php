@@ -45,7 +45,7 @@
                                             <img src="dist/img/default-50x50.gif" alt="Product Image">
                                         </div>
                                         <div class="product-info">
-                                            <h1><a  class="product-title">Saturday 19th August 2017</a></h1>
+                                            <h1><a  class="product-title">Tuesday 22nd August 2017</a></h1>
                                             <ol>
                                                 <li>
                                                     new: welcome KAP!, including split functionality between kap and pelajar
