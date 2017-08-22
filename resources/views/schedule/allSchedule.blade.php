@@ -66,7 +66,7 @@
                                         <th>Songs</th>
                                     </tr>
                                     @php($i=1)
-                                    @foreach($category->getSchedules as $schedule)
+                                    @foreach($category->getSchedules()->orderBy('due','desc')->get() as $schedule)
                                         <tr>
                                             <td>{{$i++}}</td>
                                             <td>{{dateTimeToString($schedule->due)}} </td>
