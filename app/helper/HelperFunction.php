@@ -105,12 +105,15 @@
 	}
 
 
-    function saveEvent($message){
+    function saveEvent($message, $user = true){
         $event = new App\Model\Event();
 
+        if($user){
+            $user =  Auth::user();;
+        }
         $event->detail = $message;
-        $user = Auth::user();
-        
+
+
         $event->getUser()->associate($user);
         $event->save();
     }
