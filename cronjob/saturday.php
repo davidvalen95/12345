@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // set URL and other appropriate options
-curl_setopt($ch, CURLOPT_URL, "http://gbzworshiper.com/cronjob/add/schedule");
+curl_setopt($ch, CURLOPT_URL, "http://gbzworshipper.com/cronjob/add/schedule");
 curl_setopt($ch, CURLOPT_HEADER, 0);
 
 // grab URL and pass it to the browser
