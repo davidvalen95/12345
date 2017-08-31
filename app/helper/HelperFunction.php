@@ -39,9 +39,15 @@
         return $date->format($format); // 31.07.2012
 
     }
-    function getDefaultDatetime($str){
+    function getDefaultDatetime($str=null){
         date_default_timezone_set('Asia/Jakarta');
-        return date('Y-m-d H:i:s', strtotime($str));
+        if($str==NULL){
+            return date('Y-m-d H:i:s',time());
+
+        }else{
+            return date('Y-m-d H:i:s', strtotime($str));
+
+        }
     }
 
     function getSearchFormat($str){
@@ -112,7 +118,8 @@
             $user =  Auth::user();;
         }
         $event->detail = $message;
-
+        // debug(getDefaultDatetime());
+        $event->created_at = getDefaultDatetime();
 
         $event->getUser()->associate($user);
         $event->save();
