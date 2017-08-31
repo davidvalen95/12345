@@ -46,14 +46,15 @@ class HomeController extends Controller
     {
         // debug(Auth::user());
         // /home
-        $request->flash();
         $post = $request->all();
         if(isset($post['songSearch'])){
+            $request->flash();
+
             // debug($post['songSearch']);
             $str = getSearchFormat($post['songSearch']);
             $where = Song::where('raw_lyric','like',"%$str%");
             $where = $where->orWhere('title','like',"%{$post['songSearch']}%");
-            $data['songs'] = $where->paginate(5000);
+            $data['songs'] = $where->paginate(15);
             $data['searchSong'] = $post['songSearch'];
         }else{
             $data['songs'] = Song::orderBy('title')->paginate(15);

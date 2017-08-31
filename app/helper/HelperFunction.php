@@ -70,14 +70,14 @@
 		 *
 		 */
 
-
+         $pagination->appends(Illuminate\Support\Facades\Input::except(['page']));
 
 		$totalData	 		= $pagination->total();
 		$fetch	 			= $pagination->perPage();
-		$threshold			= 5;
+		$threshold			= 3;
 		$last				= ceil($totalData / $fetch);
         $current            = $pagination->currentPage();
-
+        // debug($pagination->url(1));
 		$start				= ($current-$threshold >= $threshold?$current-$threshold:1);
 		$end				= ($current+$threshold >= $last?$last:$current+$threshold);
 		//debug(ceil($pagination / $fetch));

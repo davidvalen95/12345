@@ -54,11 +54,12 @@ class LoginController extends Controller
             'password' => $request['password']
         ))){
             $user = User::find(Auth::id());
-            Session::flash('message.success',"Hey welcome back <b>$user->name</b> ");
+            // $request->session()->flash('message.success',"Hey welcome back <b>{$user->setDefaultPreferences()->name}</b> ");
+            $request->session()->flash('message.success',"Hey welcome back <b>{$user->setDefaultPreferences()->name}</b> ");
             // debug();
             return redirect()->intended('/');
         }else{
-            Session::flash('message.danger',"Email or password is not registered yet");
+            $request->session()->flash('message.danger',"Email or password is not registered yet");
             return redirect()->back();
         }
 
@@ -125,7 +126,7 @@ class LoginController extends Controller
         $user->save();
 
         // debug();
-        Session::flash('message.success',"Password changed, reset permission for user {$user->setDefaultPreferences()->name} revoked");
+        $request->session()->flash('message.success',"Password changed, reset permission for user {$user->setDefaultPreferences()->name} revoked");
         return redirect(route('login'));
 
     }

@@ -98,7 +98,7 @@ class RegisterController extends Controller
         // debug($category->name);
         $user->save();
 
-        Session::flash('message.success', 'Register success. Go login ;)');
+        $request->session()->flash('message.success', 'Register success. Go login ;)');
         return redirect('/login');
     }
 

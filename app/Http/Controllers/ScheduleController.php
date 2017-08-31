@@ -55,7 +55,7 @@ class ScheduleController extends Controller
         $schedule = Schedule::find($post->schedule_id);
         $schedule->getSongDetail()->detach($post->song_detail_id);
         $songDetail = SongDetail::find($post->song_detail_id);
-        Session::flash('message.success','deleted');
+        $request->session()->flash('message.success','deleted');
         saveEvent("remove {$songDetail->title} from the schedule");
         return redirect()->back();
     }
@@ -94,7 +94,7 @@ class ScheduleController extends Controller
 
         $latestSchedule = Schedule::getLatestSchedule($this->user->getCategory);
         if(!$latestSchedule->isExpired()){
-            Session::flash('message.danger',"Add schedule failed. Latest schedule is not expired yet");
+            $request->session()->flash('message.danger',"Add schedule failed. Latest schedule is not expired yet");
             return redirect()->back();
         }
         $schedule = new Schedule($request->all());
@@ -104,7 +104,7 @@ class ScheduleController extends Controller
         $schedule->getCategory()->associate($user->getCategory);
         $schedule->save();
 
-        Session::flash('message.success',"Schedule added");
+        $request->session()->flash('message.success',"Schedule added");
         saveEvent("Added <b>new schedule</b> for ". dateTimeToString($latestSchedule->due));
         return redirect()->back();
 
@@ -118,7 +118,7 @@ class ScheduleController extends Controller
         // debug(dateTimeToString($latestSchedule->due));
 
         if($latestSchedule->isExpired()){
-            Session::flash('message.danger','Add song failed. Latest schedule has expired. add new schedule');
+            $request->session()->flash('message.danger','Add song failed. Latest schedule has expired. add new schedule');
             return redirect()->back();
         }
 
@@ -149,7 +149,7 @@ class ScheduleController extends Controller
             $songDetail->pivot->save();
         }
         saveEvent('Change song order in latest schedule');
-        Session::flash('message.success','Songs has been re-ordered');
+        $request->session()->flash('message.success','Songs has been re-ordered');
         return redirect()->back();
     }
 
@@ -162,7 +162,7 @@ class ScheduleController extends Controller
         $schedule->getWorshipLeader()->associate($user)->save();
         saveEvent('Set the songleader');
 
-        Session::flash('message.success','Worship Leader set!');
+        $request->session()->flash('message.success','Worship Leader set!');
         return redirect()->back();
     }
 

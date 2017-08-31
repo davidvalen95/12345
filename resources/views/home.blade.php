@@ -220,8 +220,8 @@
                         <div style='display: inline;' class=""><a href={{action('SongController@getNewSong')}} class='label bg-green'>Add song</a></div>
 
                         <div class="box-tools">
-                            <form action='' method='post'>
-                                {{csrf_field()}}
+                            <form action='' method='get'>
+                                {{-- {{csrf_field()}} --}}
                                 <div class="input-group input-group-sm" style="width: 250px;">
 
 
