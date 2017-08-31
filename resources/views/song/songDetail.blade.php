@@ -79,7 +79,7 @@
 
 
 
-                        <div class="tab-pane " id="activity">
+                        <div class="tab-pane active" id="activity">
                             <ul class='mDetail'>
                                 <li>
                                     <i style='' class="fa fa-video-camera bg-maroon mDetailIcon"></i>
@@ -92,7 +92,7 @@
                         </div>
 
 
-                        <div class="tab-pane active"  id="settings">
+                        <div class="tab-pane "  id="settings">
                             <form class="form-horizontal" method='POST' action={{route('post.song.detail')}}>
                                 {{csrf_field()}}
                                 @foreach($forms as $form)
