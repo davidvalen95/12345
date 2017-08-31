@@ -145,9 +145,9 @@ class SongController extends Controller
         $this->validate($request, array(
             // 'title' => 'required',
             // 'description' => 'required',
-            'embedUrl'  => Rule::unique('song_detail')->where(function ($query) use($post){
+            'embedUrl'  => [Rule::unique('song_detail')->where(function ($query) use($post){
                                 $query->where('embedUrl','=', $post->embedUrl)->where('song_id','=',$post->song_id);
-                            })
+                            }),'size:11']
         ));
 
 
@@ -161,9 +161,9 @@ class SongController extends Controller
         $content = (object)$content;
         if($content->status == "fail"){
             $reason = strtolower($content->reason);
-            if(!str_contains($reason, "wmg")){
-                //# wmg means copyright
-                $request->session()->flash('message.danger', "$content->reason");
+            if(!str_contains($reason, "restricted+from+pl")){
+
+                $request->session()->flash('message.danger', "Wrong video code. please see guidelines!");
                 return redirect()->back();
             }
         }

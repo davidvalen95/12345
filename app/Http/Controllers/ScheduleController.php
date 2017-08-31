@@ -160,6 +160,7 @@ class ScheduleController extends Controller
         $user = User::find($post->userId);
         $schedule = Schedule::find($post->scheduleId);
         $schedule->getWorshipLeader()->associate($user)->save();
+        saveEvent('Set the songleader');
 
         Session::flash('message.success','Worship Leader set!');
         return redirect()->back();

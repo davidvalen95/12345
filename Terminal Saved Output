@@ -1,0 +1,123 @@
+Last login: Fri Aug 25 08:42:12 on console
+suryasofts-iMac:~ suryasoft$ cd /
+suryasofts-iMac:/ suryasoft$ cd applications
+suryasofts-iMac:applications suryasoft$ cd xampp
+suryasofts-iMac:xampp suryasoft$ cd htdocs
+suryasofts-iMac:htdocs suryasoft$ cd quiz-id
+suryasofts-iMac:quiz-id suryasoft$ ls
+Procfile	composer.json	index.php	readme.md	tests
+app		composer.lock	package.json	resources	vendor
+artisan		config		phpunit.xml	routes		webpack.mix.js
+bootstrap	database	public		storage
+suryasofts-iMac:quiz-id suryasoft$ git pull
+remote: Counting objects: 228, done.
+remote: Compressing objects: 100% (200/200), done.
+remote: Total 210 (delta 140), reused 14 (delta 8)
+Receiving objects: 100% (210/210), 18.57 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (140/140), completed with 13 local objects.
+From https://git.heroku.com/quiz-id
+   e0e17d0..e88b970  master     -> heroku/master
+Updating e0e17d0..e88b970
+Fast-forward
+ app/.DS_Store                      | Bin 6148 -> 6148 bytes
+ app/Helper/.DS_Store               | Bin 0 -> 6148 bytes
+ app/Helper/Classes/CMessageApi.php |   7 ++-
+ app/Helper/Classes/Type/CRoom.php  |  89 ++++++++++++++++++++++++++++
+ app/Helper/Classes/Type/CUser.php  |  69 ++++++++++++++++++++++
+ app/Helper/Constants.php           |   6 +-
+ app/Helper/aFunction.php           |  64 +++++++++++++++++++++
+ app/Helper/commands.php            | 115 -------------------------------------
+ app/Http/Controllers/Webhook.php   |  44 +++++++-------
+ resources/lang/en/message.php      |   2 +
+ resources/lang/id/message.php      |   2 +
+ 11 files changed, 255 insertions(+), 143 deletions(-)
+ create mode 100644 app/Helper/.DS_Store
+ create mode 100644 app/Helper/Classes/Type/CRoom.php
+ create mode 100644 app/Helper/Classes/Type/CUser.php
+ delete mode 100644 app/Helper/commands.php
+suryasofts-iMac:quiz-id suryasoft$ git commit -a -m " debug"
+git [master 1707727]  debug
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+suryasofts-iMac:quiz-id suryasoft$ git push
+Counting objects: 6, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 613 bytes | 0 bytes/s, done.
+Total 6 (delta 4), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote: 
+remote: -----> PHP app detected
+remote: -----> Bootstrapping...
+remote: -----> Installing platform packages...
+remote:        - php (7.1.8)
+remote:        - ext-mbstring (bundled with php)
+remote:        - apache (2.4.20)
+remote:        - nginx (1.8.1)
+remote: -----> Installing dependencies...
+remote:        Composer version 1.4.2 2017-05-17 08:17:52
+remote: 
+remote:  !     WARNING: Your Composer vendor dir is part of your Git repository
+remote:        This directory should not be under version control; only your
+remote:        'composer.json' and 'composer.lock' files should be added, which
+remote:        will let Composer handle installation of dependencies on deploy.
+remote:        To suppress this notice, first remove the folder from your index
+remote:        by running 'git rm -r --cached vendor/'.
+remote:        Next, edit your project's '.gitignore' file and add the folder
+remote:        '/vendor/' to the list.
+remote:        For more info, refer to the Composer FAQ: http://bit.ly/1rlCSZU
+remote: 
+remote:        Loading composer repositories with package information
+remote:        Installing dependencies from lock file
+remote:        Package operations: 0 installs, 0 updates, 28 removals
+remote:          - Removing phpunit/phpunit (5.7.21)
+remote:          - Removing myclabs/deep-copy (1.6.1)
+remote:          - Removing phpspec/prophecy (v1.7.0)
+remote:          - Removing phpunit/php-code-coverage (4.0.8)
+remote:          - Removing sebastian/code-unit-reverse-lookup (1.0.1)
+remote:          - Removing phpunit/php-file-iterator (1.4.2)
+remote:          - Removing phpunit/php-timer (1.0.9)
+remote:          - Removing phpunit/phpunit-mock-objects (3.4.4)
+remote:          - Removing doctrine/instantiator (1.0.5)
+remote:          - Removing phpunit/php-text-template (1.2.1)
+remote:          - Removing sebastian/comparator (1.2.4)
+remote:          - Removing sebastian/diff (1.4.3)
+remote:          - Removing sebastian/environment (2.0.0)
+remote:          - Removing sebastian/exporter (2.0.0)
+remote:          - Removing sebastian/global-state (1.1.1)
+remote:          - Removing sebastian/object-enumerator (2.0.1)
+remote:          - Removing sebastian/recursion-context (2.0.0)
+remote:          - Removing sebastian/resource-operations (1.0.0)
+remote:          - Removing sebastian/version (2.0.1)
+remote:          - Removing symfony/yaml (v3.3.6)
+remote:          - Removing phpunit/php-token-stream (1.4.11)
+remote:          - Removing phpdocumentor/reflection-docblock (3.2.2)
+remote:          - Removing phpdocumentor/type-resolver (0.3.0)
+remote:          - Removing phpdocumentor/reflection-common (1.0)
+remote:          - Removing webmozart/assert (1.2.0)
+remote:          - Removing mockery/mockery (0.9.9)
+remote:          - Removing hamcrest/hamcrest-php (v1.2.2)
+remote:          - Removing fzaninotto/faker (v1.7.1)
+remote:        Generating optimized autoload files
+remote:        > Illuminate\Foundation\ComposerScripts::postInstall
+remote:        > php artisan optimize
+remote:        
+remote:        
+remote:        
+remote:        Generating optimized class loader
+remote:        The compiled services file has been removed.
+remote: -----> Preparing runtime environment...
+remote: -----> Checking for additional extensions to install...
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote: 
+remote: -----> Compressing...
+remote:        Done: 17M
+remote: -----> Launching...
+remote:        Released v216
+remote:        https://quiz-id.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+To https://git.heroku.com/quiz-id.git
+   e88b970..1707727  master -> master
+suryasofts-iMac:quiz-id suryasoft$ git commit -a -m " score"

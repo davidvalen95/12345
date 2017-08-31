@@ -1,0 +1,388 @@
+Last login: Tue Aug 29 08:43:20 on ttys000
+suryasofts-imac:~ suryasoft$ ls
+Applications	Downloads	Movies		Projects	pgadmin.log
+Desktop		Dropbox		Music		Public		sqlfile.sql
+Documents	Library		Pictures	contact.php
+suryasofts-imac:~ suryasoft$ ks
+-bash: ks: command not found
+suryasofts-imac:~ suryasoft$ s;\
+> 
+suryasofts-imac:~ suryasoft$ cd /
+suryasofts-imac:/ suryasoft$ cd applications
+suryasofts-imac:applications suryasoft$ cd xampp
+suryasofts-imac:xampp suryasoft$ cd htdocs
+suryasofts-imac:htdocs suryasoft$ composer create-project --prefer-dist laravel/laravel angular
+^C
+suryasofts-imac:htdocs suryasoft$ composer create-project --prefer-dist laravel/laravel 
+^C
+suryasofts-imac:htdocs suryasoft$ composer create-project --prefer-dist laravel/laravel Angular
+Installing laravel/laravel (v5.4.30)
+
+                                            
+  [InvalidArgumentException]                
+  Project directory Angular/ is not empty.  
+                                            
+
+create-project [-s|--stability STABILITY] [--prefer-source] [--prefer-dist] [--repository REPOSITORY] [--repository-url REPOSITORY-URL] [--dev] [--no-dev] [--no-custom-installers] [--no-scripts] [--no-progress] [--no-secure-http] [--keep-vcs] [--no-install] [--ignore-platform-reqs] [--] [<package>] [<directory>] [<version>]
+
+suryasofts-imac:htdocs suryasoft$ rm -rf angular
+suryasofts-imac:htdocs suryasoft$ composer create-project --prefer-dist laravel/laravel An
+^C
+suryasofts-imac:htdocs suryasoft$ composer create-project --prefer-dist laravel/laravel Angular
+Installing laravel/laravel (v5.4.30)
+  - Installing laravel/laravel (v5.4.30): Downloading (100%)         
+Created project in Angular
+> php -r "file_exists('.env') || copy('.env.example', '.env');"
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+^C
+suryasofts-imac:htdocs suryasoft$ ls
+Angular			dchatlaravel		musik
+applications.html	dchatsvn		php-getting-started
+bitnami.css		dxn			quiz
+blog			favicon.ico		quiz-id
+book			grj			quizku
+codeigniter		img			test
+dashboard		index.php		webalizer
+suryasofts-imac:htdocs suryasoft$ rm -rf angular
+suryasofts-imac:htdocs suryasoft$ cp quiz-id angular
+cp: quiz-id is a directory (not copied).
+suryasofts-imac:htdocs suryasoft$ cd -rf quiz-id angular
+-bash: cd: -r: invalid option
+cd: usage: cd [-L|-P] [dir]
+suryasofts-imac:htdocs suryasoft$ cd -P quiz-id angular
+suryasofts-imac:quiz-id suryasoft$ ls
+Procfile	composer.json	index.php	readme.md	tests
+app		composer.lock	package.json	resources	vendor
+artisan		config		phpunit.xml	routes		webpack.mix.js
+bootstrap	database	public		storage
+suryasofts-imac:quiz-id suryasoft$ ls
+Procfile	composer.json	index.php	readme.md	tests
+app		composer.lock	package.json	resources	vendor
+artisan		config		phpunit.xml	routes		webpack.mix.js
+bootstrap	database	public		storage
+suryasofts-imac:quiz-id suryasoft$ ls
+Procfile	composer.json	index.php	readme.md	tests
+app		composer.lock	package.json	resources	vendor
+artisan		config		phpunit.xml	routes		webpack.mix.js
+bootstrap	database	public		storage
+suryasofts-imac:quiz-id suryasoft$ cd ..
+suryasofts-imac:htdocs suryasoft$ ls
+applications.html	dchatsvn		php-getting-started
+bitnami.css		dxn			quiz
+blog			favicon.ico		quiz-id
+book			grj			quizku
+codeigniter		img			test
+dashboard		index.php		webalizer
+dchatlaravel		musik
+suryasofts-imac:htdocs suryasoft$ cd quiz-id
+suryasofts-imac:quiz-id suryasoft$ ls
+Procfile	composer.json	index.php	readme.md	tests
+app		composer.lock	package.json	resources	vendor
+artisan		config		phpunit.xml	routes		webpack.mix.js
+bootstrap	database	public		storage
+suryasofts-imac:quiz-id suryasoft$ git status
+^C
+suryasofts-imac:quiz-id suryasoft$ git log
+commit bda985f14481b391bbc25ddae853b06c0bd1401e
+Author: David Valentino <davidvalen95@gmail.com>
+Date:   Fri Aug 25 17:05:20 2017 +0700
+
+    s
+
+commit 606ae6ea35e3727d3bc373c2ed6150c52978a1c3
+Author: David Valentino <davidvalen95@gmail.com>
+Date:   Fri Aug 25 17:00:15 2017 +0700
+
+    s
+
+commit 3582574ddb12bcd8862299f4a5762b542ba32194
+Author: David Valentino <davidvalen95@gmail.com>
+Date:   Fri Aug 25 16:59:52 2017 +0700
+
+    s
+
+commit ead2bc09fc535a3e899784a53b91327a9fff5e59
+Author: David Valentino <davidvalen95@gmail.com>
+Date:   Fri Aug 25 16:57:49 2017 +0700
+
+    s
+suryasofts-imac:quiz-id suryasoft$ ls ..
+applications.html	dchatsvn		php-getting-started
+bitnami.css		dxn			quiz
+blog			favicon.ico		quiz-id
+book			grj			quizku
+codeigniter		img			test
+dashboard		index.php		webalizer
+dchatlaravel		musik
+suryasofts-imac:quiz-id suryasoft$ cp quiz-id angular
+cp: quiz-id: No such file or directory
+suryasofts-imac:quiz-id suryasoft$ cpy quiz-id angular
+-bash: cpy: command not found
+suryasofts-imac:quiz-id suryasoft$ ls
+Procfile	composer.json	index.php	readme.md	tests
+app		composer.lock	package.json	resources	vendor
+artisan		config		phpunit.xml	routes		webpack.mix.js
+bootstrap	database	public		storage
+suryasofts-imac:quiz-id suryasoft$ cd ..
+suryasofts-imac:htdocs suryasoft$ cp quiz-id angular
+cp: quiz-id is a directory (not copied).
+suryasofts-imac:htdocs suryasoft$ ls
+applications.html	dchatsvn		php-getting-started
+bitnami.css		dxn			quiz
+blog			favicon.ico		quiz-id
+book			grj			quizku
+codeigniter		img			test
+dashboard		index.php		webalizer
+dchatlaravel		musik
+suryasofts-imac:htdocs suryasoft$ cp -L quiz-id angular
+cp: quiz-id is a directory (not copied).
+suryasofts-imac:htdocs suryasoft$ cp
+usage: cp [-R [-H | -L | -P]] [-fi | -n] [-apvX] source_file target_file
+       cp [-R [-H | -L | -P]] [-fi | -n] [-apvX] source_file ... target_directory
+suryasofts-imac:htdocs suryasoft$ cp -L quiz-id angular
+cp: quiz-id is a directory (not copied).
+suryasofts-imac:htdocs suryasoft$ cp -R quiz-id angular
+suryasofts-imac:htdocs suryasoft$ ls
+angular			dchatlaravel		musik
+applications.html	dchatsvn		php-getting-started
+bitnami.css		dxn			quiz
+blog			favicon.ico		quiz-id
+book			grj			quizku
+codeigniter		img			test
+dashboard		index.php		webalizer
+suryasofts-imac:htdocs suryasoft$ cd angular
+suryasofts-imac:angular suryasoft$ git remote
+heroku
+suryasofts-imac:angular suryasoft$ git remote --remove heroku
+error: unknown option `remove'
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --verbose         be verbose; must be placed before a subcommand
+
+suryasofts-imac:angular suryasoft$ git remote remove heroku
+suryasofts-imac:angular suryasoft$ ls
+Procfile	composer.json	index.php	readme.md	tests
+app		composer.lock	package.json	resources	vendor
+artisan		config		phpunit.xml	routes		webpack.mix.js
+bootstrap	database	public		storage
+suryasofts-imac:angular suryasoft$ git remote
+suryasofts-imac:angular suryasoft$ php artisan migrate
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[08006] [7] could not connect to server: No such file or directory   
+  	Is the server running locally and accepting                                 
+  	connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"? (SQL:  
+   select * from information_schema.tables where table_schema = public and ta  
+  ble_name = migrations)                                                       
+                                                                               
+
+                                                                              
+  [Doctrine\DBAL\Driver\PDOException]                                         
+  SQLSTATE[08006] [7] could not connect to server: No such file or directory  
+  	Is the server running locally and accepting                                
+  	connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?       
+                                                                              
+
+                                                                              
+  [PDOException]                                                              
+  SQLSTATE[08006] [7] could not connect to server: No such file or directory  
+  	Is the server running locally and accepting                                
+  	connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?       
+                                                                              
+
+suryasofts-imac:angular suryasoft$ php artisan migrate
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] No such file or directory (SQL: select * from inform  
+  ation_schema.tables where table_schema = angular and table_name = migration  
+  s)                                                                           
+                                                                               
+
+                                                    
+  [Doctrine\DBAL\Driver\PDOException]               
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+                                                    
+  [PDOException]                                    
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+suryasofts-imac:angular suryasoft$ php artisan migrate
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] No such file or directory (SQL: select * from inform  
+  ation_schema.tables where table_schema = angular and table_name = migration  
+  s)                                                                           
+                                                                               
+
+                                                    
+  [Doctrine\DBAL\Driver\PDOException]               
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+                                                    
+  [PDOException]                                    
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+suryasofts-imac:angular suryasoft$ php artisan migrate:install
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] No such file or directory (SQL: create table `migrat  
+  ions` (`id` int unsigned not null auto_increment primary key, `migration` v  
+  archar(128) not null, `batch` int not null) default character set utf8mb4 c  
+  ollate utf8mb4_unicode_ci)                                                   
+                                                                               
+
+                                                    
+  [Doctrine\DBAL\Driver\PDOException]               
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+                                                    
+  [PDOException]                                    
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+suryasofts-imac:angular suryasoft$ php artisan migrate:install
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] No such file or directory (SQL: create table `migrat  
+  ions` (`id` int unsigned not null auto_increment primary key, `migration` v  
+  archar(128) not null, `batch` int not null) default character set utf8mb4 c  
+  ollate utf8mb4_unicode_ci)                                                   
+                                                                               
+
+                                                    
+  [Doctrine\DBAL\Driver\PDOException]               
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+                                                    
+  [PDOException]                                    
+  SQLSTATE[HY000] [2002] No such file or directory  
+                                                    
+
+suryasofts-imac:angular suryasoft$ php artisan migrate:install
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'migrations'  
+   already exists (SQL: create table `migrations` (`id` int unsigned not null  
+   auto_increment primary key, `migration` varchar(128) not null, `batch` int  
+   not null) default character set utf8mb4 collate utf8mb4_unicode_ci)         
+                                                                               
+
+                                                                               
+  [Doctrine\DBAL\Driver\PDOException]                                          
+  SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'migrations'  
+   already exists                                                              
+                                                                               
+
+                                                                               
+  [PDOException]                                                               
+  SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'migrations'  
+   already exists                                                              
+                                                                               
+
+suryasofts-imac:angular suryasoft$ php artisan migrate
+
+
+
+Migrating: 2017_08_17_091413_create_room
+Migrated:  2017_08_17_091413_create_room
+Migrating: 2017_08_17_092824_create_game
+Migrated:  2017_08_17_092824_create_game
+Migrating: 2017_08_18_083916_create_quiz
+Migrated:  2017_08_18_083916_create_quiz
+Migrating: 2017_08_18_084224_create_answer
+Migrated:  2017_08_18_084224_create_answer
+Migrating: 2017_08_18_084634_create_pivot_answer_game
+Migrated:  2017_08_18_084634_create_pivot_answer_game
+Migrating: 2017_08_18_085409_foreign_quiz
+Migrated:  2017_08_18_085409_foreign_quiz
+Migrating: 2017_08_18_085615_create_pivot_game_room
+Migrated:  2017_08_18_085615_create_pivot_game_room
+Migrating: 2017_08_18_085752_pivot_room_user
+Migrated:  2017_08_18_085752_pivot_room_user
+Migrating: 2017_08_18_133721_create_eventlog
+Migrated:  2017_08_18_133721_create_eventlog
+Migrating: 2017_08_18_135512_add_tambahan_users
+Migrated:  2017_08_18_135512_add_tambahan_users
+Migrating: 2017_08_18_172913_edit_eventlog
+Migrated:  2017_08_18_172913_edit_eventlog
+Migrating: 2017_08_23_022757_create_debug
+Migrated:  2017_08_23_022757_create_debug
+Migrating: 2017_08_23_072735_alter_user_locale
+Migrated:  2017_08_23_072735_alter_user_locale
+Migrating: 2017_08_24_030727_alter_user_follow
+Migrated:  2017_08_24_030727_alter_user_follow
+Migrating: 2017_08_24_030737_alter_user_follow2
+Migrated:  2017_08_24_030737_alter_user_follow2
+Migrating: 2017_08_24_092730_alter_room_locale
+Migrated:  2017_08_24_092730_alter_room_locale
+Migrating: 2017_08_24_093722_alter_room_type
+Migrated:  2017_08_24_093722_alter_room_type
+Migrating: 2017_08_24_094027_alter_room_roomid
+Migrated:  2017_08_24_094027_alter_room_roomid
+Migrating: 2017_08_24_095601_alter_room_nullable
+Migrated:  2017_08_24_095601_alter_room_nullable
+Migrating: 2017_08_25_043321_alter_room_user_score
+Migrated:  2017_08_25_043321_alter_room_user_score
+Migrating: 2017_08_25_071554_create_genre
+Migrated:  2017_08_25_071554_create_genre
+Migrating: 2017_08_25_072402_alter_quiz_genre
+Migrated:  2017_08_25_072402_alter_quiz_genre
+Migrating: 2017_08_25_074125_alter_quiz_bilingual
+Migrated:  2017_08_25_074125_alter_quiz_bilingual
+Migrating: 2017_08_25_082955_drop_game_room
+Migrated:  2017_08_25_082955_drop_game_room
+Migrating: 2017_08_25_083359_alter_game_belongsTo_room
+Migrated:  2017_08_25_083359_alter_game_belongsTo_room
+Migrating: 2017_08_25_091153_create_gamelist
+Migrated:  2017_08_25_091153_create_gamelist
+Migrating: 2017_08_25_091435_alter_game_foreign_gamelist
+Migrated:  2017_08_25_091435_alter_game_foreign_gamelist
+suryasofts-imac:angular suryasoft$ php artisan make:controller QuoteController
+
+
+
+Controller created successfully.
+suryasofts-imac:angular suryasoft$ php artisan make:model

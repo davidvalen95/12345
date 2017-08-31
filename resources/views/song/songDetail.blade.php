@@ -79,7 +79,7 @@
 
 
 
-                        <div class="tab-pane active" id="activity">
+                        <div class="tab-pane " id="activity">
                             <ul class='mDetail'>
                                 <li>
                                     <i style='' class="fa fa-video-camera bg-maroon mDetailIcon"></i>
@@ -92,7 +92,7 @@
                         </div>
 
 
-                        <div class="tab-pane" id="settings">
+                        <div class="tab-pane active"  id="settings">
                             <form class="form-horizontal" method='POST' action={{route('post.song.detail')}}>
                                 {{csrf_field()}}
                                 @foreach($forms as $form)
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <div class='col-xs-offset-2'>
+                            <div class='col-md-offset-2'>
                                 <h3>Guidelines</h3>
                                 <p>
                                     Example for valid video code :
