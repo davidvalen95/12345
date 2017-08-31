@@ -54,7 +54,7 @@ class HomeController extends Controller
             $str = getSearchFormat($post['songSearch']);
             $where = Song::where('raw_lyric','like',"%$str%");
             $where = $where->orWhere('title','like',"%{$post['songSearch']}%");
-            $data['songs'] = $where->paginate(15);
+            $data['songs'] = $where->orderBy('title','asc')->paginate(15);
             $data['searchSong'] = $post['songSearch'];
         }else{
             $data['songs'] = Song::orderBy('title')->paginate(15);

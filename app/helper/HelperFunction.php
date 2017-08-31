@@ -89,11 +89,11 @@
 		";
 		for($i=$start;$i<=$end;$i++){
 			$href    		= ($i==$current?"":"href='".$pagination->url($i)."'");
-			$active  		= ($i==$current?"active":"");
+			$active  		= ($i==$current?"background-color:#dcdcdc;":"");
 
 
 			$list	.= "<li>
-                            <a $href class='$active'>$i</a>
+                            <a $href class='' style='$active'>$i</a>
                         </li>";
 		}
 
