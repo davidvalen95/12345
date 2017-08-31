@@ -45,7 +45,7 @@ class ScheduleController extends Controller
         // $event = new App\Model\Event();
         // $event->detail = "System added new schedule for " . dateTimeToString(Schedule::getLatestSchedule($category)->due);
 
-        saveEvent("System added new schedule for KAP and Pelajar for " . dateTimeToString(Schedule::getLatestSchedule($category)->due),null);
+        saveEvent("System added new schedule for <b>KAP</b> and <b>Pelajar</b> for " . dateTimeToString(Schedule::getLatestSchedule($category)->due),null);
     }
 
 
@@ -141,8 +141,7 @@ class ScheduleController extends Controller
                 $array[$id] = $i++;
             }
         }
-
-        $latest = Schedule::getLatestSchedule();
+        $latest = Schedule::getLatestSchedule($this->user->getCategory);
         foreach($latest->getSongDetail()->get() as $songDetail){
             $id = $songDetail->pivot->id;
             $songDetail->pivot->order = $array[$id];
