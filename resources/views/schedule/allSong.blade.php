@@ -54,7 +54,7 @@
                 $userContributor->setDefaultPreferences();
                 $thisSong = true;
             ?>
-            <div class="col-sm-6 col-lg-4 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
             <!-- Widget: user widget style 1 -->
                 <div class="box box-widget widget-user-2">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
