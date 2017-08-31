@@ -48,7 +48,7 @@
 
         @php($i=0)
         @foreach($schedule->getSongDetail()->orderBy('order','asc')->get() as $songDetail)
-            @if($i%3==0)<div class='row'>@endIf
+            @if($i%2==0)<div class='row'>@endIf
             <?php
                 $userContributor = $songDetail->getUser;
                 $userContributor->setDefaultPreferences();
@@ -94,7 +94,7 @@
 
 
 
-            @if($i%3==0)</div>{{--row--}}@endIf
+            @if($i%2==0)</div>{{--row--}}@endIf
 
         @endForeach
         {{-- </div> --}}
