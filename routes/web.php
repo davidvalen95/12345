@@ -62,6 +62,13 @@ Route::get('cronjob/add/schedule', "ScheduleController@getCronjobAddSchedule")->
 
 
 
+Route::get('alkitab',function(){
+    // $bible  = new App\Helper\Classes\CBible('kejadian','1');
+    $test = (object) [];
+    $test->coba = 'sdf';
+
+});
+
 
 Route::get('coba',function(){
 
