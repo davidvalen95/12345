@@ -3,11 +3,14 @@ namespace App\Helper\Classes;
 
 use DOMDocument;
 
+
 class CBible{
 
     public $book;
     public $chapter;
     public $verses;
+
+    public $completeChapter;
     public function __construct($book, $chapter){
         $this->book = $book;
         $this->chapter = $chapter;
@@ -19,6 +22,9 @@ class CBible{
 
         $httpText = curl_exec($curlSession);
 
+        $htmlNode = new DOMDocument();
+        // debug(htmlspecialchars($paragraph));
+        $htmlNode->loadHTML($httpText);
 
         $pattern = "/<p>((?!<\/p>).)*<\/p>/"; //# split all <p and capture
         $string = "$httpText";
@@ -27,27 +33,62 @@ class CBible{
         curl_close($curlSession);
 
 
-        $int =0;
-        foreach($matches[0] as $paragraph){
-            $pNode = new DOMDocument();
-            // debug(htmlspecialchars($paragraph));
-            $pNode->loadHTML($httpText);
-            debug($pNode->getElementsByTagName('p')[10]);
-            // $pNode =
-            if(strpos($paragraph,'reftext')){
-                $pattern = "/<a((?!>).)*>(((?!<\/a).)*)<\/a>/"; //# split all <p and capture
-                preg_match_all($pattern, $paragraph, $verseMatches);
-                $this->verses[(int)$verseMatches[1]] = "sdf";
-                //<a((?!>).)*>((?!<\\\/a).)*<\\\/a>
 
-                $int++;
+        $int =0;
+
+        $currentChapterInformation = (object) array();
+        $currentChapterInformation->book = $book;
+        $currentChapterInformation->chapter = $chapter;
+        $currentChapterInformation->data=[];
+        foreach($htmlNode->getElementsByTagName('p') as $paragraph){
+            $content = (object) [];
+            foreach($paragraph->childNodes as $childNode){
+
+                if($this->hasAtribute($childNode,"paragraphtitle")){
+                    $content->type = "title";
+                    $content->content = $childNode->textContent;
+                }
+
+                if($this->hasAtribute($childNode, "reftext")){
+                    $content->type = "verse";
+                    $content->verse = $childNode->textContent;
+
+                }
+                if($this->hasAtribute($childNode,"data-begin")){
+                    $this->verses[(int)$content->verse] =  $childNode->textContent;
+                    $content->content = $childNode->textContent;
+                }
+            }
+            if(!empty((array)$content)){
+                $currentChapterInformation->data[] = $content;
+            }
+
+        }
+        // debug($verses);
+        // echo json_encode($verses);
+
+        $this->completeChapter =  ($currentChapterInformation);
+        // debug($this->completeChapter);
+        // return response()->json();
+    }
+
+
+
+    public function hasAtribute($node, $what){
+
+
+        // echo $node->nodeType;
+        if($node->nodeType == 1){
+            foreach($node->attributes as $attribute){
+                $name = $attribute->nodeName;
+                $value = $attribute->nodeValue;
+                if($what == $name || $what == $value){
+                    return true;
+                }
             }
         }
-        debug($int);
-        debug($this->verses);
 
-
-        return response()->json($matches[0]);
+        return false;
     }
 
 }

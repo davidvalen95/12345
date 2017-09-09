@@ -67,7 +67,7 @@ Route::get('alkitab',function(){
 //     $test = (object) [];
 //     $test->coba = 'sdf';
 // ac
-
+    return  response()->json($bible->completeChapter);
 });
 
 
