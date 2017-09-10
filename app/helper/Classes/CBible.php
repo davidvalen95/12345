@@ -43,8 +43,7 @@ class CBible{
                 $int++;
             }
         }
-        debug($int);
-        debug($this->verses);
+
 
 
         return response()->json($matches[0]);
