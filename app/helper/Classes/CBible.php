@@ -64,18 +64,14 @@ class CBible{
             }
 
         }
-        // debug($verses);
-        // echo json_encode($verses);
 
         $this->completeChapter =  ($currentChapterInformation);
-        // debug($this->completeChapter);
-        // return response()->json();
+
     }
 
 
 
     public function hasAtribute($node, $what){
-
 
         // echo $node->nodeType;
         if($node->nodeType == 1){
