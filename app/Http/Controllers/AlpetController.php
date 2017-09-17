@@ -9,6 +9,7 @@ use App\Helper\Classes\CAlpetVerse;
 use App\User;
 use Auth;
 use Session;
+use DOMDocument;
 class AlpetController extends Controller
 {
     //
@@ -42,7 +43,6 @@ class AlpetController extends Controller
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
         $alpetVerses = null;
-
         if(!$day || !$month){
             $now =  getDefaultDatetime();
             $day =  dateTimeToString($now,"j"); //day without zeros
@@ -50,17 +50,20 @@ class AlpetController extends Controller
         }
 
 
-        $alpet = Alpet::where('day',$day)->where('month',$month)->first();
-        if($alpet){
-            $sections = explode(",", $alpet->verse);
+
+        // $alpet = Alpet::where('day',$day)->where('month',$month)->first();
+        if(true){//#$alpet
+            // $sections = explode(",", $alpet->verse);
+            $sections = $this->getSections();;
             $alpetVerses = [];
+
 
             foreach($sections as $section){
                 $alpetVerses[] = new CAlpetVerse($section);
             }
             // return response()->json($alpetVerses);
             $data['alpetVerses'] = $alpetVerses;
-            $data['sections'] = $alpet->verse;
+            $data['sections'] = "{$sections[0]}, {$sections[1]}";//#$alpet->verse
             return view('alpet.daily',$data);
 
         }else{
@@ -74,6 +77,34 @@ class AlpetController extends Controller
         return "$day/$month";
     }
 
+    private function getSections(){
+        $curlSession = curl_init();
+        curl_setopt($curlSession, CURLOPT_URL, "http://www.tulang-elisa.org/khotbah/wahyu/");
+        curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
+        curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+
+        $httpText = curl_exec($curlSession);
+        curl_close($curlSession);
+        $node = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $node->loadHTML($httpText);
+        libxml_use_internal_errors(false);
+        // debug($node);
+        $pembacaanNode = $node->getElementById("Pembacaan");
+        $pembacaanNode->getElementsByTagName("p");
+        $raw = $pembacaanNode->childNodes->item(3)->textContent;
+        $raw = preg_replace("/\s/", "", $raw);
+        // debug($raw);
+        $regex = 'WasiatLama\(Perj\.Lama\):(.*)WasiatBaru\(Perj\.Baru\):(.*)';
+        // $regex2 = "(\w*)";
+        preg_match_all("/$regex/", $raw, $groupMatches);
+
+        //# WB WL
+        return [$groupMatches[2][0], $groupMatches[1][0]];
+        // debug($groupMatches);
+
+        // return response()->json($pembacaanNode);
+    }
 
 
 }

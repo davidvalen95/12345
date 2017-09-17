@@ -28,11 +28,9 @@
 
                     @foreach ($alpetVerse->contents as $book)
 
-                        @if($alpetVerse->type == VERSE_TYPE_VERSES)
-                            <h3>{{$alpetVerse->rawReference}}</h3>
-                        @else
-                            <h3>{{$book->book}} {{$book->chapter}}</h3>
-                        @endIf
+                        {{-- @if($alpetVerse->type == VERSE_TYPE_VERSES) --}}
+                            <h3>{{$alpetVerse->getReadable()}}</h3>
+
 
                         @foreach($book->completeChapter as $currentJson)
                             <p>

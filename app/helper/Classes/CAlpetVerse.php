@@ -84,7 +84,23 @@ class CAlpetVerse{
         // debug($this->contents);
     }
 
-
+    public function getReadable(){
+        $bookUpper = ucwords($this->book);
+        if($this->type == VERSE_TYPE_VERSES){
+            $until = "";
+            if($this->verseFrom != $this->verseUntil){
+                $until = "-$this->verseUntil";
+            }
+            return "$bookUpper {$this->pasalFrom}:$this->verseFrom{$until}";
+        }
+        if($this->type == VERSE_TYPE_PASAL){
+            $until = "";
+            if($this->pasalFrom != $this->pasalTo){
+                $until = "-$this->pasalTo";
+            }
+            return "$bookUpper $this->pasalFrom{$until}";
+        }
+    }
     private function sanitize($str){
         $str = strtolower($str);
         $str = preg_replace("/\s+/", "", $str);

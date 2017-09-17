@@ -19,6 +19,7 @@ class CBible{
         curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
 
         $httpText = curl_exec($curlSession);
+        curl_close($curlSession);
 
         $htmlNode = new DOMDocument();
         // debug(htmlspecialchars($httpText));
@@ -30,7 +31,6 @@ class CBible{
         $string = "$httpText";
         preg_match_all($pattern, $string, $matches);
 
-        curl_close($curlSession);
 
 
 

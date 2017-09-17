@@ -10,7 +10,7 @@
     {{-- @php($category->setDefaultPreferences()) --}}
     @php($schedules = $category->getSchedules()->orderBy('due','desc')->take(3)->get())
     @php($users = $category->getUsers()->where('instrument','=','singer')->orderBy('name','asc')->get())
-    <div class="box box-primary @if($user->getCategory->id != $category->id)hidden-xs @endIf">
+    <div class="box box-primary {{-- @if($user->getCategory->id != $category->id)hidden-xs @endIf" --}}">
         <div class="box-body box-profile">
             <img class="profile-user-img img-responsive img-circle" src={{$category->getImageLogo()}} alt="User profile picture">
 
