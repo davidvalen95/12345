@@ -19,10 +19,16 @@
 
 
 @section('content')
-    <div class='content'>
+    <section class="content-header">
+        <h1>Alpet: {{dateTimeToString(getDefaultDatetime())}}<small>{{$sections}}</small></h1>
+
+    </section>
+    <section class='content'>
+
         <div class='row'>
+
             <div class='col-xs-12'>
-                <h2>Today read: <span>{{$sections}}</span></h2>
+
 
                 @foreach ($alpetVerses as $alpetVerse)
 
@@ -50,7 +56,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    </section>
 
 
 @endSection
