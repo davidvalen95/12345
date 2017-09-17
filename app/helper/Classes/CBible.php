@@ -8,8 +8,6 @@ class CBible{
 
     public $book;
     public $chapter;
-    public $verses;
-
     public $completeChapter;
     public function __construct($book, $chapter){
         $this->book = $book;
@@ -23,8 +21,10 @@ class CBible{
         $httpText = curl_exec($curlSession);
 
         $htmlNode = new DOMDocument();
-        // debug(htmlspecialchars($paragraph));
+        // debug(htmlspecialchars($httpText));
+        libxml_use_internal_errors(true);
         $htmlNode->loadHTML($httpText);
+        libxml_use_internal_errors(false);
 
         $pattern = "/<p>((?!<\/p>).)*<\/p>/"; //# split all <p and capture
         $string = "$httpText";
@@ -35,11 +35,9 @@ class CBible{
 
 
         $int =0;
-
-        $currentChapterInformation = (object) array();
-        $currentChapterInformation->book = $book;
-        $currentChapterInformation->chapter = $chapter;
-        $currentChapterInformation->data=[];
+        $ayat = 1;
+        // $currentChapterInformation = (object) array();
+        $currentChapterInformation = [];
         foreach($htmlNode->getElementsByTagName('p') as $paragraph){
             $content = (object) [];
             foreach($paragraph->childNodes as $childNode){
@@ -47,6 +45,7 @@ class CBible{
                 if($this->hasAtribute($childNode,"paragraphtitle")){
                     $content->type = "title";
                     $content->content = $childNode->textContent;
+                    $content->nextVerse = $ayat;
                 }
 
                 if($this->hasAtribute($childNode, "reftext")){
@@ -55,18 +54,19 @@ class CBible{
 
                 }
                 if($this->hasAtribute($childNode,"data-begin")){
-                    $this->verses[(int)$content->verse] =  $childNode->textContent;
+                    // $this->verses[(int)$content->verse] =  $childNode->textContent;
                     $content->content = $childNode->textContent;
+                    $ayat ++;
                 }
             }
             if(!empty((array)$content)){
-                $currentChapterInformation->data[] = $content;
+                $currentChapterInformation [] = $content;
             }
 
         }
 
         $this->completeChapter =  ($currentChapterInformation);
-
+        $this->setDefaultPreferences();
     }
 
 
@@ -87,6 +87,9 @@ class CBible{
         return false;
     }
 
+    public function setDefaultPreferences(){
+        $this->book = ucwords($this->book);
+    }
 }
 
 
