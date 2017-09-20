@@ -102,7 +102,6 @@
         <!-- Sidebar user panel -->
             @if(isset($user))
 
-            @endisset)
                 <div class="user-panel">
 
                     <div class="pull-left image">
