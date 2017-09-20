@@ -20,6 +20,18 @@ class AlpetController extends Controller
     {
 
 
+                $this->middleware(function ($request, $next) {
+                    if(Auth::check()){
+                            $this->user = User::find(Auth::id());
+                            $this->user->setDefaultPreferences();
+                            $this->message = (Session::get('message'));
+                            return $next($request);
+                        }
+                    else{
+                        $this->user = null;
+                    }
+                    });
+                //
 
     }
 
@@ -42,7 +54,7 @@ class AlpetController extends Controller
         }
 
         $data['title']      = "Alpet $day-$month | " .TITLE;
-
+        $data['user']       = $this->user;
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
         $alpetVerses = null;

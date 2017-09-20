@@ -40,7 +40,7 @@
 
       <div class="navbar-custom-menu">
 
-         @if(isset($user))
+         @if($user)
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
 
@@ -100,7 +100,7 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
-            @if(isset($user))
+            @if($user)
 
                 <div class="user-panel">
 
