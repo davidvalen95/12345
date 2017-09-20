@@ -20,14 +20,14 @@
 
 @section('content')
     <section class="content-header">
-        <h1>{{dateTimeToString(getDefaultDatetime())}}</h1>
-        <h4>{{$sections}} <small>Terjemahan Baru</small></h4>
+        <h1>{{dateTimeToString(getDefaultDatetime("$day-$month-2004"))}}</h1>
+        <h4>{{$sections}} <small>{{strToUpper($version)}}</small></h4>
     </section>
     <section class='content'>
 
         <div class='row'>
 
-            <div class='col-xs-12 col-lg-6'>
+            <div id='parent'class='col-xs-12 col-lg-6'>
 
 
                 @foreach ($alpetVerses as $alpetVerse)
@@ -71,7 +71,7 @@
                     </div> --}}
 
                         <div id='{{$book->book}}{{$book->chapter}}' class="box box-default">
-                            <a data-toggle="collapse" data-parent="#{{$book->book}}{{$book->chapter}}" href="#target-{{$book->book}}{{$book->chapter}}" aria-expanded="false" class="collapsed">
+                            <a data-toggle="collapse" data-parent="#parent" href="#target-{{$book->book}}{{$book->chapter}}" aria-expanded="false" class="collapsed">
                                 <div class="box-header with-border">
 
                                     <h3 class="box-title text-center">
@@ -81,6 +81,7 @@
                                         @elseif ($alpetVerse->type == VERSE_TYPE_PASAL)
                                             {{$book->book}} {{$book->chapter}}
                                         @endIf
+                                        <small>{{strToUpper($version)}}</small>
 
                                     </h3>
                                 </div>

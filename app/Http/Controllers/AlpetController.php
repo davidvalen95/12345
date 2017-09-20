@@ -20,15 +20,6 @@ class AlpetController extends Controller
     {
 
 
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-                $this->user = User::find(Auth::id());
-                $this->user->setDefaultPreferences();
-                $this->message = (Session::get('message'));
-                return $next($request);
-            });
-        //
-
 
     }
 
@@ -43,15 +34,14 @@ class AlpetController extends Controller
 
         }
         if(!$day || !$month){
-            $now =  getDefaultDatetime();
+            $now =  getDefaultDatetime("");
             $day =  dateTimeToString($now,"j"); //day without zeros
             $month = dateTimeToString($now,"n"); //without zeros
             return redirect()->route('get.alpet',[$version,$day,$month]);
 
         }
 
-        $data['title']      = 'Home | '.TITLE;
-        $data['user']       = $this->user;
+        $data['title']      = "Alpet $day-$month | " .TITLE;
 
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
@@ -69,6 +59,9 @@ class AlpetController extends Controller
             }
             // return response()->json($alpetVerses);
             $data['alpetVerses'] = $alpetVerses;
+            $data['version'] = $version;
+            $data['day'] = $day;
+            $data['month'] = $month;
             // $data['sections'] = "{$sections[0]}, {$sections[1]}";//#$alpet->verse
             $data['sections'] = $alpet->verse;
             return view('alpet.daily',$data);

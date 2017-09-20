@@ -39,6 +39,8 @@
       </a>
 
       <div class="navbar-custom-menu">
+
+         @if(Auth::check())
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
 
@@ -83,31 +85,37 @@
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
+    @endIf
+
+
+
       </div>
     </nav>
   </header>
 
     {{-- menu samping --}}
     <!-- Left side column. contains the logo and sidebar -->
+
     <aside class="main-sidebar">
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
+            @if(Auth::check())
+                <div class="user-panel">
 
-            <div class="user-panel">
+                    <div class="pull-left image">
 
-                <div class="pull-left image">
+                            <img src={{$user->getImageLogo()}} class="img-circle" alt="User Image">
 
-                        <img src={{$user->getImageLogo()}} class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+
+                        <p>{{$user->name}}</p>
+                        <a href="{{route('home')}}"><i class="fa fa-circle text-success"></i>{{$user->instrument}}</a>
+                    </div>
 
                 </div>
-                <div class="pull-left info">
-
-                    <p>{{$user->name}}</p>
-                    <a href="{{route('home')}}"><i class="fa fa-circle text-success"></i>{{$user->instrument}}</a>
-                </div>
-
-            </div>
+            @endIf
 
         <!-- search form -->
         <form action={{action('HomeController@index')}} method="POST" class="sidebar-form">
