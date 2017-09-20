@@ -20,17 +20,20 @@ class AlpetController extends Controller
     {
 
 
+
                 $this->middleware(function ($request, $next) {
                     if(Auth::check()){
                             $this->user = User::find(Auth::id());
                             $this->user->setDefaultPreferences();
                             $this->message = (Session::get('message'));
-                            return $next($request);
+
                         }
                     else{
                         $this->user = null;
                     }
+                    return $next($request);
                     });
+
                 //
 
     }
