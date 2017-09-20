@@ -87,9 +87,9 @@
                             </a>
                         <!-- /.box-header -->
                             <div id="target-{{$book->book}}{{$book->chapter}}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                <div class="box-body">
+                                <div class="box-body" style='font-size:16px;'>
                                     @foreach($book->completeChapter as $currentJson)
-
+                                            {{-- @php(debug($currentJson)); --}}
                                             @if($currentJson->type == "verse")
                                                 <p>
                                                     <a href='http://alkitab.mobi/tb/{{$book->book}}/{{$book->chapter}}/{{$currentJson->verse}}/'><b>{{$currentJson->verse}}. </b></a>

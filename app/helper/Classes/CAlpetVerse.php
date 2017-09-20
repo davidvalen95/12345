@@ -13,7 +13,7 @@ class CAlpetVerse{
 
     //# array
     public $contents;
-    public function __construct($fullReference){
+    public function __construct($version, $fullReference){
         $this->rawReference = $fullReference;
 
         //#luk23:5-12
@@ -57,11 +57,11 @@ class CAlpetVerse{
         if($this->type == VERSE_TYPE_PASAL){
             for($i = $this->pasalFrom;$i<= $this->pasalTo;$i++){
                 // debug($alpetVerse);
-                $bible =  new CBible($this->book, $i);
+                $bible =  new CBible($version, $this->book, $i);
                 $bibles[] = $bible;
             }
         }else if($this->type == VERSE_TYPE_VERSES){
-            $bible =  new CBible($this->book, $this->pasalFrom);
+            $bible =  new CBible($version, $this->book, $this->pasalFrom);
             $bank = [];
             // debug((array)$bible->completeChapter);
             foreach($bible->completeChapter as $currentJson){

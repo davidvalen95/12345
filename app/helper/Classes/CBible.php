@@ -9,12 +9,12 @@ class CBible{
     public $book;
     public $chapter;
     public $completeChapter;
-    public function __construct($book, $chapter){
+    public function __construct($version, $book, $chapter){
         $this->book = $book;
         $this->chapter = $chapter;
         $this->verses = [];
         $curlSession = curl_init();
-        curl_setopt($curlSession, CURLOPT_URL, "http://alkitab.mobi/tb/$book/$chapter");
+        curl_setopt($curlSession, CURLOPT_URL, "http://alkitab.mobi/$version/$book/$chapter");
         curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
         curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
 

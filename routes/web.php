@@ -16,7 +16,8 @@ Route::post('/', 'HomeController@index' );
 Auth::routes();
 
 
-Route::get('alpet/{day?}/{month?}', 'AlpetController@getAlpet')->name('get.alpet');
+Route::get('alpet/{version?}/{day?}/{month?}', 'AlpetController@getAlpet')->name('get.alpet');
+
 // Route::get('alpet/}', 'AlpetController@getAlpet')->name('get.alpet');
 
 

@@ -34,8 +34,21 @@ class AlpetController extends Controller
 
 
 
-    public function getAlpet($day=null, $month=null){
+    public function getAlpet($version=null, $day=null, $month=null){
         //get today
+        if(!$version || is_numeric($version)){
+            $now =  getDefaultDatetime();
+            $version = "tb";
+            return redirect()->route('get.alpet',[$version]);
+
+        }
+        if(!$day || !$month){
+            $now =  getDefaultDatetime();
+            $day =  dateTimeToString($now,"j"); //day without zeros
+            $month = dateTimeToString($now,"n"); //without zeros
+            return redirect()->route('get.alpet',[$version,$day,$month]);
+
+        }
 
         $data['title']      = 'Home | '.TITLE;
         $data['user']       = $this->user;
@@ -43,27 +56,21 @@ class AlpetController extends Controller
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
         $alpetVerses = null;
-        if(!$day || !$month){
-            $now =  getDefaultDatetime();
-            $day =  dateTimeToString($now,"j"); //day without zeros
-            $month = dateTimeToString($now,"n"); //without zeros
-        }
 
-
-
-        // $alpet = Alpet::where('day',$day)->where('month',$month)->first();
-        if(true){//#$alpet
+        $alpet = Alpet::where('day',$day)->where('month',$month)->first();
+        if($alpet){//#$alpet
             // $sections = explode(",", $alpet->verse);
-            $sections = $this->getSections();;
+            // $sections = $this->getSections();;
+            $sections = explode(",",$alpet->verse);
             $alpetVerses = [];
 
-
             foreach($sections as $section){
-                $alpetVerses[] = new CAlpetVerse($section);
+                $alpetVerses[] = new CAlpetVerse($version, $section);
             }
             // return response()->json($alpetVerses);
             $data['alpetVerses'] = $alpetVerses;
-            $data['sections'] = "{$sections[0]}, {$sections[1]}";//#$alpet->verse
+            // $data['sections'] = "{$sections[0]}, {$sections[1]}";//#$alpet->verse
+            $data['sections'] = $alpet->verse;
             return view('alpet.daily',$data);
 
         }else{
@@ -71,10 +78,10 @@ class AlpetController extends Controller
         }
 
 
+        return "$version/$day/$month";
 
 
 
-        return "$day/$month";
     }
 
     private function getSections(){
