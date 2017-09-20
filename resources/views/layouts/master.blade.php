@@ -40,7 +40,7 @@
 
       <div class="navbar-custom-menu">
 
-         @if(Auth::check())
+         @if(isset($user))
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
 
@@ -100,7 +100,9 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
-            @if(Auth::check())
+            @if(isset($user))
+
+            @endisset)
                 <div class="user-panel">
 
                     <div class="pull-left image">
