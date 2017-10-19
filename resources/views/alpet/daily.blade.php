@@ -20,7 +20,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>{{"$day/$month"}}</h1>
+        @php($currentYear =  dateTimeToString(getDefaultDatetime(),"Y"))
+        <h1>{{dateTimeToString(getDefaultDatetime("$day-$month-$currentYear"),"D, d-M")}}</h1>
         <h4>{{$sections}} <small>{{strToUpper($version)}}</small></h4>
         <a href='{{route('get.alpet')}}'>Pindah ke <b>alpet hari ini</b></a>
     </section>
