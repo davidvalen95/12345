@@ -63,7 +63,6 @@ class AlpetController extends Controller
         $alpetVerses = null;
 
         $alpet = Alpet::where('day',$day)->where('month',$month)->first();
-        debug($alpet);
         if($alpet){//#$alpet
             // $sections = explode(",", $alpet->verse);
             // $sections = $this->getSections();;
