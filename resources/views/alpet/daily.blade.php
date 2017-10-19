@@ -22,6 +22,7 @@
     <section class="content-header">
         <h1>{{dateTimeToString(getDefaultDatetime(),"D, d-M")}}</h1>
         <h4>{{$sections}} <small>{{strToUpper($version)}}</small></h4>
+        <a href='{{route('get.alpet')}}'>Pindah ke <b>alpet hari ini</b></a>
     </section>
     <section class='content'>
 
@@ -88,7 +89,7 @@
                             </a>
                         <!-- /.box-header -->
                             <div id="target-{{$book->book}}{{$book->chapter}}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                <div class="box-body" style='font-size:15px;'>
+                                <div class="box-body" style='font-size:16px;'>
 
                                     @foreach($book->completeChapter as $currentJson)
                                             {{-- @php(debug($currentJson)); --}}
