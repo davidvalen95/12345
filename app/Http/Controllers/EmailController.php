@@ -60,7 +60,7 @@ class EmailController extends Controller
         $users = User::all();
         foreach ($users as $user) {
 
-            Mail::send([], [], function ($message)  use ($post,$textMessage){
+            Mail::send([], [], function ($message)  use ($post,$textMessage,$user){
                 $message->from('reminder@gbzworshipper.com', "Youth GBZ");
                 $message->subject($post->subject);
                 $message->to($user->email);
