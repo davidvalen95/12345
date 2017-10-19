@@ -45,6 +45,9 @@
         <p style='font-size:18px;'>
             Hallo <b>david valentino</b> !!
         </p>
+        <p style='font-size:8px;color:#9f9f9f;'>
+            Yang tadi salah nama xD maap ye
+        </p>
         <p style='font-size:15px;color:#9f9f9f;'>
             Udah baca alpet blm hari ini??
         </p>
