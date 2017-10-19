@@ -23,9 +23,9 @@ class CAlpetVerse{
         preg_match_all("/([\S]+)/", $fullReference, $matches);
 
         //# Luk
-        $this->book = $matches[0];
+        $this->book = $matches[0][0];
         //# 23:5-12 / 23-24
-        $verse = $matches[1];
+        $verse = $matches[1][0];
         // debug(strpos($verse, ":"));
         if(strpos($verse, ":") <= -1){
             // debug($verse);
