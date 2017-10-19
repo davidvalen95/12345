@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Mail;;
 Route::get('/', 'HomeController@index' );
 Route::post('/', 'HomeController@index' );
 Auth::routes();
@@ -66,22 +65,10 @@ Route::get('cronjob/add/schedule', "ScheduleController@getCronjobAddSchedule")->
 
 
 
-Route::get('alkitab',function(){
-    $bible  = new App\Helper\Classes\CBible('  kejadian   ','1');
+Route::get('/email/draft','EmailController@getEmailDraft')->name('get.emailDraft');
+Route::post('/email/draft','EmailController@postEmailDraft')->name('post.emailDraft');
 
-    return response()->json($bible->comp);
-//     $test = (object) [];
-//     $test->coba = 'sdf';
-// ac
-    return  response()->json($bible->completeChapter);
-});
 
-Route::get('mail-text',function(){
-    Mail::raw('message',function($message){
-        $message->to('davidvalen95@gmail.com');
-        $message->from('reminder@gbzworshipper.com');
-    });
-});
 Route::get('coba',function(){
 
     //# filter songDetail based on foreign User attribute
