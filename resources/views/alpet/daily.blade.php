@@ -20,7 +20,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>{{dateTimeToString(getDefaultDatetime("$day-$month-2004"))}}</h1>
+        <h1>{{dateTimeToString(getDefaultDatetime(),"D, d-M")}}</h1>
         <h4>{{$sections}} <small>{{strToUpper($version)}}</small></h4>
     </section>
     <section class='content'>
