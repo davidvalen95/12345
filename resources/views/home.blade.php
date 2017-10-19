@@ -15,11 +15,9 @@
     <div class='row'>
 
         <div class='col-xs-12'>
-            <div class="alert alert-info alert-dismissible">
+            <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <a href='{{route('get.update')}}'><h4><i class="icon fa fa-check"></i>New Update Tuesday 22nd August</h4><span> please click to view update</span></a>
-
-
+            <a href='{{route('get.alpet')}}'><h4><i class="icon fa fa-check"></i>New update ALPET</h4><span> Click for read today's alpet</span></a>
           </div>
         </div>
     </div>
@@ -42,7 +40,7 @@
       <!-- Small boxes (Stat box) -->
         <div class="row">
             <a href='https://google.com'>
-                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-sm                 -6 col-lg-3  col-xs-12">
+                <a style='color:'href='https://docs.google.com/spreadsheets/d/1iSMUs-vzDJfl6NoKnWKkNYjVfv7HmtT_4f1H2fLXdws/edit?usp=sharing'><div class="col-sm-6 col-lg-3  col-xs-12">
                     <div class="info-box bg-yellow">
                     <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
@@ -113,7 +111,22 @@
             </div>
 
 
+                <a style='color:'href='{{route('get.alpet')}}'><div class="col-sm-6 col-lg-3  col-xs-12">
+                    <div class="info-box bg-green">
+                    <span class="info-box-icon"><i class="fa fa-book"></i></span>
 
+                    <div class="info-box-content">
+                        <span class="info-box-text">Alpet</span>
+                        <span class="info-box-number"></span>
+
+                        <span class="progress-description">
+                            Klik untuk lihat alpet hari ini
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                    </div>
+                <!-- /.info-box -->
+                </div></a>
 
 
         {{-- jadwal mingguan kiri --}}

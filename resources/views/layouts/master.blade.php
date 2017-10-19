@@ -195,6 +195,8 @@
              </ul>
         </li>
 
+        <li><a href={{route('get.alpet')}}><i class="fa fa-book"></i> <span>Alpet</span></a></li>
+
     </aside>
 
 

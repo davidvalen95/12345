@@ -15,7 +15,7 @@
 
 <body class="hold-transition register-page">
     @include('layouts.alert')
-<div class="register-box">
+<div  style='margin-bottom: 26px;'  class="register-box">
   <div class="register-logo">
     <a href="../../index2.html">{{TITLE}}</a>
   </div>
@@ -50,6 +50,9 @@
     </form>
   </div>
   <!-- /.form-box -->
+</div>
+<div class='row text-center'>
+    <a href='{{route('get.alpet')}}' class='btn btn-success'><i class="fa fa-book"></i> Baca Alpet Hari ini</a>
 </div>
 <!-- /.register-box -->
 
