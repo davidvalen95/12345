@@ -54,11 +54,12 @@ class EmailController extends Controller
     public function postEmailDraft(Request $request){
         $post = (object) $request->all();
 
-        $textMessage = $post->textMessage;
-        $textMessage = str_replace("{{name}}", $this->user->name , $textMessage);
         // debug($textMessage);
         $users = User::all();
         foreach ($users as $user) {
+
+            $textMessage = $post->textMessage;
+            $textMessage = str_replace("{{name}}", $user->name , $textMessage);
             $user->setDefaultPreferences();
             Mail::send([], [], function ($message)  use ($post,$textMessage,$user){
                 $message->from('reminder@gbzworshipper.com', "Youth GBZ");
