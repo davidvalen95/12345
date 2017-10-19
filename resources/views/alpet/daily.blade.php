@@ -20,7 +20,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>{{dateTimeToString(getDefaultDatetime(),"D, d-M")}}</h1>
+        <h1>{{dateTimeToString(getDefaultDatetime("$day-$month"),"D, d-M")}}</h1>
         <h4>{{$sections}} <small>{{strToUpper($version)}}</small></h4>
         <a href='{{route('get.alpet')}}'>Pindah ke <b>alpet hari ini</b></a>
     </section>
