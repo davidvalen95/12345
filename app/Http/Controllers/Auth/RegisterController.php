@@ -112,7 +112,8 @@ class RegisterController extends Controller
         "bass" => "Bass",
         "keyboard" => "Keyboard",
         "singer" => "WL / Singer",
-        "ava" => "Sound / Ava"
+        "ava" => "Sound / Ava",
+        "dll" => "Dan lain-lain"
         );
         $instrument   = new Form("Jenis pelayanan", "instrument", "select", "glyphicon-music",  $optionMusik);
         $password     = Form::getPassword();
