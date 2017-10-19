@@ -17,7 +17,6 @@ class CBible{
         curl_setopt($curlSession, CURLOPT_URL, "http://alkitab.mobi/$version/$book/$chapter");
         curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
         curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
-
         $httpText = curl_exec($curlSession);
         curl_close($curlSession);
 
