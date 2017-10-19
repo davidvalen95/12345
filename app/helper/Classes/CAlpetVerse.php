@@ -20,12 +20,12 @@ class CAlpetVerse{
         $fullReference = $this->sanitize($fullReference);
 
         //#(huruf)(digit)
-        preg_match_all("/([^\d\W\s]+)(.*)/", $fullReference, $matches);
+        preg_match_all("/([\S]+)/", $fullReference, $matches);
 
         //# Luk
-        $this->book = $matches[1][0];
+        $this->book = $matches[0];
         //# 23:5-12 / 23-24
-        $verse = $matches[2][0];
+        $verse = $matches[1];
         // debug(strpos($verse, ":"));
         if(strpos($verse, ":") <= -1){
             // debug($verse);
