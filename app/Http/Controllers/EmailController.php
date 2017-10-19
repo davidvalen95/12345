@@ -59,7 +59,7 @@ class EmailController extends Controller
         // debug($textMessage);
         $users = User::all();
         foreach ($users as $user) {
-
+            $user->setDefaultPreferences();
             Mail::send([], [], function ($message)  use ($post,$textMessage,$user){
                 $message->from('reminder@gbzworshipper.com', "Youth GBZ");
                 $message->subject($post->subject);
