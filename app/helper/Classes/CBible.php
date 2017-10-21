@@ -29,7 +29,7 @@ class CBible{
         $pattern = "/<p>((?!<\/p>).)*<\/p>/"; //# split all <p and capture
         $string = "$httpText";
         preg_match_all($pattern, $string, $matches);
-
+        $this->setDefaultPreferences();
 
 
 
@@ -54,7 +54,9 @@ class CBible{
                 }
                 if($this->hasAtribute($childNode,"data-begin")){
                     // $this->verses[(int)$content->verse] =  $childNode->textContent;
-                    $content->content = $childNode->textContent;
+                    $content->content       = $childNode->textContent;
+                    $content->fullReference = "$book {$chapter}:$ayat";
+                    // $content->->
                     $ayat ++;
                 }
             }
@@ -65,7 +67,6 @@ class CBible{
         }
 
         $this->completeChapter =  ($currentChapterInformation);
-        $this->setDefaultPreferences();
     }
 
 

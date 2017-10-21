@@ -16,7 +16,8 @@ Auth::routes();
 
 
 Route::get('alpet/{version?}/{day?}/{month?}', 'AlpetController@getAlpet')->name('get.alpet');
-
+Route::post('alpet/favorite/add', 'AlpetController@postFavorite')->name('post.verseFavorite');
+Route::get('verse/favorite','AlpetController@getFavorite')->name('get.favoriteVerse');
 // Route::get('alpet/}', 'AlpetController@getAlpet')->name('get.alpet');
 
 

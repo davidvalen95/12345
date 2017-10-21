@@ -196,6 +196,7 @@
         </li>
 
         <li><a href={{route('get.alpet')}}><i class="fa fa-book"></i> <span>Alpet</span></a></li>
+        <li><a href={{route('get.favoriteVerse')}}><i class="fa fa-heart" aria-hidden="true"></i> <span>My Fav Verses!</span></a></li>
 
     </aside>
 

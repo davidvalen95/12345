@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function getEvents(){
         return $this->hasMany('App\Model\Event','user_id');
     }
+
+    public function getFavorites(){
+        return $this->hasMany('App\Model\FavoriteVerse','user_id');
+    }
 }

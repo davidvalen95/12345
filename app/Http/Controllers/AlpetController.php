@@ -9,6 +9,8 @@ use App\Helper\Classes\CAlpetVerse;
 use App\User;
 use Auth;
 use Session;
+
+use App\Model\FavoriteVerse;
 use DOMDocument;
 class AlpetController extends Controller
 {
@@ -19,7 +21,7 @@ class AlpetController extends Controller
     public function __construct()
     {
 
-
+                $this->middleware(['auth'])->only(['postFavorite','getFavorite']);
 
                 $this->middleware(function ($request, $next) {
                     if(Auth::check()){
@@ -60,6 +62,7 @@ class AlpetController extends Controller
         $data['user']       = $this->user;
         $data['success'] = Session::get('message.success');
         $data['danger'] = Session::get('message.danger');
+
         $alpetVerses = null;
 
         $alpet = Alpet::where('day',$day)->where('month',$month)->first();
@@ -79,6 +82,13 @@ class AlpetController extends Controller
             $data['month'] = $month;
             // $data['sections'] = "{$sections[0]}, {$sections[1]}";//#$alpet->verse
             $data['sections'] = $alpet->verse;
+            $favorites = [];
+            if(Auth::check()){
+                $favorites = $this->user->getFavorites;
+            }
+            $data['favorites'] = $favorites;
+            // return response()->json((array)$favorites);
+            // debug(((array)$favorites));
             return view('alpet.daily',$data);
 
         }else{
@@ -90,6 +100,39 @@ class AlpetController extends Controller
 
 
 
+    }
+    public function getFavorite(Request $request){
+        $data['title']      = "Favorite Verse | " .TITLE;
+        $data['user']       = $this->user;
+        $data['success'] = Session::get('message.success');
+        $data['danger'] = Session::get('message.danger');
+
+        $favorites = $this->user->getFavorites()->orderBy('comment','asc')->orderBy('created_at','desc')->get();
+
+        //# grouped based on comment
+        $groupedFavorites = [];
+        $previousComment = "";
+        foreach($favorites as $favorite){
+            if($favorite->comment != $previousComment){
+                $groupedFavorites[$favorite->comment] = [];
+            }
+            $previousComment = $favorite->comment;
+            $groupedFavorites[$favorite->comment][] = $favorite;
+        }
+
+        $data['groupedFavorites'] = $groupedFavorites;
+        // return response()->json($groupedFavorites);;
+        return view('alpet.favoriteVerse', $data);
+    }
+    public function postFavorite(Request $request){
+
+        $post = (object) $request->all();
+        $favorite = new FavoriteVerse($request->all());
+        $favorite->getUser()->associate($this->user);
+        $favorite->save();
+
+
+        // return response()->json($post);
     }
 
     private function getSections(){
