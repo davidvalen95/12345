@@ -56,6 +56,7 @@ function isExistKeyValue($array, $key, $val)
                         success:function(result){
                         },
                         error: function(result){
+
                             alert("Something is wrong, cannot add to favorite");
                             $(`#${recentHeart}>i`).css('color','#e0e0e0');
 

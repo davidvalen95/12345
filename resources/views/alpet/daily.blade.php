@@ -46,7 +46,7 @@ function isExistKeyValue($array, $key, $val)
             })
 
             $('#modalForm').submit(function(e){
-                    e.preventDefault();
+                    // e.preventDefault();
                     $('#modal-favorite').modal('hide');
                     $(`#${recentHeart}>i`).css('color','red');
                     $.ajax({

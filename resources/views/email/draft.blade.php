@@ -43,7 +43,7 @@
 
     <div style='text-align:center'>
         <p style='font-size:18px;'>
-            Hallo <b>{{name}}</b> !!
+            Hallo <b>David</b> !!
         </p>
         <p style='font-size:8px;color:#9f9f9f;'>
             Yang tadi salah nama xD maap ye
