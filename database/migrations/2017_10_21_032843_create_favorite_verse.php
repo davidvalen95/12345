@@ -27,7 +27,7 @@ class CreateFavoriteVerse extends Migration
                 ->onUpdate('cascade');
             $table->string('verse');
             $table->text('content');
-            $table->string('comment',512)->nullable()->default('No Tag');
+            $table->string('comment',512)->default('No Tag');
 
         });
     }

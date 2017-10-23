@@ -54,20 +54,39 @@ class EmailController extends Controller
     public function postEmailDraft(Request $request){
         $post = (object) $request->all();
 
-        // debug($textMessage);
-        $users = User::all();
-        foreach ($users as $user) {
-            $user->setDefaultPreferences();
+        // debug((boolean)$post->isDebug);
+        $isDebug = (bool) isset($post->isDebug) ? $post->isDebug : true;
+        if($isDebug){
+            $this->user->setDefaultPreferences();
             $textMessage = $post->textMessage;
-            $textMessage = str_replace("{{name}}", $user->name , $textMessage);
-            Mail::send([], [], function ($message)  use ($post,$textMessage,$user){
+            $textMessage = str_replace("{{name}}", $this->user->name , $textMessage);
+            Mail::send([], [], function ($message)  use ($post,$textMessage){
                 $message->from('reminder@gbzworshipper.com', "Youth GBZ");
                 $message->subject($post->subject);
-                $message->to($user->email);
+                $message->to($this->user->email);
                 $message->setBody($textMessage, 'text/html');
             });
+            // debug('yes');
+
+
+        }else{
+
+            debug('dont');
+            $users = User::all();
+            foreach ($users as $user) {
+                $user->setDefaultPreferences();
+                $textMessage = $post->textMessage;
+                $textMessage = str_replace("{{name}}", $user->name , $textMessage);
+                Mail::send([], [], function ($message)  use ($post,$textMessage,$user){
+                    $message->from('reminder@gbzworshipper.com', "Youth GBZ");
+                    $message->subject($post->subject);
+                    $message->to($user->email);
+                    $message->setBody($textMessage, 'text/html');
+                });
+            }
 
         }
+
 
 
 

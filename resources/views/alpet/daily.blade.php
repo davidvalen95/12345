@@ -42,18 +42,27 @@ function isExistKeyValue($array, $key, $val)
                 $('#modalFullReference').html(fullReference);
                 $('#modalInputContent').val(content);
                 $('#modalInputFullReference').val(fullReference);
+                var comment = $('#modalInputComment').val('');
+
                 recentHeart = $(this).attr('id');
             })
 
             $('#modalForm').submit(function(e){
-                    // e.preventDefault();
+                    e.preventDefault();
+                    $(`#${recentHeart}>i`).css('color','#ca0101');
+                    var comment = $('#modalInputComment').val();
+                    if(comment == ''){
+                        alert('Tag must be filled');
+                        $(`#${recentHeart}>i`).css('color','#e0e0e0');
+                        return;
+                    }
                     $('#modal-favorite').modal('hide');
-                    $(`#${recentHeart}>i`).css('color','red');
                     $.ajax({
                         url:'{{route('post.verseFavorite')}}',
                         type:"POST",
                         data: $(this).serialize(),
                         success:function(result){
+                            $
                         },
                         error: function(result){
                             alert("Something is wrong, cannot add to favorite");
@@ -120,9 +129,10 @@ function isExistKeyValue($array, $key, $val)
                                                             @php
                                                                 $ids = array_column(array($favorites), 'id', 'id');
                                                                 $color =   isExistKeyValue((array) $favorites,'verse',$currentJson->fullReference) ? "#cc0101" : "#e0e0e0";
+                                                                $modal =   isExistKeyValue((array) $favorites,'verse',$currentJson->fullReference) ? "" : "modal";
                                                             @endphp
 
-                                                            <a id='{{$id}}Heart'  href='#'  data-target-id='{{$id}}' data-full-reference='{{$currentJson->fullReference}}'  data-toggle="modal" data-target="#modal-favorite"  class="myModal pull-left">
+                                                            <a id='{{$id}}Heart'  href='#'  data-target-id='{{$id}}' data-full-reference='{{$currentJson->fullReference}}'  data-toggle="{{$modal}}" data-target="#modal-favorite"  class="myModal pull-left">
                                                                 <i style='color:{{$color}}' class="fa fa-heart" aria-hidden="true"></i>
                                                             </a>
                                                         @else
@@ -182,7 +192,7 @@ function isExistKeyValue($array, $key, $val)
                             <div class='box-body'>
                                 <div class='form-group'>
                                     <label>Tag, about this verse</label>
-                                    <input class="form-control" placeholder='Ex. mengampuni, kesabaran, menurut pada boss dll' name='comment' type="text" />
+                                    <input id='modalInputComment' class="form-control" placeholder='Ex. mengampuni, kesabaran, menurut pada boss dll' name='comment' type="text" />
                                 </div>
                             </div>
 

@@ -24,6 +24,11 @@
                         <label>Text Message</label>
                         <textarea name='textMessage' class='form-control'></textarea>
                     </div>
+                    <div class='form-group'>
+                        <label>isDebug</label>
+                        <input name='isDebug' type='radio'  value='0'  />false
+                        <input checked="checked" name='isDebug' type='radio' value='1' /> true
+                    </div>
                     <button class='btn btn-success'>Send</button>
                 </form>
 
