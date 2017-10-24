@@ -87,7 +87,9 @@ class AlpetController extends Controller
                 $favorites = $this->user->getFavorites;
             }
             $data['favorites'] = $favorites;
-            // return response()->json((array)$favorites);
+            $data['tags'] = $this->user->getFavorites()->distinct()->get(['comment']);
+
+            // return response()->json($data['tags']);
             // debug(((array)$favorites));
             return view('alpet.daily',$data);
 

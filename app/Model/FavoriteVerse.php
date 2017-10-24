@@ -16,6 +16,11 @@ class FavoriteVerse extends Model
     }
 
     public function isContain($currentVerse){
-        
+
+    }
+
+    public function save(array $options = []){
+        $this->comment = strtolower($this->comment);
+        parent::save($options);
     }
 }

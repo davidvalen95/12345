@@ -46,7 +46,9 @@ function isExistKeyValue($array, $key, $val)
 
                 recentHeart = $(this).attr('id');
             })
-
+            $('.tag').click(function(){
+                $('#modalInputComment').val($(this).html());
+            })
             $('#modalForm').submit(function(e){
                     e.preventDefault();
                     $(`#${recentHeart}>i`).css('color','#ca0101');
@@ -195,7 +197,22 @@ function isExistKeyValue($array, $key, $val)
                                     <input id='modalInputComment' class="form-control" placeholder='Ex. mengampuni, kesabaran, menurut pada boss dll' name='comment' type="text" />
                                 </div>
                             </div>
-
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <h5><b>Your tags history</b> </h5>
+                                    <p>
+                                        click this to automatically fill the tag field
+                                    </p>
+                                    @php($defaultTags = ['Kesabaran','Pengampunan','Kasih'])
+                                    @foreach ($tags as $tag)
+                                        @php($tag->comment = ucwords($tag->comment))
+                                        <a  style='display:inline-block;margin-right:10px' href='#' class='tag btn btn-default'>{{$tag->comment}}</a>
+                                    @endforeach
+                                    @foreach ($defaultTags as $tag)
+                                        <a  style='display:inline-block;margin-right:10px' href='#' class='tag btn btn-default'>{{$tag}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
                     {{-- modal body --}}
                     </div>
                     <div class="modal-footer">

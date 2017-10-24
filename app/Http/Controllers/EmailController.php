@@ -71,7 +71,7 @@ class EmailController extends Controller
 
         }else{
 
-            debug('dont');
+
             $users = User::all();
             foreach ($users as $user) {
                 $user->setDefaultPreferences();
