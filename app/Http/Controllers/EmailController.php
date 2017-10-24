@@ -60,6 +60,7 @@ class EmailController extends Controller
             $this->user->setDefaultPreferences();
             $textMessage = $post->textMessage;
             $textMessage = str_replace("{{name}}", $this->user->name , $textMessage);
+            $textMessage = "DEBUG $textMessage";
             Mail::send([], [], function ($message)  use ($post,$textMessage){
                 $message->from('reminder@gbzworshipper.com', "Youth GBZ");
                 $message->subject($post->subject);

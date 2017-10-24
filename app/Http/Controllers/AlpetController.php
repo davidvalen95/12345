@@ -87,7 +87,9 @@ class AlpetController extends Controller
                 $favorites = $this->user->getFavorites;
             }
             $data['favorites'] = $favorites;
-            $data['tags'] = $this->user->getFavorites()->distinct()->get(['comment']);
+            if(Auth::check()){
+                $data['tags'] = $this->user->getFavorites()->distinct()->get(['comment']);
+            }
 
             // return response()->json($data['tags']);
             // debug(((array)$favorites));

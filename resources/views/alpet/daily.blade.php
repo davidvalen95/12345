@@ -204,10 +204,12 @@ function isExistKeyValue($array, $key, $val)
                                         click this to automatically fill the tag field
                                     </p>
                                     @php($defaultTags = ['Kesabaran','Pengampunan','Kasih'])
-                                    @foreach ($tags as $tag)
-                                        @php($tag->comment = ucwords($tag->comment))
-                                        <a  style='display:inline-block;margin-right:10px' href='#' class='tag btn btn-default'>{{$tag->comment}}</a>
-                                    @endforeach
+                                    @if(Auth::check())
+                                        @foreach ($tags as $tag)
+                                            @php($tag->comment = ucwords($tag->comment))
+                                            <a  style='display:inline-block;margin-right:10px' href='#' class='tag btn btn-default'>{{$tag->comment}}</a>
+                                        @endforeach
+                                    @endIf
                                     @foreach ($defaultTags as $tag)
                                         <a  style='display:inline-block;margin-right:10px' href='#' class='tag btn btn-default'>{{$tag}}</a>
                                     @endforeach

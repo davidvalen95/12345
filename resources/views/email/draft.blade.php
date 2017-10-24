@@ -74,39 +74,45 @@
 
     <div style='text-align:center'>
         <p style='font-size:18px;'>
-            Hallo GBZers, <b>{{name}}</b>
+            Hallo lagi, <b>{{name}}</b>
         </p>
         <p style='font-size:15px;color:#9f9f9f;'>
             Ada fitur baru lagi
         </p>
-        <p style='14px'>
+        <p style='font-size:14px'>
             Kamu sekarang bisa nge-save ayat-ayat favorit waktu lagi baca alpet. Jadi ayat itu akan disimpen di idmu. Kamu bisa melihat ayat favoritmu kapanpun
         </p>
-        <p style='14px'>
-            Ayat akan dikelompokan sesuai <i><b>Tag</b></i> jadi memudahkan untuk di baca ulang
+        <p style='font-size:14px'>
+            Ayat akan dikelompokan sesuai <b><i>Tag</i></b> jadi memudahkan untuk di baca ulang, kamu harus <b>login dulu ya</b> biar bisa save
         </p>
 
-        <div style='display:block;margin:12px auto; max-width:350px;'>
-            <p>
-                Langkah awal klik hati disebelah ayat
+        <div style=';display:block;margin:30px auto; max-width:250px;'>
+            <p style='font-size:16px'>
+                Langkah satu klik hati disebelah ayat
             </p>
-            <img style='width: 100%;' src='http://gbzworshipper.com/images/alpet/1.png'/>
-            <p>
+            <img style='border:1px solid #5b5b5b; width: 100%;margin-bottom:14px' src='http://gbzworshipper.com/images/alpet/1.png'/>
+            <p style='font-size:16px'>
                 Langkah dua, isi tag untuk tagging ayat, atau bisa klik tombol tag yang tersedia
             </p>
-            <img style='width: 100%;' src='http://gbzworshipper.com/images/alpet/2.png'/>
-            <p>
+            <img style='border:1px solid #5b5b5b; width: 100%;margin-bottom:14px' src='http://gbzworshipper.com/images/alpet/2.png'/>
+            <p style='font-size:16px'>
                 Langkah tiga, buka ayat favoritmu di menu
             </p>
-            <img style='width: 100%;' src='http://gbzworshipper.com/images/alpet/3.png'/>
-            <p>
+            <img style='border:1px solid #5b5b5b; width: 100%;margin-bottom:14px' src='http://gbzworshipper.com/images/alpet/3.png'/>
+            <p style='font-size:16px'>
                 Langkah empat, Ayat di kelompokan sesuai tag untuk memudahkan membaca
             </p>
-            <img style='width: 100%;' src='http://gbzworshipper.com/images/alpet/4.png'/>
+            <img style='border:1px solid #5b5b5b; width: 100%;margin-bottom:14px' src='http://gbzworshipper.com/images/alpet/4.png'/>
 
         </div>
+        <p style='font-size:13px;color:#9f9f9f;'>
+            Happy alpeting
+        </p>
+        <p style='font-size:12px;color:#9f9f9f;'>
+            <i>"Tetapi yang terutama: kasihilah sungguh-sungguh seorang akan yang lain, sebab kasih menutupi banyak sekali dosa."</i>
 
-        <a href='http://gbzworshipper.com/alpet' style='margin-top:16px; display: inline-block; text-align:center;background-color:#7D56A9;color:white; padding:10px'>Alpet hari ini</a>
+        </p>
+        <a href='http://gbzworshipper.com/alpet' style='margin-top:16px; display: inline-block; text-align:center;background-color:#7D56A9;color:white; padding:10px'>Lihat alpet hari ini</a>
 
     </div>
 
